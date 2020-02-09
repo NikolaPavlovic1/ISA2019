@@ -1,0 +1,21 @@
+html, body, app-root {
+    height: 100%;
+    margin: 0mm;
+    }
+.inventory-body {
+    position: fixed;
+    margin-top: -0.7cm;
+    min-width: 100%;
+    background-color: #f5f4cce1;
+    }
+.jumbotron{
+    margin: 7cm;
+    text-align: center;
+    color: rgb(255, 187, 0);
+    font: outline;
+    font-family: 'Cambria', sans-serif;}
+.nav-link{
+    font-weight: bold;
+    font-family: 'Cambria', sans-serif;
+}
+

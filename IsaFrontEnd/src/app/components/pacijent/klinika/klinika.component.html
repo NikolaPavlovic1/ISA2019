@@ -1,0 +1,35 @@
+<body class="inventory-body">
+    <div class="container">
+        <br><br><br>
+        <div class="text-center">
+
+            <br><br>
+            <h1>Klinike</h1>
+        
+            <table class="table table-striped sortable-table" matSort (matSortChange)="sortData($event)">
+                <thead>
+                    <tr>
+                        <th mat-sort-header="ime">Ime</th>
+                        <th mat-sort-header="adresa">Adresa</th>
+                        <th mat-sort-header="opis">Opis</th>
+                        <th mat-sort-header="grad">Grad</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let klinike of sortedData">
+                        <td style="text-align: left;">{{klinike.ime}}</td>
+                        <td style="text-align: left;">{{klinike.adresa}}</td>
+                        <td style="text-align: left;">{{klinike.opis}}</td>
+                        <td style="text-align: left;">{{klinike.grad}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+
+        </div>
+
+
+    </div>
+
+</body>

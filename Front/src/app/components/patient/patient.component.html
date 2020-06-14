@@ -1,0 +1,46 @@
+<nav class="navbar navbar-light" style="background-color: #f5f4cce1;" >
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav nav-tabs nav-justified" id="listanav">
+            <li class="nav-item">
+                <a  (click)="clinicClick()"> Lista klinika</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="schedulingClick()">Zakazi pregled</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="examinationsClick()">Dostupni pregledi</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="recordClick()">Zdravstveni karton</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="scheduledExaminations()">Zakazani pregledi</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="historyClick()">Istorija pregleda</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="profileClick()">Vasi podaci</a>
+            </li>
+            <li class="nav-item">
+                <a  (click)="logoutClick()">Odjava</a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<!--
+<body class="inventory-body">
+    <div class="container">
+        <div class="jumbotron">
+
+            <h1>DOBRO DOSLI NA VAS PROFIL</h1>
+        </div>
+    </div>
+
+</body>
+-->
+<router-outlet></router-outlet>

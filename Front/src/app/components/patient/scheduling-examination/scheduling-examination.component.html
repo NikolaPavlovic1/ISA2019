@@ -1,0 +1,172 @@
+<body class="inventory-body">
+    <div class="container">
+        <div>
+            <div class="row" style="max-width: 90%; margin: 0 auto; " class="text-center">
+                <br><br><br><br><br>
+                <h1>Zakazivanje pregleda</h1>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Datum pregleda:</label>
+                                <input class="form-control" type="date" required="required" [(ngModel)]="examinationDate">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tip pregleda:</label>
+                            <select class="form-control" [(ngModel)]="examination">
+                                <option *ngFor="let examination of allExaminationTypes" [ngValue]="examination">
+                                    {{examination.name}}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-ml-6">
+                        <div class="form-group">
+                            <label for="endDestination">Lokacija klinike: </label>
+                                <input class="form-control" type="text" [(ngModel)]="clinicLocation"
+                                    [ngModelOptions]="{standalone:true}">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-11 text-center">
+                        <button type="button " (click)="clinicSearch()" style="margin-left:40%;margin-right:30%;"
+                            class="btn btn-secondary">Pretrazi
+                            klinike</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <table class="table sortable-table" *ngIf="showingClinicTable == true">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Ime</th>
+                        <th style="text-align: center;">Opis</th>
+                        <th style="text-align: center;">Lokacija</th>
+                        <th style="text-align: center;">Ocena</th>
+                        <th style="text-align: center;">Cena</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let clinic of clinics">
+                    <tr>
+                        <td style="text-align: center;">{{clinic.name}}</td>
+                        <td style="text-align: center;">{{clinic.description}}</td>
+                        <td style="text-align: center;">{{clinic.city}}</td>
+                        <td style="text-align: center;">{{clinic.rating}}</td>
+                        <td style="text-align: center;">{{price}}</td>
+                        <td style="text-align: center;"><button class="btn btn-link"
+                                (click)="showDoctors(clinic)">Prikazi lekare</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" *ngIf="showingDoctorTable == true">
+                <h3>Spisak lekara</h3>
+                <br>
+                <table class="table sortable-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Ime </th>
+                            <th style="text-align: center;">Prezime</th>
+                            <th style="text-align: center;">Ocena</th>
+                            <th style="text-align: center;">Radno vreme</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let doctor of doctors">
+                        <tr>
+                            <td style="text-align: center;">{{doctor.name}}</td>
+                            <td style="text-align: center;">{{doctor.surname}}</td>
+                            <td style="text-align: center;">{{doctor.rating}}</td>
+                            <td style="text-align: center;">{{doctor.workingTimeFrom}} - {{doctor.workingTimeTo}}
+                            </td>
+                            <td style="text-align: center;"><button class="btn btn-link"
+                                (click)="showAppointment(modal, doctor)">Prikazi termine</button></td>
+            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" style="max-width: 90%; margin: 0 auto;" *ngIf="showingDoctorTable == true">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            
+                            <label>Ime </label>
+                            <div class="input-group">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="form-control" type="text" id="imeLjekara"
+                                    [(ngModel)]=" nameDoctorSearch" [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Prezime</label>
+                            <div class="input-group">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="form-control" type="text" id="prezimeLjekara"
+                                    [(ngModel)]="surnameDoctorSearch" [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Ocena</label>
+                            <div class="input-group">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="form-control" type="number" id="ocjenaLjekara" [(ngModel)]="doctorRating"
+                                    [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-11">
+                        <button type="button " (click)="doctorSearch()" style="margin-left:40%;margin-right:30%;"
+                            class="btn btn-secondary">Pretrazi
+                            Lekare</button>
+                            <br><br><br><br><br><br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<ng-template #modal>
+    <div class="modal-header">
+        <h4 class="modal-title naslov text-center">Slobodni termini </h4>
+    </div>
+    <div class="modal-body d-flex ">
+        <div>
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Termini</label>
+                            <select class="form-control" [(ngModel)]="appointmentDoctor" >
+                                <option *ngFor="let appointment of allAppointment" [hidden]="appointment.reserved == true" [ngValue]="appointment">
+                                    {{appointment.appointment}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                    <div class="col-md-12">
+                            <button style="margin: 5px" type="submit" (click)="scheduleExamination()" class="btn btn-secondary ">Zakazi pregled</button>          
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
+
 @Entity
 public class MedicalExamination {
 
@@ -23,6 +25,10 @@ public class MedicalExamination {
 	private MedicalRecord medicalRecord;
 	
 	public MedicalExamination() {}
+	
+	public MedicalExamination(MedicalExaminationDTO me) {
+		this.startDateTime = me.getStartDateTime();
+	}
 
 	public Long getId() {
 		return id;

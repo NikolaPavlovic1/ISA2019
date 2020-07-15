@@ -1,23 +1,11 @@
-package com.ftn.ProjectISA.model;
+package com.ftn.ProjectISA.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.ftn.ProjectISA.model.Address;
+import com.ftn.ProjectISA.model.Patient;
 
-import com.ftn.ProjectISA.dto.PatientDTO;
+public class PatientDTO {
 
-
-@Entity
-public class Patient {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
 	private String lastName;
 	private String email;
@@ -25,16 +13,27 @@ public class Patient {
 	private String password;
 	private String phoneNumber;
 	private String insuranceNumber;
-	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
+	private MedicalRecordDTO medicalRecord;
 	
-	@OneToOne(mappedBy="patient")
-    private MedicalRecord medicalRecord;
+	public PatientDTO() {}
+
+	public PatientDTO(Long id, String name, String lastName, String email, String userName, String password,
+			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.userName = userName;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.insuranceNumber = insuranceNumber;
+		this.address = address;
+		this.medicalRecord = medicalRecord;
+	}
 	
-	public Patient() {}
-	
-	public Patient(PatientDTO p) {
+	public PatientDTO(Patient p) {
+		this.id = p.getId();
 		this.name = p.getName();
 		this.lastName = p.getLastName();
 		this.email = p.getEmail();
@@ -43,7 +42,7 @@ public class Patient {
 		this.phoneNumber = p.getPhoneNumber();
 		this.insuranceNumber = p.getInsuranceNumber();
 		this.address = p.getAddress();
-		this.medicalRecord = new MedicalRecord();
+		this.medicalRecord = new MedicalRecordDTO(p.getMedicalRecord());
 	}
 
 	public Long getId() {
@@ -68,14 +67,6 @@ public class Patient {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public MedicalRecord getMedicalRecord() {
-		return medicalRecord;
-	}
-
-	public void setMedicalRecord(MedicalRecord medicalRecord) {
-		this.medicalRecord = medicalRecord;
 	}
 
 	public String getEmail() {
@@ -125,7 +116,17 @@ public class Patient {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	
 
+	public MedicalRecordDTO getMedicalRecord() {
+		return medicalRecord;
+	}
+
+	public void setMedicalRecord(MedicalRecordDTO medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
+	
+	
+	
+	
+	
 }

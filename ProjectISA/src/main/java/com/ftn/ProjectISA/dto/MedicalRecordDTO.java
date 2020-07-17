@@ -11,7 +11,7 @@ import com.ftn.ProjectISA.model.MedicalRecord;
 public class MedicalRecordDTO {
 
 	private Long id;
-	private Long patientId;
+	private Long userId;
 	private List<LocalDateTime> medicalExaminations = new ArrayList<LocalDateTime>();
 	private List<Disease> diseaseHistory = new ArrayList<Disease>();
 	
@@ -19,7 +19,7 @@ public class MedicalRecordDTO {
 	
 	public MedicalRecordDTO(MedicalRecord mr) {
 		this.id = mr.getId();
-		this.patientId = mr.getPatient().getId();
+		this.userId = mr.getUser().getId();
 		
 		for(MedicalExamination me : mr.getMedicalExaminations()) {
 			this.medicalExaminations.add(me.getStartDateTime());
@@ -36,12 +36,12 @@ public class MedicalRecordDTO {
 		this.id = id;
 	}
 
-	public Long getPatientId() {
-		return patientId;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setPatientId(Long patientId) {
-		this.patientId = patientId;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public List<LocalDateTime> getMedicalExaminations() {

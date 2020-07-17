@@ -8,11 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.ftn.ProjectISA.dto.PatientDTO;
+import com.ftn.ProjectISA.dto.UserDTO;
+import com.ftn.ProjectISA.enums.Role;
 
 
 @Entity
-public class Patient {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,25 +26,27 @@ public class Patient {
 	private String password;
 	private String phoneNumber;
 	private String insuranceNumber;
+	private Role role; 
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
 	
-	@OneToOne(mappedBy="patient")
+	@OneToOne(mappedBy="user")
     private MedicalRecord medicalRecord;
 	
-	public Patient() {}
+	public User() {}
 	
-	public Patient(PatientDTO p) {
-		this.name = p.getName();
-		this.lastName = p.getLastName();
-		this.email = p.getEmail();
-		this.userName = p.getUserName();
-		this.password = p.getPassword();
-		this.phoneNumber = p.getPhoneNumber();
-		this.insuranceNumber = p.getInsuranceNumber();
-		this.address = p.getAddress();
+	public User(UserDTO u) {
+		this.name = u.getName();
+		this.lastName = u.getLastName();
+		this.email = u.getEmail();
+		this.userName = u.getUserName();
+		this.password = u.getPassword();
+		this.phoneNumber = u.getPhoneNumber();
+		this.insuranceNumber = u.getInsuranceNumber();
+		this.address = u.getAddress();
 		this.medicalRecord = new MedicalRecord();
+		this.role = u.getRole();
 	}
 
 	public Long getId() {
@@ -124,6 +127,14 @@ public class Patient {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

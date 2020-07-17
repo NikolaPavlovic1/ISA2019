@@ -22,8 +22,8 @@ public class MedicalRecord {
 	private Long id;
 	
 	@OneToOne
-    @JoinColumn (name="patient")
-	private Patient patient;
+    @JoinColumn (name="user")
+	private User user;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="medicalRecord")
 	private List<MedicalExamination> medicalExaminations = new ArrayList<MedicalExamination>();
@@ -41,12 +41,12 @@ public class MedicalRecord {
 		this.id = id;
 	}
 
-	public Patient getPatient() {
-		return patient;
+	public User getUser() {
+		return user;
 	}
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<MedicalExamination> getMedicalExaminations() {

@@ -1,9 +1,10 @@
 package com.ftn.ProjectISA.dto;
 
+import com.ftn.ProjectISA.enums.Role;
 import com.ftn.ProjectISA.model.Address;
-import com.ftn.ProjectISA.model.Patient;
+import com.ftn.ProjectISA.model.User;
 
-public class PatientDTO {
+public class UserDTO {
 
 	private Long id;
 	private String name;
@@ -15,11 +16,13 @@ public class PatientDTO {
 	private String insuranceNumber;
 	private Address address;
 	private MedicalRecordDTO medicalRecord;
+	private Role role;
 	
-	public PatientDTO() {}
+	public UserDTO() {}
 
-	public PatientDTO(Long id, String name, String lastName, String email, String userName, String password,
-			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord) {
+	public UserDTO(Long id, String name, String lastName, String email, String userName, String password,
+			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord,
+			Role role) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -30,19 +33,21 @@ public class PatientDTO {
 		this.insuranceNumber = insuranceNumber;
 		this.address = address;
 		this.medicalRecord = medicalRecord;
+		this.role = role;
 	}
 	
-	public PatientDTO(Patient p) {
-		this.id = p.getId();
-		this.name = p.getName();
-		this.lastName = p.getLastName();
-		this.email = p.getEmail();
-		this.userName = p.getUserName();
-		this.password = p.getPassword();
-		this.phoneNumber = p.getPhoneNumber();
-		this.insuranceNumber = p.getInsuranceNumber();
-		this.address = p.getAddress();
-		this.medicalRecord = new MedicalRecordDTO(p.getMedicalRecord());
+	public UserDTO(User u) {
+		this.id = u.getId();
+		this.name = u.getName();
+		this.lastName = u.getLastName();
+		this.email = u.getEmail();
+		this.userName = u.getUserName();
+		this.password = u.getPassword();
+		this.phoneNumber = u.getPhoneNumber();
+		this.insuranceNumber = u.getInsuranceNumber();
+		this.address = u.getAddress();
+		this.medicalRecord = new MedicalRecordDTO(u.getMedicalRecord());
+		this.role = u.getRole();
 	}
 
 	public Long getId() {
@@ -123,6 +128,14 @@ public class PatientDTO {
 
 	public void setMedicalRecord(MedicalRecordDTO medicalRecord) {
 		this.medicalRecord = medicalRecord;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

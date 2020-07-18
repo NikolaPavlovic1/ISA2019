@@ -18,12 +18,13 @@ public class UserDTO {
 	private MedicalRecordDTO medicalRecord;
 	private Role role;
 	private boolean active;
+	private boolean approved;
 	
 	public UserDTO() {}
 
 	public UserDTO(Long id, String name, String lastName, String email, String username, String password,
 			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord,
-			Role role, boolean active) {
+			Role role, boolean active, boolean approved) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -36,6 +37,7 @@ public class UserDTO {
 		this.medicalRecord = medicalRecord;
 		this.role = role;
 		this.active = active;
+		this.approved = approved;
 	}
 	
 	public UserDTO(User u) {
@@ -51,6 +53,7 @@ public class UserDTO {
 		this.medicalRecord = new MedicalRecordDTO(u.getMedicalRecord());
 		this.role = u.getRole();
 		this.active = u.isActive();
+		this.approved = u.isApproved();
 	}
 
 	public Long getId() {
@@ -147,6 +150,14 @@ public class UserDTO {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	
 	

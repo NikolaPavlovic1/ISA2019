@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,6 +55,19 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(retVal, HttpStatus.OK); 
 	}
 	
+	//@PreAuthorize("ADMINISTRATOR")
+	@PostMapping(value = "/approve/{id}") 
+	public Boolean approveUser(@PathVariable Long id) { 
+		Boolean retVal = userService.approveUser(id);
+		return retVal; 
+	}
+	
+	@PostMapping(value = "/activate/{confirmationKey}") 
+	public Boolean activateUser(@PathVariable String confirmationKey) { 
+		Boolean retVal = userService.activateAccount(confirmationKey);
+		return retVal; 
+	}
+	
 	@PostMapping(consumes = "application/json") 
 	public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO){
 		UserDTO retVal = userService.registerUser(userDTO); 
@@ -77,6 +92,17 @@ public class UserController {
 
 		return new ResponseEntity<AuthenticationResponse>(
 				new AuthenticationResponse(jwt,user.getUsername(),user.getRole()), HttpStatus.OK); 
+	}
+	
+	@GetMapping(value="/logout") 
+	public Boolean logout(){
+		
+		if(SecurityContextHolder.getContext().getAuthentication()!= null) {
+			SecurityContextHolder.getContext().setAuthentication(null);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@PutMapping(consumes = "application/json") 

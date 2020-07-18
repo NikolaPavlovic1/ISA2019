@@ -27,6 +27,8 @@ public class User {
 	private String phoneNumber;
 	private String insuranceNumber;
 	private boolean active;
+	private boolean approved;
+	private String confirmationKey;
 	private Role role; 
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -42,13 +44,14 @@ public class User {
 		this.lastName = u.getLastName();
 		this.email = u.getEmail();
 		this.username = u.getUsername();
-		this.password = u.getPassword();
 		this.phoneNumber = u.getPhoneNumber();
 		this.insuranceNumber = u.getInsuranceNumber();
 		this.address = u.getAddress();
 		this.medicalRecord = new MedicalRecord();
 		this.role = u.getRole();
 		this.active = false;
+		this.approved = false;
+		this.setConfirmationKey(null);
 	}
 
 	public Long getId() {
@@ -145,6 +148,22 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved= approved;
+	}
+
+	public String getConfirmationKey() {
+		return confirmationKey;
+	}
+
+	public void setConfirmationKey(String confirmationKey) {
+		this.confirmationKey = confirmationKey;
 	}
 	
 	

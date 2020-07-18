@@ -39,6 +39,11 @@ public class UserService {
 		UserDTO retVal = new UserDTO(userRepository.getOne(id));
 		return retVal;
 	}
+	
+	public UserDTO findUserByUsername(String username) {
+		UserDTO retVal = new UserDTO(userRepository.findByUsername(username));
+		return retVal;
+	}
 
 	public UserDTO updateUser(UserDTO user) {
 		User u = userRepository.getOne(user.getId());

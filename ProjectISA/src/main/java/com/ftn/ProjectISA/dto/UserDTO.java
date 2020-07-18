@@ -10,30 +10,32 @@ public class UserDTO {
 	private String name;
 	private String lastName;
 	private String email;
-	private String userName;
+	private String username;
 	private String password;
 	private String phoneNumber;
 	private String insuranceNumber;
 	private Address address;
 	private MedicalRecordDTO medicalRecord;
 	private Role role;
+	private boolean active;
 	
 	public UserDTO() {}
 
-	public UserDTO(Long id, String name, String lastName, String email, String userName, String password,
+	public UserDTO(Long id, String name, String lastName, String email, String username, String password,
 			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord,
-			Role role) {
+			Role role, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.insuranceNumber = insuranceNumber;
 		this.address = address;
 		this.medicalRecord = medicalRecord;
 		this.role = role;
+		this.active = active;
 	}
 	
 	public UserDTO(User u) {
@@ -41,13 +43,14 @@ public class UserDTO {
 		this.name = u.getName();
 		this.lastName = u.getLastName();
 		this.email = u.getEmail();
-		this.userName = u.getUserName();
+		this.username = u.getUsername();
 		this.password = u.getPassword();
 		this.phoneNumber = u.getPhoneNumber();
 		this.insuranceNumber = u.getInsuranceNumber();
 		this.address = u.getAddress();
 		this.medicalRecord = new MedicalRecordDTO(u.getMedicalRecord());
 		this.role = u.getRole();
+		this.active = u.isActive();
 	}
 
 	public Long getId() {
@@ -82,12 +85,12 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -136,6 +139,14 @@ public class UserDTO {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

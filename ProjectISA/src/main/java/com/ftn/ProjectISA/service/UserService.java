@@ -26,7 +26,7 @@ public class UserService {
 
 	public UserDTO registerUser(UserDTO userDTO) {
 		User user = new User(userDTO);
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
 		userRepository.save(user);
 		return userDTO;

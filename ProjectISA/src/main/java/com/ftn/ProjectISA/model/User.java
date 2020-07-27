@@ -34,7 +34,7 @@ public class User {
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
 	
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private MedicalRecord medicalRecord;
 	
 	public User() {}

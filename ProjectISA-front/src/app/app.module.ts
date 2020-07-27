@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminUserComponent } from './components/admin-user/admin-user.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    AdminUserComponent
+    AdminUserComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

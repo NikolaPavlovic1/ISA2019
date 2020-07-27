@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/model/User';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-admin-user',
-  templateUrl: './admin-user.component.html',
-  styleUrls: ['./admin-user.component.css']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
-export class AdminUserComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
 
-  users : User[] = [];
+  user : User = new User();
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.loadUser();
   }
 
-  public loadUsers(){
+  public loadUser(){
     //let headers = this.authService.getHeaders();
 
-    this.http.get<User[]>('http://localhost:8080/api/user/all').subscribe((data) => {
-      this.users = data;
+    this.http.get<User>('http://localhost:8080/api/user/1').subscribe((data) => {
+      this.user = data;
       console.log(data);
     });
   }
 
-  public delete(id : number) {
+  public update(id : number) {
     //let headers = this.authService.getHeaders();
 
     /*this.http.delete('http://localhost:8080/api/user/'+id, {headers:headers}).subscribe((data) => {

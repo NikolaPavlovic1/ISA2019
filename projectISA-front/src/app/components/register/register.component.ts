@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
     this.http.post<User>('http://localhost:8080/api/user',this.user).subscribe((data)=>{
       console.log(data);
-
+      alert("Registration successfull");
 
     });
     

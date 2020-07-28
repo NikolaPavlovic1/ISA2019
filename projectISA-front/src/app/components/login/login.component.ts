@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationRequest } from 'src/app/model/AuthenticationRequest';
+import { AuthenticationResponse } from 'src/app/model/AuthenticationResponse';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +21,16 @@ export class LoginComponent implements OnInit {
 
   login(){
     
+    let request = new AuthenticationRequest();
+    request.username = this.username;
+    request.password = this.password;
     
-    /*this.http.post<User>('http://localhost:8080/api/user',this.user).subscribe((data)=>{
+    this.http.post<AuthenticationResponse>('http://localhost:8080/api/user/login',request).subscribe((data)=>{
       console.log(data);
-
-
+      localStorage.setItem('id',data.id.toString());
+      localStorage.setItem('token',data.token);
     });
-    */
+    
   }
 
 }

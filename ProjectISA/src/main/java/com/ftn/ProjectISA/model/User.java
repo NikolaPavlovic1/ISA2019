@@ -48,10 +48,12 @@ public class User {
 		this.insuranceNumber = u.getInsuranceNumber();
 		this.address = u.getAddress();
 		this.medicalRecord = new MedicalRecord();
-		this.role = u.getRole();
+		this.medicalRecord.setUser(this);
+		this.role = Role.PATIENT;
 		this.active = false;
 		this.approved = false;
 		this.setConfirmationKey(null);
+		
 	}
 
 	public Long getId() {

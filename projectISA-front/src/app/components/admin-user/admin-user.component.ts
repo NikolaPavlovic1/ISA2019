@@ -18,8 +18,12 @@ export class AdminUserComponent implements OnInit {
   }
 
   public loadUsers(){
-    //let headers = this.authService.getHeaders();
-
+    /*let headers = new HttpHeaders();
+    let token = "Bearer ";
+    token += this.storageService.getToken();
+    headers = headers.set('Authorization', token);
+    */
+   
     this.http.get<User[]>('http://localhost:8080/api/user/all').subscribe((data) => {
       this.users = data;
       console.log(data);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationRequest } from 'src/app/model/AuthenticationRequest';
 import { AuthenticationResponse } from 'src/app/model/AuthenticationResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   password : String;
   
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       localStorage.setItem('id',data.id.toString());
       localStorage.setItem('token',data.token);
+      this.router.navigate(["/profile/"+data.id.toString()]);
     });
     
   }

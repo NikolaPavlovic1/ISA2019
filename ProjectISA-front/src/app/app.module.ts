@@ -9,6 +9,9 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminUserComponent } from './components/admin-user/admin-user.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ClinicsComponent } from './components/clinics/clinics.component';
+import { HistoryComponent } from './components/history/history.component';
+import { MedicalRecordComponent } from './components/medical-record/medical-record.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     RegisterComponent,
     LoginComponent,
     AdminUserComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ClinicsComponent,
+    HistoryComponent,
+    MedicalRecordComponent
   ],
   imports: [
     BrowserModule,

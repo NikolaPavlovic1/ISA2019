@@ -23,14 +23,14 @@
 						</th>
 						<th class="text-center">
 							Email
-                        </th>
-                        <th class="text-center">
+						</th>
+						<th class="text-center">
 							Phone number
-                        </th>
-                        <th class="text-center">
+						</th>
+						<th class="text-center">
 							Insurance number
-                        </th>
-                        <th class="text-center">
+						</th>
+						<th class="text-center">
 							Role
 						</th>
 						<th class="text-center">
@@ -52,32 +52,39 @@
 							<input type="text" disabled name='mail0' class="form-control" value="{{user.lastName}}" />
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" value="{{user.username}}"/>
+							<input name="desc0" disabled class="form-control" value="{{user.username}}" />
 						</td>
 						<td data-name="desc">
 							<input type="text" disabled name="desc0" class="form-control" value="{{user.email}}" />
-                        </td>
-                        <td data-name="desc">
-							<input type="text" disabled name="desc0" class="form-control" value="{{user.phoneNumber}}" />
-                        </td>
-                        <td data-name="desc">
-							<input type="text" disabled name="desc0" class="form-control" value="{{user.insuranceNumber}}" />
-                        </td>
-                        <td data-name="desc">
+						</td>
+						<td data-name="desc">
+							<input type="text" disabled name="desc0" class="form-control"
+								value="{{user.phoneNumber}}" />
+						</td>
+						<td data-name="desc">
+							<input type="text" disabled name="desc0" class="form-control"
+								value="{{user.insuranceNumber}}" />
+						</td>
+						<td data-name="desc">
 							<input type="text" disabled name="desc0" class="form-control" value="{{user.role}}" />
 						</td>
 						<td data-name="desc">
-							<input type="text" *ngIf="user.active == true" disabled name="desc0" class="form-control" value="Yes" />
-							<input type="text" *ngIf="user.active == false" disabled name="desc0" class="form-control" value="No" />
-                        </td>
-                        <td data-name="desc">
-							<input type="text" *ngIf="user.approved == true" disabled name="desc0" class="form-control" value="Yes" />
-							<input type="text" *ngIf="user.approved == false" disabled name="desc0" class="form-control" value="No" />
+							<input type="text" *ngIf="user.active == true" disabled name="desc0" class="form-control"
+								value="Yes" />
+							<input type="text" *ngIf="user.active == false" disabled name="desc0" class="form-control"
+								value="No" />
+						</td>
+						<td data-name="desc">
+							<input type="text" *ngIf="user.approved == true" disabled name="desc0" class="form-control"
+								value="Yes" />
+							<input type="text" *ngIf="user.approved == false" disabled name="desc0" class="form-control"
+								value="No" />
 						</td>
 						<td data-name="del">
-							<button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span
-									aria-hidden="true" (click)="delete(user.id)">Approve</span></button>
-                        </td>
+							<button name="del0" *ngIf="user.approved == false"
+								class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true"
+									(click)="delete(user.id)">Approve</span></button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

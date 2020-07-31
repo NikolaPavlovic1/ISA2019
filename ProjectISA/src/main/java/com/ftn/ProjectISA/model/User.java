@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.ftn.ProjectISA.dto.UserDTO;
@@ -36,6 +37,9 @@ public class User {
 	
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private MedicalRecord medicalRecord;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	private Clinic clinic;
 	
 	public User() {}
 	
@@ -166,6 +170,14 @@ public class User {
 
 	public void setConfirmationKey(String confirmationKey) {
 		this.confirmationKey = confirmationKey;
+	}
+
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
 	}
 	
 	

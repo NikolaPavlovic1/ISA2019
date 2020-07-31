@@ -23,15 +23,31 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="addressAdmin" routerLink="/admin/address">
+        <a class="nav-link" id="addressAdmin" routerLink="/clinics">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
           </i>
-          Adresses
+          Clinics
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="addressAdmin" routerLink="/profile/1">
+        <a class="nav-link" id="addressAdmin" routerLink="/history">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-warning">A</span>
+          </i>
+          History of pregleda
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="addressAdmin" routerLink="/medical-record">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-warning">A</span>
+          </i>
+          Medical record
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="addressAdmin" routerLink="/profile">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
           </i>
@@ -48,7 +64,7 @@
         <a class="nav-link" id="register" routerLink="/register" style="color: white;">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="logout"  routerLink="/register" style="color: white;">Log Out</a>
+        <a class="nav-link" id="logout"  (click)="logout()" style="color: white;">Log Out</a>
       </li>
     </ul>
   

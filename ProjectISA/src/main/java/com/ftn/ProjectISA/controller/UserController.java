@@ -97,14 +97,14 @@ public class UserController {
 	}
 	
 	@GetMapping(value="/logout") 
-	public Boolean logout(){
+	public ResponseEntity<Boolean> logout(){
 		
 		if(SecurityContextHolder.getContext().getAuthentication()!= null) {
 			SecurityContextHolder.getContext().setAuthentication(null);
-			return true;
+			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 		}
 		
-		return false;
+		return new ResponseEntity<Boolean>(false,HttpStatus.BAD_REQUEST);
 	}
 	
 	@PutMapping(consumes = "application/json") 

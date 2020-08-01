@@ -46,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/api/disease").hasAuthority("ADMINISTRATOR")
 		.antMatchers("/api/user/login").permitAll()
 		.antMatchers("/api/user/**").permitAll()
+		.antMatchers("/api/medical-record/**").permitAll()
+		.antMatchers("/api/medical-examination/**").permitAll()
 		//.antMatchers("/**").permitAll()
 		.anyRequest().authenticated()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

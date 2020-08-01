@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,6 +28,7 @@ public class MedicalRecord {
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="medicalRecord")
 	private List<MedicalExamination> medicalExaminations = new ArrayList<MedicalExamination>();
+	
 	
 	@ManyToMany(mappedBy = "medicalRecords")
 	private List<Disease> diseaseHistory = new ArrayList<Disease>();

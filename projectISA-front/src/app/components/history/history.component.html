@@ -1,1 +1,42 @@
-<p>history works!</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 table-responsive">
+			<h4>Examination history: </h4>
+			<table class="table table-bordered table-hover table-sortable" id="tab_logic">
+				<thead>
+					<tr>
+						<th class="text-center">
+							Date
+						</th>
+						<th class="text-center">
+							Doctor
+						</th>
+						<th class="text-center">
+							Type
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id='addr0' data-id="0" class="hidden" *ngFor="let examination of examinations">
+						<td data-name="name">
+							<input type="text" disabled name='name0' class="form-control" value="{{examination.startDateTime}}" />
+						</td>
+						<td data-name="mail">
+							<input type="text" disabled name='mail0' class="form-control" value="Dobavi po id" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" value="{{examination.examinationType}}" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

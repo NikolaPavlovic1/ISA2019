@@ -1,10 +1,13 @@
 package com.ftn.ProjectISA.dto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ftn.ProjectISA.model.Address;
 import com.ftn.ProjectISA.model.Clinic;
+import com.ftn.ProjectISA.model.MedicalRoom;
+import com.ftn.ProjectISA.model.PricelistItem;
 import com.ftn.ProjectISA.model.User;
 
 public class ClinicDTO {
@@ -13,6 +16,11 @@ public class ClinicDTO {
 	private List<UserDTO> doctors = new ArrayList<UserDTO>();
 	private Address address;
 	private String name;
+	private String description;
+	private List<LocalDateTime> appointments = new ArrayList<LocalDateTime>();
+	private List<MedicalRoomDTO> medicalRooms = new ArrayList<MedicalRoomDTO>();
+	private List<PricelistItemDTO> pricelist = new ArrayList<PricelistItemDTO>();
+	
 	
 	public ClinicDTO() {}
 	
@@ -20,9 +28,18 @@ public class ClinicDTO {
 		this.id = clinic.getId();
 		this.address = clinic.getAddress();
 		this.name = clinic.getName();
+		this.description = clinic.getDescription();
+		this.appointments = clinic.getAppointments();
 		for(User u : clinic.getDoctors()) {
 			this.doctors.add(new UserDTO(u));
 		}
+		for(MedicalRoom mr : clinic.getMedicalRooms()) {
+			this.medicalRooms.add(new MedicalRoomDTO(mr));
+		}
+		for(PricelistItem item : clinic.getPricelist()) {
+			this.pricelist.add(new PricelistItemDTO(item));
+		}
+		
 	}
 
 	public Long getId() {
@@ -55,6 +72,38 @@ public class ClinicDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<LocalDateTime> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<LocalDateTime> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<MedicalRoomDTO> getMedicalRooms() {
+		return medicalRooms;
+	}
+
+	public void setMedicalRooms(List<MedicalRoomDTO> medicalRooms) {
+		this.medicalRooms = medicalRooms;
+	}
+
+	public List<PricelistItemDTO> getPricelist() {
+		return pricelist;
+	}
+
+	public void setPricelist(List<PricelistItemDTO> pricelist) {
+		this.pricelist = pricelist;
 	}
 	
 	

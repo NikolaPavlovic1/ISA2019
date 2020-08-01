@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 import com.ftn.ProjectISA.dto.MedicalRecordDTO;
 import com.ftn.ProjectISA.model.MedicalRecord;
 import com.ftn.ProjectISA.repository.MedicalRecordRepository;
+import com.ftn.ProjectISA.repository.UserRepository;
 
 @Service
 public class MedicalRecordService {
 
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
 
 	public List<MedicalRecordDTO> findAllMedicalRecords() {
 
@@ -28,8 +33,8 @@ public class MedicalRecordService {
 		return medicalRecordDTOs;
 	}
 
-	public MedicalRecordDTO findMedicalRecord(Long id) {
-		MedicalRecordDTO retVal = new MedicalRecordDTO(medicalRecordRepository.getOne(id));
+	public MedicalRecordDTO findMedicalRecord(Long userId) {
+		MedicalRecordDTO retVal = new MedicalRecordDTO(this.userRepository.getOne(userId).getMedicalRecord());
 		return retVal;
 	}
 

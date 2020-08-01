@@ -1,7 +1,11 @@
 package com.ftn.ProjectISA.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ftn.ProjectISA.enums.Role;
 import com.ftn.ProjectISA.model.Address;
+import com.ftn.ProjectISA.model.MedicalExamination;
 import com.ftn.ProjectISA.model.User;
 
 public class UserDTO {
@@ -19,6 +23,7 @@ public class UserDTO {
 	private Role role;
 	private boolean active;
 	private boolean approved;
+	private List<MedicalExaminationDTO> doctorsScheduledExaminations = new ArrayList<MedicalExaminationDTO>();
 	
 	public UserDTO() {}
 
@@ -54,6 +59,9 @@ public class UserDTO {
 		this.role = u.getRole();
 		this.active = u.isActive();
 		this.approved = u.isApproved();
+		for(MedicalExamination me: u.getDoctorsScheduledExaminations()) {
+			this.doctorsScheduledExaminations.add(new MedicalExaminationDTO(me));
+		}
 	}
 
 	public Long getId() {
@@ -158,6 +166,14 @@ public class UserDTO {
 
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+
+	public List<MedicalExaminationDTO> getDoctorsScheduledExaminations() {
+		return doctorsScheduledExaminations;
+	}
+
+	public void setDoctorsScheduledExaminations(List<MedicalExaminationDTO> doctorsScheduledExaminations) {
+		this.doctorsScheduledExaminations = doctorsScheduledExaminations;
 	}
 	
 	

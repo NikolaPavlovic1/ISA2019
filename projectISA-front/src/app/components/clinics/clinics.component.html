@@ -1,1 +1,46 @@
-<p>clinics works!</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container">
+    <br>
+    <h4>List of available clinics: </h4>
+    <div class="dropdown">
+        Filter by doctor: <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{selectedDoctor.username}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="refresh(0)">None</a>
+            <a class="dropdown-item" *ngFor="let doc of doctors" (click)="refresh(doc.id)">{{doc.username}}</a>
+        </div>
+    </div>
+    <br>
+    <div class="row" id="ads" *ngIf="filteredClinics.length > 0">
+        <!-- Category Card -->
+        <div class="col-md-4" *ngFor="let c of filteredClinics">
+            <div class="card rounded">
+                <div class="card-image">
+                    <!-- <span class="card-notify-year">
+                        <b>{{c.startTime | date: 'dd/MM/yyyy'}} - {{man.endTime | date: 'dd/MM/yyyy'}}</b>
+                    </span> -->
+                    <img class="img-fluid" src="assets/img/clinic.png" alt="Alternate Text" />
+                </div>
+                <div class="card-image-overlay m-auto">
+                    <span class="card-detail-badge">{{c.name}}</span>
+                </div>
+
+                <div class="card-body text-center">
+                    <h5>{{c.name}}</h5>
+                    <span class="card-detail-badge"><a class="moreLink" [routerLink]="['/clinic', c.id]">Click
+                            for more</a></span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div *ngIf="filteredClinics.length==0">
+        <h2>No results found!</h2>
+    </div>
+</div>

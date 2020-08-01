@@ -1,12 +1,20 @@
 package com.ftn.ProjectISA.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.ftn.ProjectISA.dto.UserDTO;
@@ -38,8 +46,16 @@ public class User {
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private MedicalRecord medicalRecord;
 	
+	
+	
+	
+	//doctors
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private Clinic clinic;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="doctor")
+	private List<MedicalExamination> doctorsScheduledExaminations = new ArrayList<MedicalExamination>();
+	
 	
 	public User() {}
 	
@@ -53,7 +69,7 @@ public class User {
 		this.address = u.getAddress();
 		this.medicalRecord = new MedicalRecord();
 		this.medicalRecord.setUser(this);
-		this.role = Role.PATIENT;
+		this.role = u.getRole();
 		this.active = false;
 		this.approved = false;
 		this.setConfirmationKey(null);
@@ -178,6 +194,14 @@ public class User {
 
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
+	}
+
+	public List<MedicalExamination> getDoctorsScheduledExaminations() {
+		return doctorsScheduledExaminations;
+	}
+
+	public void setDoctorsScheduledExaminations(List<MedicalExamination> doctorsScheduledExaminations) {
+		this.doctorsScheduledExaminations = doctorsScheduledExaminations;
 	}
 	
 	

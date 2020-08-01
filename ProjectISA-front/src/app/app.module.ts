@@ -12,6 +12,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ClinicsComponent } from './components/clinics/clinics.component';
 import { HistoryComponent } from './components/history/history.component';
 import { MedicalRecordComponent } from './components/medical-record/medical-record.component';
+import { DatePipe } from '@angular/common';
+import { ClinicComponent } from './components/clinic/clinic.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { MedicalRecordComponent } from './components/medical-record/medical-reco
     UserProfileComponent,
     ClinicsComponent,
     HistoryComponent,
-    MedicalRecordComponent
+    MedicalRecordComponent,
+    ClinicComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { MedicalRecordComponent } from './components/medical-record/medical-reco
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

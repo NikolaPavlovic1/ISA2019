@@ -1,9 +1,11 @@
 package com.ftn.ProjectISA.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.ftn.ProjectISA.dto.ClinicDTO;
+import com.ftn.ProjectISA.dto.MedicalRoomDTO;
+import com.ftn.ProjectISA.dto.PricelistItemDTO;
+import com.ftn.ProjectISA.dto.UserDTO;
+
 @Entity
 public class Clinic {
 
@@ -19,15 +26,32 @@ public class Clinic {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	private String description;
+	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<User> doctors = new ArrayList<User>();
+	
+	@ElementCollection
+	private List<LocalDateTime> appointments = new ArrayList<LocalDateTime>();
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
+	private List<MedicalRoom> medicalRooms = new ArrayList<MedicalRoom>();
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
 	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
+	private List<PricelistItem> pricelist = new ArrayList<PricelistItem>();
+	
 	private String name;
 	
 	public Clinic() {}
+	
+	public Clinic(ClinicDTO clinic) {
+		this.address = clinic.getAddress();
+		this.name = clinic.getName();
+		this.description = clinic.getDescription();
+	}
 
 	public Long getId() {
 		return id;
@@ -59,6 +83,38 @@ public class Clinic {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<LocalDateTime> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<LocalDateTime> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<MedicalRoom> getMedicalRooms() {
+		return medicalRooms;
+	}
+
+	public void setMedicalRooms(List<MedicalRoom> medicalRooms) {
+		this.medicalRooms = medicalRooms;
+	}
+
+	public List<PricelistItem> getPricelist() {
+		return pricelist;
+	}
+
+	public void setPricelist(List<PricelistItem> pricelist) {
+		this.pricelist = pricelist;
 	}
 	
 	

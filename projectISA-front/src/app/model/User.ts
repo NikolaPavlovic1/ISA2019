@@ -1,5 +1,6 @@
 import { Address } from './Address';
 import { MedicalRecord } from './MedicalRecord';
+import { MedicalExamination } from './MedicalExamination';
 
 export class User {
     id : number;
@@ -15,4 +16,5 @@ export class User {
 	role : String;
 	active : Boolean;
 	approved: Boolean;
+	doctorsScheduledExaminations : MedicalExamination[] = [];
 }

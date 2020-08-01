@@ -20,14 +20,29 @@ public class MedicalExamination {
 	private Long id;
 	
 	private LocalDateTime startDateTime;
+	private String type;
+	private int duration;
+	private int price;
+
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	private MedicalRoom medicalRoom;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private MedicalRecord medicalRecord;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	private User doctor;
+	
+	
+
 	public MedicalExamination() {}
 	
 	public MedicalExamination(MedicalExaminationDTO me) {
 		this.startDateTime = me.getStartDateTime();
+		this.type = me.getType();
+		this.duration = me.getDuration();
+		this.price = me.getPrice();
+		
 	}
 
 	public Long getId() {
@@ -54,5 +69,47 @@ public class MedicalExamination {
 		this.medicalRecord = medicalRecord;
 	}
 	
+	public User getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public MedicalRoom getMedicalRoom() {
+		return medicalRoom;
+	}
+
+	public void setMedicalRoom(MedicalRoom medicalRoom) {
+		this.medicalRoom = medicalRoom;
+	}
+
+	
+
 	
 }

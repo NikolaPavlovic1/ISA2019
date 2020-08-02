@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/api/disease").hasAuthority("ADMINISTRATOR")
-		.antMatchers("/api/user/login").permitAll()
+		//.antMatchers("/api/user/login").permitAll()
 		.antMatchers("/api/user/**").permitAll()
 		.antMatchers("/api/medical-record/**").permitAll()
 		.antMatchers("/api/medical-examination/**").permitAll()

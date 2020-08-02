@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.UserDTO;
 import com.ftn.ProjectISA.model.User;
+import com.ftn.ProjectISA.repository.ClinicRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
 @Service
@@ -17,6 +18,9 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ClinicRepository clinicRepository;
 	
 	@Autowired
     PasswordEncoder passwordEncoder;
@@ -27,6 +31,9 @@ public class UserService {
 	public UserDTO registerUser(UserDTO userDTO) {
 		User user = new User(userDTO);
 		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		if(userDTO.getClinicId() != null) {
+			user.setClinic(clinicRepository.getOne(userDTO.getClinicId()));
+		}
 
 		userRepository.save(user);
 		return userDTO;
@@ -74,6 +81,7 @@ public class UserService {
 		u.setApproved(true);
 		String confirmationKey = getRandomString();
 		u.setConfirmationKey(confirmationKey);
+		userRepository.save(u);
 		
 		/*try {
 			mailService.sendEmail(u);
@@ -87,6 +95,7 @@ public class UserService {
 	public boolean activateAccount(String confirmationKey) {	
 		User u = userRepository.findByConfirmationKey(confirmationKey);
 		u.setActive(true);
+		userRepository.save(u);
 		
 		return true;
 	}

@@ -1,10 +1,5 @@
 package com.ftn.ProjectISA.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-
-import com.ftn.ProjectISA.model.Clinic;
 import com.ftn.ProjectISA.model.PricelistItem;
 
 public class PricelistItemDTO {

@@ -59,15 +59,15 @@ public class UserController {
 	
 	//@PreAuthorize("ADMINISTRATOR")
 	@PostMapping(value = "/approve/{id}") 
-	public Boolean approveUser(@PathVariable Long id) { 
+	public ResponseEntity<Boolean> approveUser(@PathVariable Long id) { 
 		Boolean retVal = userService.approveUser(id);
-		return retVal; 
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
 	}
 	
 	@PostMapping(value = "/activate/{confirmationKey}") 
-	public Boolean activateUser(@PathVariable String confirmationKey) { 
+	public ResponseEntity<Boolean> activateUser(@PathVariable String confirmationKey) { 
 		Boolean retVal = userService.activateAccount(confirmationKey);
-		return retVal; 
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);
 	}
 	
 	@PostMapping(consumes = "application/json") 

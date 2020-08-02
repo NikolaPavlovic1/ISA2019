@@ -24,6 +24,7 @@ public class UserDTO {
 	private boolean active;
 	private boolean approved;
 	private List<MedicalExaminationDTO> doctorsScheduledExaminations = new ArrayList<MedicalExaminationDTO>();
+	private Long clinicId;
 	
 	public UserDTO() {}
 
@@ -62,6 +63,10 @@ public class UserDTO {
 		for(MedicalExamination me: u.getDoctorsScheduledExaminations()) {
 			this.doctorsScheduledExaminations.add(new MedicalExaminationDTO(me));
 		}
+		if(u.getClinic()!= null) {
+			this.clinicId = u.getClinic().getId();	
+		}
+		
 	}
 
 	public Long getId() {
@@ -174,6 +179,14 @@ public class UserDTO {
 
 	public void setDoctorsScheduledExaminations(List<MedicalExaminationDTO> doctorsScheduledExaminations) {
 		this.doctorsScheduledExaminations = doctorsScheduledExaminations;
+	}
+
+	public Long getClinicId() {
+		return clinicId;
+	}
+
+	public void setClinicId(Long clinicId) {
+		this.clinicId = clinicId;
 	}
 	
 	

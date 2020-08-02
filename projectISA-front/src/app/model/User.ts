@@ -17,4 +17,5 @@ export class User {
 	active : Boolean;
 	approved: Boolean;
 	doctorsScheduledExaminations : MedicalExamination[] = [];
+	clinicId : number;
 }

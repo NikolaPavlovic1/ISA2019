@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "clinics", component: ClinicsComponent },
   { path: "history", component: HistoryComponent },
   { path: "medical-record", component: MedicalRecordComponent },
-  { path: "profile/:id", component: UserProfileComponent },
+  { path: "profile", component: UserProfileComponent },
   { path: "", component: HomeComponent },
   {path:'', redirectTo:'/home', pathMatch:'full'} 
   //{path:'**', component:PageNotFoundComponent} 

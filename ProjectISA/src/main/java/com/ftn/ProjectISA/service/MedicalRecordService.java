@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.MedicalRecordDTO;
 import com.ftn.ProjectISA.model.MedicalRecord;
+import com.ftn.ProjectISA.repository.MedicalExaminationRepository;
 import com.ftn.ProjectISA.repository.MedicalRecordRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
@@ -16,6 +17,9 @@ public class MedicalRecordService {
 
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
+	
+	@Autowired
+	MedicalExaminationRepository medicalExaminationRepository;
 	
 	@Autowired
 	UserRepository userRepository;

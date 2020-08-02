@@ -21,6 +21,15 @@
 						<th class="text-center">
 							Type
 						</th>
+						<th class="text-center">
+							Duration(min)
+						</th>
+						<th class="text-center">
+							Price
+						</th>
+						<th class="text-center">
+							Medical room
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,10 +38,19 @@
 							<input type="text" disabled name='name0' class="form-control" value="{{examination.startDateTime}}" />
 						</td>
 						<td data-name="mail">
-							<input type="text" disabled name='mail0' class="form-control" value="Dobavi po id" />
+							<input type="text" disabled name='mail0' class="form-control" value="Dobavi doktora po id" />
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" value="{{examination.examinationType}}" />
+							<input name="desc0" disabled class="form-control" value="{{examination.type}}" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" value="{{examination.duration}}" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" value="{{examination.price}}" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" value="Dobavi po medical room" />
 						</td>
 					</tr>
 				</tbody>

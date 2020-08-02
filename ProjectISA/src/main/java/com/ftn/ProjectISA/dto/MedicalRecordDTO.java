@@ -1,6 +1,5 @@
 package com.ftn.ProjectISA.dto;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class MedicalRecordDTO {
 
 	private Long id;
 	private Long userId;
-	private List<LocalDateTime> medicalExaminations = new ArrayList<LocalDateTime>();
+	private List<MedicalExaminationDTO> medicalExaminations = new ArrayList<MedicalExaminationDTO>();
 	private List<Disease> diseaseHistory = new ArrayList<Disease>();
 	
 	public MedicalRecordDTO() {}
@@ -22,7 +21,7 @@ public class MedicalRecordDTO {
 		this.userId = mr.getUser().getId();
 		
 		for(MedicalExamination me : mr.getMedicalExaminations()) {
-			this.medicalExaminations.add(me.getStartDateTime());
+			this.medicalExaminations.add(new MedicalExaminationDTO(me));
 		}
 		
 		this.diseaseHistory = mr.getDiseaseHistory();
@@ -44,11 +43,11 @@ public class MedicalRecordDTO {
 		this.userId = userId;
 	}
 
-	public List<LocalDateTime> getMedicalExaminations() {
+	public List<MedicalExaminationDTO> getMedicalExaminations() {
 		return medicalExaminations;
 	}
 
-	public void setMedicalExaminations(List<LocalDateTime> medicalExaminations) {
+	public void setMedicalExaminations(List<MedicalExaminationDTO> medicalExaminations) {
 		this.medicalExaminations = medicalExaminations;
 	}
 

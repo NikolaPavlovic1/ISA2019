@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       localStorage.setItem('id',data.id.toString());
       localStorage.setItem('token',data.token);
-      this.router.navigate(["/profile/"+data.id.toString()]);
+      this.router.navigate(["/profile"]);
     });
     
   }

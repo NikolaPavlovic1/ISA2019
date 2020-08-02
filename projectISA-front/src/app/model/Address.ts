@@ -4,4 +4,6 @@ export class Address {
 	city: String;
 	street: String;
 	number: number;
+	latitude: number;
+	longitude : number;
 }

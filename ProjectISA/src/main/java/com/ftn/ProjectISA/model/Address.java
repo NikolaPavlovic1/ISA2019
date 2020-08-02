@@ -15,6 +15,8 @@ public class Address {
 	private String city;
 	private String street;
 	private int number;
+	private double latitude;
+	private double longitude;
 	
 	public Address() {
 		
@@ -58,5 +60,21 @@ public class Address {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 }

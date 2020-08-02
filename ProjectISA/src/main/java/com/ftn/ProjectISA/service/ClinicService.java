@@ -17,9 +17,7 @@ public class ClinicService {
 	ClinicRepository clinicRepository;
 	
 	public ClinicDTO addClinic(ClinicDTO c) {
-		Clinic clinic = new Clinic();
-		clinic.setAddress(c.getAddress());
-		clinic.setName(c.getName());
+		Clinic clinic = new Clinic(c);
 		
 		clinicRepository.save(clinic);
 		return c;

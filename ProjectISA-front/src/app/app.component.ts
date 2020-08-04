@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'projectISA-front';
-
+  
   constructor(private http:HttpClient, private router:Router) {
 
   }

@@ -107,6 +107,18 @@ public class UserController {
 		return new ResponseEntity<Boolean>(false,HttpStatus.BAD_REQUEST);
 	}
 	
+	@PostMapping(value = "/{doctorId}/{typeId}") 
+	public ResponseEntity<Boolean> addTypeToDoctor(@PathVariable Long doctorId, @PathVariable Long typeId) { 
+		Boolean retVal = userService.addTypeToDoctor(doctorId, typeId);
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "addDoctorToClinic/{doctorId}/{clinicId}") 
+	public ResponseEntity<Boolean> addDoctorToClinic(@PathVariable Long doctorId, @PathVariable Long clinicId) { 
+		Boolean retVal = userService.addDoctorToClinic(doctorId, clinicId);
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);
+	}
+	
 	@PutMapping(consumes = "application/json") 
 	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){ 
 		UserDTO retVal = userService.updateUser(userDTO); 

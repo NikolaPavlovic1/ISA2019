@@ -12,7 +12,7 @@ public class MedicalRecordDTO {
 	private Long id;
 	private Long userId;
 	private List<MedicalExaminationDTO> medicalExaminations = new ArrayList<MedicalExaminationDTO>();
-	private List<Disease> diseaseHistory = new ArrayList<Disease>();
+	private List<DiseaseDTO> diseaseHistory = new ArrayList<DiseaseDTO>();
 	
 	public MedicalRecordDTO() {}
 	
@@ -24,7 +24,10 @@ public class MedicalRecordDTO {
 			this.medicalExaminations.add(new MedicalExaminationDTO(me));
 		}
 		
-		this.diseaseHistory = mr.getDiseaseHistory();
+		for(Disease d : mr.getDiseaseHistory()) {
+			this.diseaseHistory.add(new DiseaseDTO(d));
+		}
+
 	}
 
 	public Long getId() {
@@ -51,11 +54,11 @@ public class MedicalRecordDTO {
 		this.medicalExaminations = medicalExaminations;
 	}
 
-	public List<Disease> getDiseaseHistory() {
+	public List<DiseaseDTO> getDiseaseHistory() {
 		return diseaseHistory;
 	}
 
-	public void setDiseaseHistory(List<Disease> diseaseHistory) {
+	public void setDiseaseHistory(List<DiseaseDTO> diseaseHistory) {
 		this.diseaseHistory = diseaseHistory;
 	}
 	

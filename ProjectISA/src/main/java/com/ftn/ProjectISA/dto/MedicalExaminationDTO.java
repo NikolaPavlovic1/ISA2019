@@ -10,10 +10,10 @@ public class MedicalExaminationDTO {
 	private LocalDateTime startDateTime;
 	private Long medicalRecordId;
 	private Long doctorId;
-	private String type;
-	private int duration;
+	private Long typeDurationId;
 	private int price;
 	private Long medicalRoomId;
+	
 	
 	public MedicalExaminationDTO() {}
 	
@@ -22,8 +22,7 @@ public class MedicalExaminationDTO {
 		this.startDateTime = me.getStartDateTime();
 		this.medicalRecordId = me.getMedicalRecord().getId();
 		this.doctorId = me.getDoctor().getId();
-		this.type = me.getType();
-		this.duration = me.getDuration();
+		this.typeDurationId = me.getTypeAndDuration().getId();
 		this.price = me.getPrice();
 		this.medicalRecordId = me.getMedicalRoom().getId();
 	}
@@ -60,16 +59,12 @@ public class MedicalExaminationDTO {
 		this.medicalRecordId = medicalRecordId;
 	}
 
-	public String getType() {
-		return type;
+	public Long getTypeDurationId() {
+		return typeDurationId;
 	}
 
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setTypeDurationId(Long typeDurationId) {
+		this.typeDurationId = typeDurationId;
 	}
 
 	public int getPrice() {
@@ -88,9 +83,6 @@ public class MedicalExaminationDTO {
 		this.medicalRoomId = medicalRoomId;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
 	
 	
 

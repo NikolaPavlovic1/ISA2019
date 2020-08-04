@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.ProjectISA.dto.ClinicDTO;
+import com.ftn.ProjectISA.dto.FilterClinicsDTO;
 import com.ftn.ProjectISA.service.ClinicService;
 
 @Controller
@@ -28,6 +29,12 @@ public class ClinicController {
 	@GetMapping(value = "all")
 	public ResponseEntity<List<ClinicDTO>> findAllClinics() {
 		List<ClinicDTO> retVal = clinicService.findAllClinics();
+		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "filterClinics")
+	public ResponseEntity<List<ClinicDTO>> filterClinics(FilterClinicsDTO filterClinicsDTO) {
+		List<ClinicDTO> retVal = clinicService.filterClinics(filterClinicsDTO);
 		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
 	}
 

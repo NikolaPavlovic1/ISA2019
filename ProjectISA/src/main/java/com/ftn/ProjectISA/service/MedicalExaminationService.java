@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
 import com.ftn.ProjectISA.model.MedicalExamination;
+import com.ftn.ProjectISA.model.TypeDuration;
 import com.ftn.ProjectISA.repository.MedicalExaminationRepository;
 import com.ftn.ProjectISA.repository.MedicalRecordRepository;
 import com.ftn.ProjectISA.repository.MedicalRoomRepository;
+import com.ftn.ProjectISA.repository.TypeDurationRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
 @Service
@@ -25,6 +27,9 @@ public class MedicalExaminationService {
 	
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
+	
+	@Autowired
+	TypeDurationRepository typeDurationRepository;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -65,12 +70,22 @@ public class MedicalExaminationService {
 		e.setDoctor(this.userRepository.getOne(examination.getDoctorId()));
 		e.setMedicalRecord(this.medicalRecordRepository.getOne(examination.getMedicalRecordId()));
 		e.setMedicalRoom(this.medicalRoomRepository.getOne(examination.getMedicalRoomId()));
+		TypeDuration td = this.typeDurationRepository.getOne(examination.getTypeDurationId());
+		e.setTypeAndDuration(td);
 		this.medicalExaminationRepository.save(e);
 		return examination;
 	}
 	
 	public void deleteMedicalExamination(Long id) {
 		medicalExaminationRepository.deleteById(id);
+	}
+	
+	public void addTypeDuration(String type, int duration) {
+		TypeDuration typeDuration = new TypeDuration();
+		typeDuration.setType(type);
+		typeDuration.setDuration(duration);
+		this.typeDurationRepository.save(typeDuration);
+		
 	}
 	
 }

@@ -3,8 +3,7 @@ export class MedicalExamination {
     startDateTime : Date;
     medicalRecordId : number;
     doctorId: number;
-    type:String;
-    duration:number;
+    typeDurationId: number;
     price:number;
     medicalRoomId:number;
 }

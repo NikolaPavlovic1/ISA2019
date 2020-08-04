@@ -1,12 +1,17 @@
 package com.ftn.ProjectISA.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.ProjectISA.dto.DiseaseDTO;
 import com.ftn.ProjectISA.model.Disease;
+import com.ftn.ProjectISA.model.MedicalRecord;
+import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.DiseaseRepository;
+import com.ftn.ProjectISA.repository.UserRepository;
 
 @Service
 public class DiseaseService {
@@ -14,22 +19,34 @@ public class DiseaseService {
 	@Autowired
 	DiseaseRepository diseaseRepository;
 	
-	public List<Disease> findAllDiseases() {
-
-		List<Disease> diseases = diseaseRepository.findAll();
+	@Autowired
+	UserRepository userRepository;
+	
+	public List<DiseaseDTO> findAllDiseases() {
 		
-		return diseases;
+		List<Disease> diseases = diseaseRepository.findAll();
+		List<DiseaseDTO> diseasesDTO = new ArrayList<>();
+		for(Disease d : diseases) {
+			diseasesDTO.add(new DiseaseDTO(d));
+		}
+		
+		return diseasesDTO;
 	}
 
-	public Disease findDisease(Long id) {
+	public DiseaseDTO findDisease(Long id) {
 		Disease retVal = diseaseRepository.getOne(id);
-		return retVal;
+		return new DiseaseDTO(retVal);
 	}
 	
-	public Disease addDisease(Disease d) {
+	public DiseaseDTO addDisease(DiseaseDTO d) {
+		User user = this.userRepository.getOne(d.getPatientId());
+		MedicalRecord medicalRecord = user.getMedicalRecord();
+		
 		Disease disease = new Disease();
 		disease.setName(d.getName());
-		return diseaseRepository.save(disease);
+		disease.getMedicalRecords().add(medicalRecord);
+		diseaseRepository.save(disease);
+		return d;
 	}
 	
 	public void deleteDisease(Long id) {

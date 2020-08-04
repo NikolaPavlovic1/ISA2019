@@ -4,6 +4,7 @@ import { Clinic } from 'src/app/model/Clinic';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { User } from 'src/app/model/User';
+import { FilterClinic } from 'src/app/model/FilterClinics';
 
 @Component({
   selector: 'app-clinics',
@@ -16,6 +17,8 @@ export class ClinicsComponent implements OnInit {
   filteredClinics: Clinic[] = [];
   selectedDoctor: User = new User();
   doctors: User[] = [];
+  date: Date;
+  type: string;
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
@@ -37,33 +40,24 @@ export class ClinicsComponent implements OnInit {
     });
   }
 
-  public refresh(id: number) {
-    /*let i;
-    let j;
-    this.filteredClinics = [];
-    for (i = 0; i < this.clinics.length; i++) {
-      for(j = 0 ; j < this.clinics[i].doctors.length ; j++) {
-        if (this.clinics[i].doctors[j].id == id || id == 0) {
-          this.filteredClinics.push(this.clinics[i]);
-        }
-      }
-      
-    }
+  public refresh() {
+   let filterClinic = new FilterClinic();
+   filterClinic.date = this.date;
+   filterClinic.type = this.type;
+   console.log(filterClinic);
 
-    if(id == 0) {
-      this.selectedDoctor = new User();
-      this.selectedDoctor.username == "No filter";
-    } else {
-      let j;
-      for (j = 0; j < this.locations.length; j++) {
-        if (this.locations[j].id == id) {
-          console.log(this.locations[j]);
-          this.selectedLocation = this.locations[j];
-        }
-      }
-    }
+   let headers = new HttpHeaders();
+    let token = "Bearer ";
+    token += localStorage.getItem('token');
+    headers = headers.set('Authorization', token);
     
-   */ 
+    this.http.get<Clinic[]>('http://localhost:8080/api/clinic/filter',{headers:headers}).subscribe((data) => {
+      this.clinics = data;
+      this.filteredClinics = data;
+      //this.doctors = [];
+      console.log(data);
+    });
+
   }
 
 

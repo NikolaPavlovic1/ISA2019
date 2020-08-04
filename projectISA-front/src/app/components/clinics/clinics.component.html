@@ -4,18 +4,14 @@
 
 <div class="container">
     <br>
-    <h4>List of available clinics: </h4>
-    <div class="dropdown">
-        Filter by doctor: <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{selectedDoctor.username}}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" (click)="refresh(0)">None</a>
-            <a class="dropdown-item" *ngFor="let doc of doctors" (click)="refresh(doc.id)">{{doc.username}}</a>
-        </div>
+    <div>
+        <p>Enter date: <input type="date" /></p>
+        <p>Enter type of examination: <input type="text" [(ngModel)]="type" /></p>
+        <button class="btn btn-primary" (click)="refresh()">Search</button>
     </div>
     <br>
+    <h4>List of available clinics: </h4>
+    <hr>
     <div class="row" id="ads" *ngIf="filteredClinics.length > 0">
         <!-- Category Card -->
         <div class="col-md-4" *ngFor="let c of filteredClinics">

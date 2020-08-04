@@ -1,6 +1,8 @@
 package com.ftn.ProjectISA.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
 
@@ -20,8 +24,6 @@ public class MedicalExamination {
 	private Long id;
 	
 	private LocalDateTime startDateTime;
-	private String type;
-	private int duration;
 	private int price;
 
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
@@ -33,14 +35,16 @@ public class MedicalExamination {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private User doctor;
 	
-	
+	@ManyToMany(mappedBy = "medicalRecords")
+	private List<Disease> diseaseHistory = new ArrayList<Disease>();
 
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private TypeDuration typeAndDuration;
+	
 	public MedicalExamination() {}
 	
 	public MedicalExamination(MedicalExaminationDTO me) {
 		this.startDateTime = me.getStartDateTime();
-		this.type = me.getType();
-		this.duration = me.getDuration();
 		this.price = me.getPrice();
 		
 	}
@@ -77,22 +81,6 @@ public class MedicalExamination {
 		this.doctor = doctor;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -107,6 +95,22 @@ public class MedicalExamination {
 
 	public void setMedicalRoom(MedicalRoom medicalRoom) {
 		this.medicalRoom = medicalRoom;
+	}
+
+	public List<Disease> getDiseaseHistory() {
+		return diseaseHistory;
+	}
+
+	public void setDiseaseHistory(List<Disease> diseaseHistory) {
+		this.diseaseHistory = diseaseHistory;
+	}
+
+	public TypeDuration getTypeAndDuration() {
+		return typeAndDuration;
+	}
+
+	public void setTypeAndDuration(TypeDuration typeAndDuration) {
+		this.typeAndDuration = typeAndDuration;
 	}
 
 	

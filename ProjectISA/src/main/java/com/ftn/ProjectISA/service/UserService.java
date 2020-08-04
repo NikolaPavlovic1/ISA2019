@@ -9,8 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.UserDTO;
+import com.ftn.ProjectISA.model.Clinic;
+import com.ftn.ProjectISA.model.TypeDuration;
 import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.ClinicRepository;
+import com.ftn.ProjectISA.repository.TypeDurationRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	TypeDurationRepository typeDurationRepository;
 	
 	@Autowired
 	ClinicRepository clinicRepository;
@@ -92,6 +98,8 @@ public class UserService {
 		return true;
 	}
 	
+	
+	
 	public boolean activateAccount(String confirmationKey) {	
 		User u = userRepository.findByConfirmationKey(confirmationKey);
 		u.setActive(true);
@@ -112,4 +120,24 @@ public class UserService {
         return saltStr;
 
     }
+	
+	public boolean addTypeToDoctor(Long id, Long typeDuration) {	
+		User u = userRepository.getOne(id);
+		TypeDuration td = typeDurationRepository.getOne(typeDuration);
+		td.getDoctors().add(u);
+		
+		typeDurationRepository.save(td);
+		
+		return true;
+	}
+	
+	public boolean addDoctorToClinic(Long doctorId, Long clinicId) {	
+		User u = userRepository.getOne(doctorId);
+		Clinic clinic= this.clinicRepository.getOne(clinicId);
+		u.setClinic(clinic);
+		
+		userRepository.save(u);
+		
+		return true;
+	}
 }

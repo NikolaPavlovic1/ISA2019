@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ftn.ProjectISA.model.Disease;
+import com.ftn.ProjectISA.dto.DiseaseDTO;
 import com.ftn.ProjectISA.service.DiseaseService;
 
 @Controller
@@ -25,21 +24,21 @@ public class DiseaseController {
 	DiseaseService diseaseService;
 
 	@GetMapping(value = "all")
-	public ResponseEntity<List<Disease>> findAllDiseases() {
-		List<Disease> retVal = diseaseService.findAllDiseases();
-		return new ResponseEntity<List<Disease>>(retVal, HttpStatus.OK);
+	public ResponseEntity<List<DiseaseDTO>> findAllDiseases() {
+		List<DiseaseDTO> retVal = diseaseService.findAllDiseases();
+		return new ResponseEntity<List<DiseaseDTO>>(retVal, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}") 
-	public ResponseEntity<Disease> findDisease(@PathVariable Long id) { 
-		Disease retVal = diseaseService.findDisease(id); 
-		return new ResponseEntity<Disease>(retVal, HttpStatus.OK); }
+	public ResponseEntity<DiseaseDTO> findDisease(@PathVariable Long id) { 
+		DiseaseDTO retVal = diseaseService.findDisease(id); 
+		return new ResponseEntity<DiseaseDTO>(retVal, HttpStatus.OK); }
 
-	@PreAuthorize("ADMINISTRATOR")
+	//@PreAuthorize("ADMINISTRATOR")
 	@PostMapping(consumes = "application/json") 
-	public ResponseEntity<Disease> addDisease(@RequestBody Disease diseaseDTO){
-		Disease retVal = diseaseService.addDisease(diseaseDTO);
-		return new ResponseEntity<Disease>(retVal, HttpStatus.OK); 
+	public ResponseEntity<DiseaseDTO> addDisease(@RequestBody DiseaseDTO diseaseDTO){
+		DiseaseDTO retVal = diseaseService.addDisease(diseaseDTO);
+		return new ResponseEntity<DiseaseDTO>(retVal, HttpStatus.OK); 
 	}
 	
 	@DeleteMapping(value = "/{id}") 

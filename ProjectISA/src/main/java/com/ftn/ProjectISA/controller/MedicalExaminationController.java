@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
+import com.ftn.ProjectISA.dto.TypeDurationDTO;
 import com.ftn.ProjectISA.service.MedicalExaminationService;
 
 @Controller
@@ -55,6 +56,12 @@ public class MedicalExaminationController {
 	public ResponseEntity<?> deleteMedicalExamination(@PathVariable Long id){ 
 		medicalExaminationService.deleteMedicalExamination(id);
 		return new ResponseEntity<>("Medical examination deleted successfully", HttpStatus.OK); 
+	}
+	
+	@PostMapping(value="addTypeDuration") 
+	public ResponseEntity<?> addTypeDuration(@RequestBody TypeDurationDTO tddto){
+		medicalExaminationService.addTypeDuration(tddto.getType(),tddto.getDuration());
+		return new ResponseEntity<>("Type duration added successfully", HttpStatus.OK); 
 	}
 
 }

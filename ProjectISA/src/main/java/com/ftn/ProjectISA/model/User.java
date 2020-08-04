@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -56,6 +57,8 @@ public class User {
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="doctor")
 	private List<MedicalExamination> doctorsScheduledExaminations = new ArrayList<MedicalExamination>();
 	
+	@ManyToMany(mappedBy = "doctors")
+	private List<TypeDuration> typesOfExamination = new ArrayList<TypeDuration>();
 	
 	public User() {}
 	
@@ -202,6 +205,14 @@ public class User {
 
 	public void setDoctorsScheduledExaminations(List<MedicalExamination> doctorsScheduledExaminations) {
 		this.doctorsScheduledExaminations = doctorsScheduledExaminations;
+	}
+
+	public List<TypeDuration> getTypesOfExamination() {
+		return typesOfExamination;
+	}
+
+	public void setTypesOfExamination(List<TypeDuration> typesOfExamination) {
+		this.typesOfExamination = typesOfExamination;
 	}
 	
 	

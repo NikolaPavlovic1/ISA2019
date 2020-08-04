@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.ClinicDTO;
+import com.ftn.ProjectISA.dto.FilterClinicsDTO;
 import com.ftn.ProjectISA.model.Clinic;
 import com.ftn.ProjectISA.repository.ClinicRepository;
 
@@ -32,6 +33,20 @@ public class ClinicService {
 		for(Clinic c : clinics)
 			clinicsDtos.add(new ClinicDTO(c));
 		
+		return clinicsDtos;
+	}
+	
+	public List<ClinicDTO> filterClinics(FilterClinicsDTO filterClinicsDTO) {
+
+		List<ClinicDTO> clinicsDtos = new ArrayList<ClinicDTO>();
+		
+		List<Clinic> clinics = clinicRepository.findAll();
+		
+		/*for(Clinic c : clinics) {
+			if
+		}
+			clinicsDtos.add(new ClinicDTO(c));
+		*/
 		return clinicsDtos;
 	}
 

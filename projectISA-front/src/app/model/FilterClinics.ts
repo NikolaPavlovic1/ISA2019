@@ -1,4 +1,4 @@
-export class FilterClinic {
-    date : Date;
+export class FilterClinics {
+    date : string;
     type : string;
 }

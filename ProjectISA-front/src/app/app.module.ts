@@ -15,6 +15,7 @@ import { MedicalRecordComponent } from './components/medical-record/medical-reco
 import { DatePipe } from '@angular/common';
 import { ClinicComponent } from './components/clinic/clinic.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

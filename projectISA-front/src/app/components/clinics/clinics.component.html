@@ -5,16 +5,17 @@
 <div class="container">
     <br>
     <div>
-        <p>Enter date: <input type="date" /></p>
+        <p>Enter date: <input type="date" [(ngModel)]="myDate" /></p>
+        
         <p>Enter type of examination: <input type="text" [(ngModel)]="type" /></p>
         <button class="btn btn-primary" (click)="refresh()">Search</button>
     </div>
     <br>
     <h4>List of available clinics: </h4>
     <hr>
-    <div class="row" id="ads" *ngIf="filteredClinics.length > 0">
+    <div class="row" id="ads" *ngIf="clinics.length > 0">
         <!-- Category Card -->
-        <div class="col-md-4" *ngFor="let c of filteredClinics">
+        <div class="col-md-4" *ngFor="let c of clinics">
             <div class="card rounded">
                 <div class="card-image">
                     <!-- <span class="card-notify-year">
@@ -36,7 +37,7 @@
 
 
     </div>
-    <div *ngIf="filteredClinics.length==0">
+    <div *ngIf="clinics.length==0">
         <h2>No results found!</h2>
     </div>
 </div>

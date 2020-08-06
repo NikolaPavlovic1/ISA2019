@@ -4,7 +4,7 @@ import { Clinic } from 'src/app/model/Clinic';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { User } from 'src/app/model/User';
-import { FilterClinic } from 'src/app/model/FilterClinics';
+import { FilterClinics } from 'src/app/model/FilterClinics';
 
 @Component({
   selector: 'app-clinics',
@@ -14,10 +14,7 @@ import { FilterClinic } from 'src/app/model/FilterClinics';
 export class ClinicsComponent implements OnInit {
 
   clinics: Clinic[] = [];
-  filteredClinics: Clinic[] = [];
-  selectedDoctor: User = new User();
-  doctors: User[] = [];
-  date: Date;
+  myDate: Date;
   type: string;
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
@@ -34,15 +31,15 @@ export class ClinicsComponent implements OnInit {
     
     this.http.get<Clinic[]>('http://localhost:8080/api/clinic/all',{headers:headers}).subscribe((data) => {
       this.clinics = data;
-      this.filteredClinics = data;
-      //this.doctors = [];
-      console.log(data);
     });
   }
 
   public refresh() {
-   let filterClinic = new FilterClinic();
-   filterClinic.date = this.date;
+    
+   let filterClinic = new FilterClinics();
+   filterClinic.date = JSON.stringify(this.myDate);
+   filterClinic.date = filterClinic.date.split('.')[0];
+   filterClinic.date = filterClinic.date.substr(1, filterClinic.date.length-2);
    filterClinic.type = this.type;
    console.log(filterClinic);
 
@@ -51,10 +48,8 @@ export class ClinicsComponent implements OnInit {
     token += localStorage.getItem('token');
     headers = headers.set('Authorization', token);
     
-    this.http.get<Clinic[]>('http://localhost:8080/api/clinic/filter',{headers:headers}).subscribe((data) => {
+    this.http.post<Clinic[]>('http://localhost:8080/api/clinic/filterClinics',filterClinic,{headers:headers}).subscribe((data) => {
       this.clinics = data;
-      this.filteredClinics = data;
-      //this.doctors = [];
       console.log(data);
     });
 

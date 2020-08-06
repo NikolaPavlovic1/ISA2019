@@ -26,14 +26,14 @@ public class ClinicController {
 	@Autowired
 	ClinicService clinicService;
 	
-	@GetMapping(value = "all")
+	@GetMapping(value = "/all")
 	public ResponseEntity<List<ClinicDTO>> findAllClinics() {
 		List<ClinicDTO> retVal = clinicService.findAllClinics();
 		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "filterClinics")
-	public ResponseEntity<List<ClinicDTO>> filterClinics(FilterClinicsDTO filterClinicsDTO) {
+	@PostMapping(consumes = "application/json", value = "/filterClinics")
+	public ResponseEntity<List<ClinicDTO>> filterClinics(@RequestBody FilterClinicsDTO filterClinicsDTO) {
 		List<ClinicDTO> retVal = clinicService.filterClinics(filterClinicsDTO);
 		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
 	}

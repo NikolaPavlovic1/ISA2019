@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.ProjectISA.dto.ClinicDTO;
 import com.ftn.ProjectISA.dto.FilterClinicsDTO;
+import com.ftn.ProjectISA.dto.FilterDoctorsDTO;
+import com.ftn.ProjectISA.dto.PricelistItemDTO;
+import com.ftn.ProjectISA.dto.UserDTO;
 import com.ftn.ProjectISA.service.ClinicService;
 
 @Controller
@@ -37,6 +40,12 @@ public class ClinicController {
 		List<ClinicDTO> retVal = clinicService.filterClinics(filterClinicsDTO);
 		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
 	}
+	
+	@PostMapping(consumes = "application/json", value = "/filterDoctors")
+	public ResponseEntity<List<UserDTO>> filterDoctors(@RequestBody FilterDoctorsDTO filterDoctorsDTO) {
+		List<UserDTO> retVal = clinicService.filteredDoctorsInClinic(filterDoctorsDTO);
+		return new ResponseEntity<List<UserDTO>>(retVal, HttpStatus.OK);
+	}
 
 	@GetMapping(value = "/{id}") 
 	public ResponseEntity<ClinicDTO> findClinic(@PathVariable Long id) { 
@@ -54,5 +63,11 @@ public class ClinicController {
 	public ResponseEntity<?> deleteClinic(@PathVariable Long id){ 
 		clinicService.deleteClinic(id);
 		return new ResponseEntity<>("Clinic deleted successfully", HttpStatus.OK); 
+	}
+	
+	@PostMapping(consumes = "application/json", value = "/addPriceListItem")
+	public ResponseEntity<PricelistItemDTO> addPriceListItem(@RequestBody PricelistItemDTO item) {
+		PricelistItemDTO retVal = clinicService.addPricelistItem(item);
+		return new ResponseEntity<PricelistItemDTO>(retVal, HttpStatus.OK);
 	}
 }

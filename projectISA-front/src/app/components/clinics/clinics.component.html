@@ -21,16 +21,14 @@
                     <!-- <span class="card-notify-year">
                         <b>{{c.startTime | date: 'dd/MM/yyyy'}} - {{man.endTime | date: 'dd/MM/yyyy'}}</b>
                     </span> -->
-                    <img class="img-fluid" src="assets/img/clinic.png" alt="Alternate Text" />
+                    <img class="img-fluid" src="assets/img/medicalclinic.jpg" alt="Alternate Text" />
                 </div>
-                <div class="card-image-overlay m-auto">
-                    <span class="card-detail-badge">{{c.name}}</span>
-                </div>
+                
 
                 <div class="card-body text-center">
                     <h5>{{c.name}}</h5>
-                    <span class="card-detail-badge"><a class="moreLink" [routerLink]="['/clinic', c.id]">Click
-                            for more</a></span>
+                    <span class="card-detail-badge"><a class="moreLink" [routerLink]="['/clinic', c.id]">Show profile</a></span>
+                    <span class="card-detail-badge"><a class="moreLink" (click)="showDoctors(c.id)">Show doctors</a></span>
                 </div>
             </div>
         </div>

@@ -1,1 +1,84 @@
-<p>clinic works!</p>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="image-container">
+                                    <img src="assets/img/medicalclinic.jpg" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                </div>
+                                <div class="userData ml-3">
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{ clinic.name }}</h2>
+                                    <h6 class="d-block">{{clinic.medicalRooms.length}} medical rooms</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a (click)="changeShowBasicInfo(true)" class="nav-link active" [class.active]="showBasicInfo" id="basicInfo-tab" data-toggle="tab" role="tab" aria-controls="basicInfo" [class.aria-selected]="showBasicInfo" >Basic Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a (click)="changeShowBasicInfo(false)" class="nav-link" [class.active]="!showBasicInfo" id="pricelist-tab" data-toggle="tab"  role="tab" aria-controls="pricelist" [class.aria-selected]="!showBasicInfo"  >Pricelist</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content ml-1" id="myTabContent" >
+                                    <div *ngIf="showBasicInfo" class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Address</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                Ovde preko pipe
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Description</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{clinic.description}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Name</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{clinic.name}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                    
+
+
+                                    <div *ngIf="!showBasicInfo" class="tab-pane fade show active" id="pricelist" role="tabpanel" aria-labelledby="pricelist-tab">
+                                        <div class="row" *ngFor="let item of clinic.pricelist">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">{{item.typeOfExamination}}</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{item.price}}
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <button class="btn btn-primary" [routerLink]="['/doctors',clinic.id]" > Show doctors in clinics</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -6,6 +6,7 @@ public class FilterClinicsDTO {
 	
 	private String type;
 	private Date date;
+	private Long clinicId;
 	
 	public FilterClinicsDTO() {}
 
@@ -23,6 +24,14 @@ public class FilterClinicsDTO {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Long getClinicId() {
+		return clinicId;
+	}
+
+	public void setClinicId(Long clinicId) {
+		this.clinicId = clinicId;
 	}
 	
 	

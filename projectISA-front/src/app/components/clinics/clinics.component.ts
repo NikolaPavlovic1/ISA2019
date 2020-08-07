@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { User } from 'src/app/model/User';
 import { FilterClinics } from 'src/app/model/FilterClinics';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clinics',
@@ -17,7 +18,7 @@ export class ClinicsComponent implements OnInit {
   myDate: Date;
   type: string;
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe, private router : Router) { }
 
   ngOnInit() {
     this.reload();
@@ -53,6 +54,11 @@ export class ClinicsComponent implements OnInit {
       console.log(data);
     });
 
+  }
+
+  public showDoctors(clinicId: number) {
+    this.router.navigate( ['doctors', clinicId],{queryParams: { date: this.myDate , type: this.type }});
+    
   }
 
 

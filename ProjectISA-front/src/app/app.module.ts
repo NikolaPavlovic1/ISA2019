@@ -14,6 +14,9 @@ import { HistoryComponent } from './components/history/history.component';
 import { MedicalRecordComponent } from './components/medical-record/medical-record.component';
 import { DatePipe } from '@angular/common';
 import { ClinicComponent } from './components/clinic/clinic.component';
+import { DoctorsComponent } from './components/doctors/doctors.component';
+import { FinalReservationComponent } from './components/final-reservation/final-reservation.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { ClinicComponent } from './components/clinic/clinic.component';
     ClinicsComponent,
     HistoryComponent,
     MedicalRecordComponent,
-    ClinicComponent
+    ClinicComponent,
+    DoctorsComponent,
+    FinalReservationComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <h1>Doctors filter</h1>
+    <form #myForm="ngForm" novalidate (ngSubmit)="doFilter(myForm)">
+        <div class="form-group">
+            <label>First name</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="firstName">
+        </div>
+
+        <div class="form-group">
+            <label>Last name</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="lastName">
+        </div>
+
+        <div class="form-group">
+            <label>Rate</label>
+            <input type="number" class="form-control" name="rate" [(ngModel)]="rate">
+        </div>
+
+        <div [class.d-none]="date!=undefined" class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" name="date" [(ngModel)]="date">
+        </div>
+
+        <div [class.d-none]="type!=undefined" class="form-group">
+            <label>Type</label>
+            <input type="text" class="form-control" name="type" [(ngModel)]="type">
+        </div>
+
+        <button class="btn btn-primary" type="submit" >Search</button>
+        <button class="btn btn-primary" style="margin-left: 10px;">Clear search</button>
+    </form>
+</div>
+
+<div>
+    <hr />
+    <h2>Select doctor: </h2>
+    <hr />
+    <div [class.selectedDoc]="selectedDoctor.id==doctor.id"  class="card myCard" style="width:200px" *ngFor="let doctor of filteredDoctors">
+        <img class="card-img-top" src="assets/img/clinic.png" alt="Card image">
+        <div class="card-body">
+          <h4 class="card-title">{{doctor.name}} {{ doctor.lastName}}</h4>
+          <p class="card-text">Ocena: 3</p>
+          <a class="btn btn-primary" (click)="selectDoctor(doctor.id)">Select</a>
+        </div>
+      </div>
+</div>
+
+<button class="btn btn-primary" (click)="proceed()">Proceed</button>
+

@@ -53,8 +53,10 @@ public class ClinicService {
 		
 		//LocalDateTime ldt = LocalDateTime.
 		List<ClinicDTO> filteredClinics = new ArrayList<ClinicDTO>();
-		
 		List<Clinic> clinics = clinicRepository.findAll();
+		
+		System.out.println("T: " + filterClinicsDTO.getType());
+		System.out.println("D: " + filterClinicsDTO.getDate());
 		
 		for(Clinic clinic : clinics) {
 			boolean match = false;
@@ -62,21 +64,29 @@ public class ClinicService {
 				boolean type = false;
 				boolean date = true;
 				
-				for(TypeDuration td: doctor.getTypesOfExamination()) {
-					if(td.getType().equals(filterClinicsDTO.getType())) {
-						type = true;
-						System.out.println("usao");
+				if(filterClinicsDTO.getType() != null) {
+					for(TypeDuration td: doctor.getTypesOfExamination()) {
+						if(td.getType().equals(filterClinicsDTO.getType())) {
+							type = true;
+							System.out.println("usao");
+						}
+					}	
+				} else {
+					type = true;
+				}
+				
+				if(filterClinicsDTO.getDate() != null) {
+					for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
+						Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
+						System.out.println(d);
+						System.out.println(filterClinicsDTO.getDate());
+						if(d == filterClinicsDTO.getDate()) {
+							date = false;
+							System.out.println("USAO");
+						}
 					}
 				}
-				for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
-					Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
-					System.out.println(d);
-					System.out.println(filterClinicsDTO.getDate());
-					if(d == filterClinicsDTO.getDate()) {
-						date = false;
-						System.out.println("USAO");
-					}
-				}
+				
 				
 				if(type && date) {
 					match = true;
@@ -102,23 +112,48 @@ public class ClinicService {
 			for(User doctor: clinic.getDoctors()) {
 				boolean type = false;
 				boolean date = true;
+				boolean other = true;
 				
-				//if(filterDoctorsDTO.gett)
-				for(TypeDuration td: doctor.getTypesOfExamination()) {
-					if(td.getType().equals(filterDoctorsDTO.getType())) {
-						type = true;
+				if(filterDoctorsDTO.getType() == null) {
+					type = true;
+				} else {
+					for(TypeDuration td: doctor.getTypesOfExamination()) {
+						if(td.getType().equals(filterDoctorsDTO.getType())) {
+							type = true;
+						}
+					}	
+				}
+				
+				if(filterDoctorsDTO.getDate() != null) {
+					for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
+						Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
+						if(d == filterDoctorsDTO.getDate()) {
+							date = false;
+							System.out.println("USAO");
+						}
 					}
 				}
 				
-				for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
-					Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
-					if(d == filterDoctorsDTO.getDate()) {
-						date = false;
-						System.out.println("USAO");
+				if(filterDoctorsDTO.getFirstName()!= null) {
+					if(!doctor.getName().equals(filterDoctorsDTO.getFirstName())) {
+						other = false;
 					}
 				}
 				
-				if(type && date) {
+				if(filterDoctorsDTO.getLastName()!= null) {
+					if(!doctor.getLastName().equals(filterDoctorsDTO.getLastName())) {
+						other = false;
+					}
+				}
+				
+				if(filterDoctorsDTO.getRate() > 0) {
+					/*if(doctor.getRate() != filterDoctorsDTO.getRate()) {
+						other = false;
+					}*/
+				}
+				
+				
+				if(type && date && other) {
 					filteredDoctors.add(new UserDTO(doctor));
 				}
 			}

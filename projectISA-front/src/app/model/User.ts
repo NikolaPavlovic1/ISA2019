@@ -1,6 +1,7 @@
 import { Address } from './Address';
 import { MedicalRecord } from './MedicalRecord';
 import { MedicalExamination } from './MedicalExamination';
+import { TypeDuration } from './TypeDuration';
 
 export class User {
     id : number;
@@ -18,4 +19,5 @@ export class User {
 	approved: Boolean;
 	doctorsScheduledExaminations : MedicalExamination[] = [];
 	clinicId : number;
+	typesOfExamination: TypeDuration[] = [];
 }

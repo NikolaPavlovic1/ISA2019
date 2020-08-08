@@ -38,10 +38,21 @@ export class ClinicsComponent implements OnInit {
   public refresh() {
     
    let filterClinic = new FilterClinics();
-   filterClinic.date = JSON.stringify(this.myDate);
-   filterClinic.date = filterClinic.date.split('.')[0];
-   filterClinic.date = filterClinic.date.substr(1, filterClinic.date.length-2);
-   filterClinic.type = this.type;
+   if(this.myDate == undefined) {
+     filterClinic.date = null;
+   } else {
+    filterClinic.date = JSON.stringify(this.myDate);
+    filterClinic.date = filterClinic.date.split('.')[0];
+    filterClinic.date = filterClinic.date.substr(1, filterClinic.date.length-2);
+   
+   }
+
+   if(this.myDate == undefined) {
+     filterClinic.type = null;
+   } else {
+    filterClinic.type = this.type;
+   }
+   
    console.log(filterClinic);
 
    let headers = new HttpHeaders();

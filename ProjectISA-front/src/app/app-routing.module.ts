@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "history", component: HistoryComponent },
   { path: "medical-record", component: MedicalRecordComponent },
   { path: "profile", component: UserProfileComponent },
-  { path: "reservation", component: FinalReservationComponent },
+  { path: "reservation/:doctorId", component: FinalReservationComponent },
   {path:'**', component:PageNotFoundComponent} 
 ];
 

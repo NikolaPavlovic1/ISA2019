@@ -6,6 +6,8 @@ import java.util.List;
 import com.ftn.ProjectISA.enums.Role;
 import com.ftn.ProjectISA.model.Address;
 import com.ftn.ProjectISA.model.MedicalExamination;
+import com.ftn.ProjectISA.model.PricelistItem;
+import com.ftn.ProjectISA.model.TypeDuration;
 import com.ftn.ProjectISA.model.User;
 
 public class UserDTO {
@@ -25,6 +27,7 @@ public class UserDTO {
 	private boolean approved;
 	private List<MedicalExaminationDTO> doctorsScheduledExaminations = new ArrayList<MedicalExaminationDTO>();
 	private Long clinicId;
+	private List<TypeDurationDTO> typesOfExamination = new ArrayList<TypeDurationDTO>();
 	
 	public UserDTO() {}
 
@@ -65,6 +68,17 @@ public class UserDTO {
 		}
 		if(u.getClinic()!= null) {
 			this.clinicId = u.getClinic().getId();	
+		}
+		for(TypeDuration td: u.getTypesOfExamination()) {
+			TypeDurationDTO toAdd = new TypeDurationDTO(td);
+			for(PricelistItem pli : u.getClinic().getPricelist()) {
+				if(pli.getTypeOfExamination().equals(toAdd.getType())) {
+					toAdd.setPrice(pli.getPrice());
+					this.typesOfExamination.add(toAdd);
+					break;
+				}
+			}
+			
 		}
 		
 	}
@@ -187,6 +201,14 @@ public class UserDTO {
 
 	public void setClinicId(Long clinicId) {
 		this.clinicId = clinicId;
+	}
+
+	public List<TypeDurationDTO> getTypesOfExamination() {
+		return typesOfExamination;
+	}
+
+	public void setTypesOfExamination(List<TypeDurationDTO> typesOfExamination) {
+		this.typesOfExamination = typesOfExamination;
 	}
 	
 	

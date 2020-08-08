@@ -1,1 +1,33 @@
-<p>final-reservation works!</p>
+<div class="container-fluid" style="margin-left: 10px;">
+    <h1>Reservation</h1>
+    <form #myForm="ngForm" novalidate (ngSubmit)="reserveExamination()">
+        <div class="form-group">
+            <label>Date:</label>
+            <input disabled type="date" class="form-control" name="date" [(ngModel)]="date">
+        </div>
+
+        <div class="form-group">
+            <label>Doctor</label>
+            <input disabled type="text" class="form-control" name="doctor" [value]="doctor.username">
+        </div>
+
+        <div class="form-group">
+            <label>Type</label>
+            <!--Select ovde-->
+            <!-- <input type="text" class="form-control" name="type" [(ngModel)]="type"> -->
+            <select (change)="onChange(mySelect)" name="type" #mySelect="ngModel" [(ngModel)]="type" class="form-control">
+                <option  *ngFor="let myType of doctor.typesOfExamination" >{{myType.type}}</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Price izvuci iz doktora pa klinike pa cenovnika</label>
+            <input type="number" class="form-control" name="price" [(ngModel)]="price">
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Reserve</button>
+    </form>
+</div>
+
+
+

@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -38,6 +34,7 @@ public class User {
 	private String insuranceNumber;
 	private boolean active;
 	private boolean approved;
+	private boolean declined;
 	private String confirmationKey;
 	private Role role; 
 	
@@ -47,6 +44,11 @@ public class User {
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private MedicalRecord medicalRecord;
 	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="user")
+	private List<ClinicRate> patientClinicRates = new ArrayList<ClinicRate>();
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="patient")
+	private List<DoctorRate> patientDoctorRates = new ArrayList<DoctorRate>();
 	
 	
 	
@@ -59,6 +61,11 @@ public class User {
 	
 	@ManyToMany(mappedBy = "doctors")
 	private List<TypeDuration> typesOfExamination = new ArrayList<TypeDuration>();
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="doctor")
+	private List<DoctorRate> doctorRates = new ArrayList<DoctorRate>();
+	
+	
 	
 	public User() {}
 	
@@ -75,6 +82,7 @@ public class User {
 		this.role = u.getRole();
 		this.active = false;
 		this.approved = false;
+		this.declined = false;
 		this.setConfirmationKey(null);
 		
 	}
@@ -214,7 +222,50 @@ public class User {
 	public void setTypesOfExamination(List<TypeDuration> typesOfExamination) {
 		this.typesOfExamination = typesOfExamination;
 	}
+
+	public List<ClinicRate> getPatientClinicRates() {
+		return patientClinicRates;
+	}
+
+	public void setPatientClinicRates(List<ClinicRate> patientClinicRates) {
+		this.patientClinicRates = patientClinicRates;
+	}
+
+	public List<DoctorRate> getPatientDoctorRates() {
+		return patientDoctorRates;
+	}
+
+	public void setPatientDoctorRates(List<DoctorRate> patientDoctorRates) {
+		this.patientDoctorRates = patientDoctorRates;
+	}
+
+	public List<DoctorRate> getDoctorRates() {
+		return doctorRates;
+	}
+
+	public void setDoctorRates(List<DoctorRate> doctorRates) {
+		this.doctorRates = doctorRates;
+	}
 	
-	
+	public double getAvgDoctorRate() {
+		if(this.doctorRates.size() == 0) {
+			return 0;
+		}
+		
+		double result = 0;
+		for(DoctorRate rate : this.doctorRates) {
+			result+=rate.getRate();
+		}
+		
+		return result/this.doctorRates.size();
+	}
+
+	public boolean isDeclined() {
+		return declined;
+	}
+
+	public void setDeclined(boolean declined) {
+		this.declined = declined;
+	}
 
 }

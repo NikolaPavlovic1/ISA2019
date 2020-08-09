@@ -20,6 +20,7 @@ public class ClinicDTO {
 	private List<LocalDateTime> appointments = new ArrayList<LocalDateTime>();
 	private List<MedicalRoomDTO> medicalRooms = new ArrayList<MedicalRoomDTO>();
 	private List<PricelistItemDTO> pricelist = new ArrayList<PricelistItemDTO>();
+	private double avgClinicRate;
 	
 	
 	public ClinicDTO() {}
@@ -30,6 +31,8 @@ public class ClinicDTO {
 		this.name = clinic.getName();
 		this.description = clinic.getDescription();
 		this.appointments = clinic.getAppointments();
+		this.avgClinicRate = clinic.getAvgClinicRate();
+		
 		for(User u : clinic.getDoctors()) {
 			this.doctors.add(new UserDTO(u));
 		}
@@ -104,6 +107,14 @@ public class ClinicDTO {
 
 	public void setPricelist(List<PricelistItemDTO> pricelist) {
 		this.pricelist = pricelist;
+	}
+
+	public double getAvgClinicRate() {
+		return avgClinicRate;
+	}
+
+	public void setAvgClinicRate(double avgClinicRate) {
+		this.avgClinicRate = avgClinicRate;
 	}
 	
 	

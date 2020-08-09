@@ -12,4 +12,5 @@ export class Clinic {
     appointments : Date[] = [];
     medicalRooms : MedicalRoom[] = [];
     pricelist : PricelistItem[] = [];
+    avgClinicRate: number;
 }

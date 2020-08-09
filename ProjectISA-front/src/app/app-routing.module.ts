@@ -12,6 +12,7 @@ import { MedicalRecordComponent} from "./components/medical-record/medical-recor
 import {DoctorsComponent} from "./components/doctors/doctors.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import { FinalReservationComponent } from './components/final-reservation/final-reservation.component';
+import { AccountConfirmationComponent } from './components/account-confirmation/account-confirmation.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "medical-record", component: MedicalRecordComponent },
   { path: "profile", component: UserProfileComponent },
   { path: "reservation/:doctorId", component: FinalReservationComponent },
+  { path: "confirmation/:key", component: AccountConfirmationComponent },
   {path:'**', component:PageNotFoundComponent} 
 ];
 

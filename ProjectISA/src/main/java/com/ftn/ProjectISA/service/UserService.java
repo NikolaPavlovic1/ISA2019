@@ -84,16 +84,30 @@ public class UserService {
 	
 	public boolean approveUser(Long id) {	
 		User u = userRepository.getOne(id);
-		u.setApproved(true);
 		String confirmationKey = getRandomString();
 		u.setConfirmationKey(confirmationKey);
-		userRepository.save(u);
 		
-		/*try {
-			mailService.sendEmail(u);
+		try {
+			mailService.sendApprovedEmail(u);
+			u.setApproved(true);
+			userRepository.save(u);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
+		
+		return true;
+	}
+	
+	public boolean declineUser(Long id) {	
+		User u = userRepository.getOne(id);
+		
+		try {
+			mailService.sendDeclinedEmail(u);
+			u.setDeclined(true);
+			userRepository.save(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return true;
 	}

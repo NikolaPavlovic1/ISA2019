@@ -15,9 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.ftn.ProjectISA.dto.ClinicDTO;
-import com.ftn.ProjectISA.dto.MedicalRoomDTO;
-import com.ftn.ProjectISA.dto.PricelistItemDTO;
-import com.ftn.ProjectISA.dto.UserDTO;
 
 @Entity
 public class Clinic {
@@ -36,6 +33,9 @@ public class Clinic {
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<MedicalRoom> medicalRooms = new ArrayList<MedicalRoom>();
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
+	private List<ClinicRate> clinicRates = new ArrayList<ClinicRate>();
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
@@ -116,7 +116,26 @@ public class Clinic {
 	public void setPricelist(List<PricelistItem> pricelist) {
 		this.pricelist = pricelist;
 	}
+
+	public List<ClinicRate> getClinicRates() {
+		return clinicRates;
+	}
+
+	public void setClinicRates(List<ClinicRate> clinicRates) {
+		this.clinicRates = clinicRates;
+	}
 	
-	
+	public double getAvgClinicRate() {
+		if(this.clinicRates.size() == 0) {
+			return 0;
+		}
+		
+		double result = 0;
+		for(ClinicRate rate : this.clinicRates) {
+			result+=rate.getRate();
+		}
+		
+		return result/this.clinicRates.size();
+	}
 	
 }

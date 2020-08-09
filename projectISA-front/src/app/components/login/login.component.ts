@@ -64,7 +64,11 @@ export class LoginComponent implements OnInit {
 
 
 
-    });
+    },
+    (error) => {
+      alert("You are not registered to our site!");
+    }
+    );
     
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/model/User';
 
 @Component({
@@ -30,12 +30,26 @@ export class AdminUserComponent implements OnInit {
     });
   }
 
-  public delete(id : number) {
-    //let headers = this.authService.getHeaders();
-
-    /*this.http.delete('http://localhost:8080/api/user/'+id, {headers:headers}).subscribe((data) => {
+  public approve(id : number) {
+    let headers = new HttpHeaders();
+    let token = "Bearer ";
+    token += localStorage.getItem('token');
+    headers = headers.set('Authorization', token);
+    
+    this.http.post('http://localhost:8080/api/user/approve/'+id, {headers:headers}).subscribe((data) => {
       this.loadUsers();
-    });*/
+    });
+  }
+
+  public decline(id : number) {
+    let headers = new HttpHeaders();
+    let token = "Bearer ";
+    token += localStorage.getItem('token');
+    headers = headers.set('Authorization', token);
+    
+    this.http.post('http://localhost:8080/api/user/decline/'+id, {headers:headers}).subscribe((data) => {
+      this.loadUsers();
+    });
   }
 
 

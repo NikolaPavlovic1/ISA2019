@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.ftn.ProjectISA.enums.Role;
 import com.ftn.ProjectISA.model.Address;
+import com.ftn.ProjectISA.model.ClinicRate;
+import com.ftn.ProjectISA.model.DoctorRate;
 import com.ftn.ProjectISA.model.MedicalExamination;
 import com.ftn.ProjectISA.model.PricelistItem;
 import com.ftn.ProjectISA.model.TypeDuration;
@@ -25,30 +27,18 @@ public class UserDTO {
 	private Role role;
 	private boolean active;
 	private boolean approved;
+	private boolean declined;
 	private List<MedicalExaminationDTO> doctorsScheduledExaminations = new ArrayList<MedicalExaminationDTO>();
 	private Long clinicId;
 	private List<TypeDurationDTO> typesOfExamination = new ArrayList<TypeDurationDTO>();
+	private double avgDoctorsRate;
+	
+	private List<ClinicRateDTO> patientClinicRates = new ArrayList<ClinicRateDTO>();
+	private List<DoctorRateDTO> patientDoctorRates = new ArrayList<DoctorRateDTO>();
+	
 	
 	public UserDTO() {}
 
-	public UserDTO(Long id, String name, String lastName, String email, String username, String password,
-			String phoneNumber, String insuranceNumber, Address address, MedicalRecordDTO medicalRecord,
-			Role role, boolean active, boolean approved) {
-		this.id = id;
-		this.name = name;
-		this.lastName = lastName;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
-		this.insuranceNumber = insuranceNumber;
-		this.address = address;
-		this.medicalRecord = medicalRecord;
-		this.role = role;
-		this.active = active;
-		this.approved = approved;
-	}
-	
 	public UserDTO(User u) {
 		this.id = u.getId();
 		this.name = u.getName();
@@ -63,6 +53,9 @@ public class UserDTO {
 		this.role = u.getRole();
 		this.active = u.isActive();
 		this.approved = u.isApproved();
+		this.declined = u.isDeclined();
+		this.avgDoctorsRate = u.getAvgDoctorRate();
+		
 		for(MedicalExamination me: u.getDoctorsScheduledExaminations()) {
 			this.doctorsScheduledExaminations.add(new MedicalExaminationDTO(me));
 		}
@@ -82,6 +75,13 @@ public class UserDTO {
 			
 		}
 		
+		for(ClinicRate cr: u.getPatientClinicRates()) {
+			this.patientClinicRates.add(new ClinicRateDTO(cr));
+		}
+		
+		for(DoctorRate dr: u.getPatientDoctorRates()) {
+			this.patientDoctorRates.add(new DoctorRateDTO(dr));
+		}
 	}
 
 	public Long getId() {
@@ -210,6 +210,38 @@ public class UserDTO {
 
 	public void setTypesOfExamination(List<TypeDurationDTO> typesOfExamination) {
 		this.typesOfExamination = typesOfExamination;
+	}
+
+	public double getAvgDoctorsRate() {
+		return avgDoctorsRate;
+	}
+
+	public void setAvgDoctorsRate(double avgDoctorsRate) {
+		this.avgDoctorsRate = avgDoctorsRate;
+	}
+
+	public boolean isDeclined() {
+		return declined;
+	}
+
+	public void setDeclined(boolean declined) {
+		this.declined = declined;
+	}
+
+	public List<ClinicRateDTO> getPatientClinicRates() {
+		return patientClinicRates;
+	}
+
+	public void setPatientClinicRates(List<ClinicRateDTO> patientClinicRates) {
+		this.patientClinicRates = patientClinicRates;
+	}
+
+	public List<DoctorRateDTO> getPatientDoctorRates() {
+		return patientDoctorRates;
+	}
+
+	public void setPatientDoctorRates(List<DoctorRateDTO> patientDoctorRates) {
+		this.patientDoctorRates = patientDoctorRates;
 	}
 	
 	

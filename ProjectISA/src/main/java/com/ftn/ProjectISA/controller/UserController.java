@@ -64,6 +64,13 @@ public class UserController {
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
 	}
 	
+	//@PreAuthorize("ADMINISTRATOR")
+	@PostMapping(value = "/decline/{id}") 
+	public ResponseEntity<Boolean> declineUser(@PathVariable Long id) { 
+		Boolean retVal = userService.declineUser(id);
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
+	}
+	
 	@PostMapping(value = "/activate/{confirmationKey}") 
 	public ResponseEntity<Boolean> activateUser(@PathVariable String confirmationKey) { 
 		Boolean retVal = userService.activateAccount(confirmationKey);

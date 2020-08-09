@@ -17,6 +17,7 @@ import { ClinicComponent } from './components/clinic/clinic.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { FinalReservationComponent } from './components/final-reservation/final-reservation.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AccountConfirmationComponent } from './components/account-confirmation/account-confirmation.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ClinicComponent,
     DoctorsComponent,
     FinalReservationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AccountConfirmationComponent
   ],
   imports: [
     BrowserModule,

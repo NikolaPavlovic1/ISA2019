@@ -76,14 +76,21 @@
 						</td>
 						<td data-name="desc">
 							<input type="text" *ngIf="user.approved == true" disabled name="desc0" class="form-control"
-								value="Yes" />
-							<input type="text" *ngIf="user.approved == false" disabled name="desc0" class="form-control"
-								value="No" />
+								value="Approved" />
+							<input type="text" *ngIf="user.declined == true" disabled name="desc0" class="form-control"
+								value="Declined" />
+							<input type="text" *ngIf="user.declined == false && user.approved == false" disabled name="desc0" class="form-control"
+								value="Waiting for approval..." />
 						</td>
 						<td data-name="del">
-							<button name="del0" *ngIf="user.approved == false"
+							<button name="del0" *ngIf="user.approved == false && user.declined == false"
+								class='btn btn-success glyphicon glyphicon-remove row-remove'><span aria-hidden="true"
+									(click)="approve(user.id)">Approve</span></button>
+						</td>
+						<td data-name="del">
+							<button name="del0" *ngIf="user.approved == false && user.declined == false"
 								class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true"
-									(click)="delete(user.id)">Approve</span></button>
+									(click)="decline(user.id)">Decline</span></button>
 						</td>
 					</tr>
 				</tbody>

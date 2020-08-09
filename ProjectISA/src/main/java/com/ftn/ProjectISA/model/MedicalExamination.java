@@ -1,6 +1,7 @@
 package com.ftn.ProjectISA.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class MedicalExamination {
 	public MedicalExamination() {}
 	
 	public MedicalExamination(MedicalExaminationDTO me) {
-		this.startDateTime = me.getStartDateTime();
+		this.startDateTime = me.getStartDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 		this.price = me.getPrice();
 		
 	}

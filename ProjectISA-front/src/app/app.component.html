@@ -14,7 +14,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" id="manifestationsUser">
+      <li  class="nav-item" id="usersAdminId">
         <a class="nav-link" routerLink="/users">
           <i class="fa fa-envelope-o">
             <span class="badge badge-danger">M</span>
@@ -22,7 +22,7 @@
           UsersAdmin
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" id="clinicsUserId">
         <a class="nav-link" id="addressAdmin" routerLink="/clinics">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
@@ -30,24 +30,24 @@
           Clinics
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="addressAdmin" routerLink="/history">
+      <li class="nav-item" id="historyUserId">
+        <a class="nav-link"  routerLink="/history">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
           </i>
           History of pregleda
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="addressAdmin" routerLink="/medical-record">
+      <li class="nav-item" id="medicalRecordUserId">
+        <a class="nav-link"  routerLink="/medical-record">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
           </i>
           Medical record
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="addressAdmin" routerLink="/profile">
+      <li class="nav-item" id="profileUserId">
+        <a class="nav-link"  routerLink="/profile">
           <i class="fa fa-envelope-o">
             <span class="badge badge-warning">A</span>
           </i>
@@ -57,14 +57,14 @@
           </ul>
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" id="login" routerLink="/login" style="color: white;">Login</a>
+      <li class="nav-item active" id="login">
+        <a class="nav-link"  routerLink="/login" style="color: white;">Login</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="register" routerLink="/register" style="color: white;">Register</a>
+      <li class="nav-item" id="register">
+        <a class="nav-link"  routerLink="/register" style="color: white;">Register</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="logout"  (click)="logout()" style="color: white;">Log Out</a>
+      <li class="nav-item" id="logout">
+        <a class="nav-link"   (click)="logout()" style="color: white;">Log Out</a>
       </li>
     </ul>
   

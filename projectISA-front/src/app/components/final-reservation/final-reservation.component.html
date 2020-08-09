@@ -13,10 +13,8 @@
 
         <div class="form-group">
             <label>Type</label>
-            <!--Select ovde-->
-            <!-- <input type="text" class="form-control" name="type" [(ngModel)]="type"> -->
-            <select (change)="onChange(mySelect)" name="type" #mySelect="ngModel" [(ngModel)]="type" class="form-control">
-                <option  *ngFor="let myType of doctor.typesOfExamination" >{{myType.type}}</option>
+            <select (change)="onChange()" class="custom-select" name="type"  [(ngModel)]="type" >
+                <option  *ngFor="let myType of doctor.typesOfExamination" [ngValue]="myType">{{myType.type}}</option>
             </select>
         </div>
         

@@ -74,6 +74,7 @@ public class UserDTO {
 			for(PricelistItem pli : u.getClinic().getPricelist()) {
 				if(pli.getTypeOfExamination().equals(toAdd.getType())) {
 					toAdd.setPrice(pli.getPrice());
+					
 					this.typesOfExamination.add(toAdd);
 					break;
 				}

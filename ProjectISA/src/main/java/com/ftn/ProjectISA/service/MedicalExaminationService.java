@@ -1,6 +1,7 @@
 package com.ftn.ProjectISA.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
+import com.ftn.ProjectISA.model.Clinic;
 import com.ftn.ProjectISA.model.MedicalExamination;
+import com.ftn.ProjectISA.model.MedicalRoom;
 import com.ftn.ProjectISA.model.TypeDuration;
+import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.MedicalExaminationRepository;
 import com.ftn.ProjectISA.repository.MedicalRecordRepository;
 import com.ftn.ProjectISA.repository.MedicalRoomRepository;
@@ -67,13 +71,35 @@ public class MedicalExaminationService {
 	
 	public MedicalExaminationDTO addMedicalExamination(MedicalExaminationDTO examination) {
 		MedicalExamination e = new MedicalExamination(examination);
-		e.setDoctor(this.userRepository.getOne(examination.getDoctorId()));
+		
+		User doctor = this.userRepository.getOne(examination.getDoctorId());	
+		e.setDoctor(doctor);
+		
 		e.setMedicalRecord(this.medicalRecordRepository.getOne(examination.getMedicalRecordId()));
-		e.setMedicalRoom(this.medicalRoomRepository.getOne(examination.getMedicalRoomId()));
+		
 		TypeDuration td = this.typeDurationRepository.getOne(examination.getTypeDurationId());
 		e.setTypeAndDuration(td);
-		this.medicalExaminationRepository.save(e);
-		return examination;
+		
+		Clinic clinic = doctor.getClinic();
+		for(MedicalRoom room : clinic.getMedicalRooms()) {
+			boolean free = true;
+			for(MedicalExamination ex : room.getMedicalExaminations()) {
+				if(ex.getStartDateTime() == examination.getStartDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()) {
+					free = false;
+				}
+			}
+			
+			if(free) {
+				e.setMedicalRoom(room);
+				this.medicalExaminationRepository.save(e);
+				return examination;
+			}
+		}
+		
+		
+		
+		
+		return null;
 	}
 	
 	public void deleteMedicalExamination(Long id) {

@@ -30,7 +30,40 @@ export class LoginComponent implements OnInit {
       console.log(data);
       localStorage.setItem('id',data.id.toString());
       localStorage.setItem('token',data.token);
+      localStorage.setItem('role',data.role);
+
+      if(data.role === "PATIENT") {
+      (<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
+
+      (<HTMLElement>document.getElementById("clinicsUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("historyUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("profileUserId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("login")).hidden = true;
+      (<HTMLElement>document.getElementById("register")).hidden = true;
+      (<HTMLElement>document.getElementById("logout")).hidden = false;
+
+      } else {
+        
+      (<HTMLElement>document.getElementById("usersAdminId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("profileUserId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("login")).hidden = true;
+      (<HTMLElement>document.getElementById("register")).hidden = true;
+      (<HTMLElement>document.getElementById("logout")).hidden = false;
+
+      }
+      
       this.router.navigate(["/profile"]);
+
+
+
+
     });
     
   }

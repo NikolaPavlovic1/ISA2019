@@ -1,13 +1,15 @@
 package com.ftn.ProjectISA.dto;
 
-import java.time.LocalDateTime;
+
+import java.time.ZoneId;
+import java.util.Date;
 
 import com.ftn.ProjectISA.model.MedicalExamination;
 
 public class MedicalExaminationDTO {
 	
 	private Long id;
-	private LocalDateTime startDateTime;
+	private Date startDateTime;
 	private Long medicalRecordId;
 	private Long doctorId;
 	private Long typeDurationId;
@@ -19,12 +21,12 @@ public class MedicalExaminationDTO {
 	
 	public MedicalExaminationDTO(MedicalExamination me) {
 		this.id = me.getId();
-		this.startDateTime = me.getStartDateTime();
+		this.startDateTime = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
 		this.medicalRecordId = me.getMedicalRecord().getId();
 		this.doctorId = me.getDoctor().getId();
 		this.typeDurationId = me.getTypeAndDuration().getId();
 		this.price = me.getPrice();
-		this.medicalRecordId = me.getMedicalRoom().getId();
+		this.medicalRoomId = me.getMedicalRoom().getId();
 	}
 
 	public Long getId() {
@@ -35,11 +37,11 @@ public class MedicalExaminationDTO {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartDateTime() {
+	public Date getStartDateTime() {
 		return startDateTime;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
+	public void setStartDateTime(Date startDateTime) {
 		this.startDateTime = startDateTime;
 	}
 

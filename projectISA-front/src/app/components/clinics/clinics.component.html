@@ -10,6 +10,13 @@
         <p>Enter type of examination: <input type="text" [(ngModel)]="type" /></p>
         <button class="btn btn-primary" (click)="refresh()">Search</button>
     </div>
+
+    <div class="form-group">
+            <label>Sort by</label>
+            <select (change)="onChange()" class="custom-select" name="type"  [(ngModel)]="sortType" >
+                <option  *ngFor="let st of sortTypes" >{{st}}</option>
+            </select>
+        </div>
     <br>
     <h4>List of available clinics: </h4>
     <hr>
@@ -18,9 +25,9 @@
         <div class="col-md-4" *ngFor="let c of clinics">
             <div class="card rounded">
                 <div class="card-image">
-                    <!-- <span class="card-notify-year">
-                        <b>{{c.startTime | date: 'dd/MM/yyyy'}} - {{man.endTime | date: 'dd/MM/yyyy'}}</b>
-                    </span> -->
+                     <span class="card-notify-year">
+                        <b>Average rating: {{c.avgClinicRate}}</b>
+                    </span> 
                     <img class="img-fluid" src="assets/img/medicalclinic.jpg" alt="Alternate Text" />
                 </div>
                 
@@ -30,6 +37,8 @@
                     <span class="card-detail-badge"><a class="moreLink" [routerLink]="['/clinic', c.id]">Show profile</a></span>
                     <span class="card-detail-badge"><a class="moreLink" (click)="showDoctors(c.id)">Show doctors</a></span>
                 </div>
+                <!--pipe-->
+                <small><b>{{c.address.street}} {{c.address.number}}, {{c.address.city}}, {{c.address.country}}</b></small>
             </div>
         </div>
 

@@ -7,8 +7,8 @@ export class Clinic {
     id : number;
     doctors: User[] = [];
     address: Address;
-    name : String;
-    description : String;
+    name : string;
+    description : string;
     appointments : Date[] = [];
     medicalRooms : MedicalRoom[] = [];
     pricelist : PricelistItem[] = [];

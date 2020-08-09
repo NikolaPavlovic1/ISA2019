@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Disease {
 
@@ -20,6 +22,7 @@ public class Disease {
 
 	private String name;
 	
+	@JsonBackReference
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<MedicalRecord> medicalRecords = new ArrayList<MedicalRecord>();

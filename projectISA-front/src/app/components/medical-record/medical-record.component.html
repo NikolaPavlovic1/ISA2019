@@ -19,4 +19,63 @@
             </ul>
 		</div>
 	</div>
+
+
+	<div class="row clearfix">
+		<div class="col-md-12 table-responsive">
+			<h4>Examination history: </h4>
+			<table class="table table-bordered table-hover table-sortable" id="tab_logic">
+				<thead>
+					<tr>
+						<th class="text-center">
+							Date
+						</th>
+						<th class="text-center">
+							Doctor
+						</th>
+						<th class="text-center">
+							Type
+						</th>
+						<th class="text-center">
+							Duration(min)
+						</th>
+						<th class="text-center">
+							Price
+						</th>
+						<th class="text-center">
+							Clinic
+						</th>
+						<th class="text-center">
+							Medical room
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id='addr0' data-id="0" class="hidden" *ngFor="let examination of examinations">
+						<td data-name="name">
+							<input type="text" disabled name='name0' class="form-control" [value]="examination.date" />
+						</td>
+						<td data-name="mail">
+							<input type="text" disabled name='mail0' class="form-control" [value]="examination.doctorUsername" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" [value]="examination.type" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" [value]="examination.duration" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" [value]="examination.price" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" [value]="examination.clinic" />
+						</td>
+						<td data-name="desc">
+							<input name="desc0" disabled class="form-control" [value]="examination.medicalRoom" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

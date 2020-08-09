@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
+import com.ftn.ProjectISA.dto.MedicalExaminationHistoryDTO;
 import com.ftn.ProjectISA.model.Clinic;
 import com.ftn.ProjectISA.model.MedicalExamination;
 import com.ftn.ProjectISA.model.MedicalRoom;
@@ -50,15 +51,43 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
-	public List<MedicalExaminationDTO> medicalExaminationsUserHistory(Long userId) {
+	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserHistory(Long userId) {
 
-		List<MedicalExaminationDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationDTO>();
+		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
 		
 		List<MedicalExamination> medicalExaminations = userRepository.getOne(userId).getMedicalRecord().getMedicalExaminations();
 		
 		for(MedicalExamination me : medicalExaminations)
 			if(me.getStartDateTime().isBefore(LocalDateTime.now())) {
-				medicalExaminationDTOs.add(new MedicalExaminationDTO(me));	
+				medicalExaminationDTOs.add(new MedicalExaminationHistoryDTO(me));	
+			}
+			
+		return medicalExaminationDTOs;
+	}
+	
+	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserReservations(Long userId) {
+
+		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
+		
+		List<MedicalExamination> medicalExaminations = userRepository.getOne(userId).getMedicalRecord().getMedicalExaminations();
+		
+		for(MedicalExamination me : medicalExaminations)
+			if(me.getStartDateTime().isAfter(LocalDateTime.now())) {
+				medicalExaminationDTOs.add(new MedicalExaminationHistoryDTO(me));	
+			}
+			
+		return medicalExaminationDTOs;
+	}
+	
+	public List<MedicalExaminationHistoryDTO> getPredefinedMedicalExaminations(Long clinicId) {
+
+		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
+		
+		List<MedicalExamination> medicalExaminations = this.medicalExaminationRepository.findAll();
+		
+		for(MedicalExamination me : medicalExaminations)
+			if(me.getStartDateTime().isAfter(LocalDateTime.now()) && me.getMedicalRecord()==null && me.getDoctor().getClinic().getId()==clinicId) {
+				medicalExaminationDTOs.add(new MedicalExaminationHistoryDTO(me));	
 			}
 			
 		return medicalExaminationDTOs;
@@ -100,6 +129,52 @@ public class MedicalExaminationService {
 		
 		
 		return null;
+	}
+	
+	public MedicalExaminationHistoryDTO addPredefinedMedicalExamination(MedicalExaminationDTO examination) {
+		MedicalExamination e = new MedicalExamination(examination);
+		
+		User doctor = this.userRepository.getOne(examination.getDoctorId());	
+		e.setDoctor(doctor);
+		
+		e.setMedicalRecord(null);
+		
+		TypeDuration td = this.typeDurationRepository.getOne(examination.getTypeDurationId());
+		e.setTypeAndDuration(td);
+		
+		Clinic clinic = doctor.getClinic();
+		for(MedicalRoom room : clinic.getMedicalRooms()) {
+			boolean free = true;
+			for(MedicalExamination ex : room.getMedicalExaminations()) {
+				if(ex.getStartDateTime() == examination.getStartDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()) {
+					free = false;
+				}
+			}
+			
+			if(free) {
+				e.setMedicalRoom(room);
+				this.medicalExaminationRepository.save(e);
+				return new MedicalExaminationHistoryDTO(e);
+			}
+		}
+		
+		
+		
+		
+		return null;
+	}
+	
+	public Boolean reservePredefinedMedicalExamination(Long patientId,Long examinationId){
+		MedicalExamination e = this.medicalExaminationRepository.getOne(examinationId);
+		User u = this.userRepository.getOne(patientId);
+		e.setMedicalRecord(u.getMedicalRecord());
+	
+		this.medicalExaminationRepository.save(e);
+		
+		
+		
+		
+		return true;
 	}
 	
 	public void deleteMedicalExamination(Long id) {

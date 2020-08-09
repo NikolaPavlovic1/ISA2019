@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class ClinicRate {
 
@@ -17,9 +19,11 @@ public class ClinicRate {
 	
 	private int rate;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private Clinic clinic;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private User user;
 	

@@ -17,6 +17,8 @@ export class ClinicsComponent implements OnInit {
   clinics: Clinic[] = [];
   myDate: Date;
   type: string;
+  sortType: string;
+  sortTypes = ["Name","City"];
 
   constructor(private http: HttpClient, private datePipe: DatePipe, private router : Router) { }
 
@@ -70,6 +72,15 @@ export class ClinicsComponent implements OnInit {
   public showDoctors(clinicId: number) {
     this.router.navigate( ['doctors', clinicId],{queryParams: { date: this.myDate , type: this.type }});
     
+  }
+
+  public onChange() {
+    console.log(this.sortType);
+    if(this.sortType === "Name") {
+      this.clinics.sort((a,b)=>a.name.localeCompare(b.name));
+    } else {
+      this.clinics.sort((a,b)=>a.description.localeCompare(b.description));
+    }
   }
 
 

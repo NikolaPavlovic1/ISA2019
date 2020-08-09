@@ -22,7 +22,9 @@ public class MedicalExaminationDTO {
 	public MedicalExaminationDTO(MedicalExamination me) {
 		this.id = me.getId();
 		this.startDateTime = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
-		this.medicalRecordId = me.getMedicalRecord().getId();
+		if(me.getMedicalRecord()!= null) {
+			this.medicalRecordId = me.getMedicalRecord().getId();	
+		}
 		this.doctorId = me.getDoctor().getId();
 		this.typeDurationId = me.getTypeAndDuration().getId();
 		this.price = me.getPrice();

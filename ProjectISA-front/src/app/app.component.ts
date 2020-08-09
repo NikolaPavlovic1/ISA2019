@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,23 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'projectISA-front';
 
   constructor(private http: HttpClient, private router: Router) {
+  }
+  ngOnInit(): void {
+    /*(<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
 
+    (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
+    (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
+    (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;
+    (<HTMLElement>document.getElementById("profileUserId")).hidden = true;
+
+    (<HTMLElement>document.getElementById("login")).hidden = false;
+    (<HTMLElement>document.getElementById("register")).hidden = false;
+    (<HTMLElement>document.getElementById("logout")).hidden = true;
+*/
   }
 
   logout() {
@@ -25,6 +37,7 @@ export class AppComponent {
 
 
       (<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
+      //(<HTMLElement>document.getElementById("reservationsAdminId")).hidden = true;
       (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
       (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
       (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;

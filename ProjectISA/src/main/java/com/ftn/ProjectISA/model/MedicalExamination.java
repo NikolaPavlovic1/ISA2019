@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
 
 @Entity
@@ -27,18 +29,23 @@ public class MedicalExamination {
 	private LocalDateTime startDateTime;
 	private int price;
 
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private MedicalRoom medicalRoom;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private MedicalRecord medicalRecord;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private User doctor;
 	
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "medicalRecords")
 	private List<Disease> diseaseHistory = new ArrayList<Disease>();
 
+	@JsonManagedReference
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private TypeDuration typeAndDuration;
 	

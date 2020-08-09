@@ -71,9 +71,8 @@ public class UserService {
 		User u = userRepository.getOne(user.getId());
 		u.setName(user.getName());
 		u.setLastName(user.getLastName());
-		u.setEmail(user.getEmail());
+		u.setUsername(user.getUsername());
 		u.setPhoneNumber(user.getPhoneNumber());
-		u.setInsuranceNumber(user.getInsuranceNumber());
 		
 		return new UserDTO(userRepository.save(u));
 	}

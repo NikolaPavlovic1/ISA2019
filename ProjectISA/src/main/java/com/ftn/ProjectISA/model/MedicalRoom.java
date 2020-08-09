@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class MedicalRoom {
 
@@ -21,9 +24,11 @@ public class MedicalRoom {
 	
 	private String description;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private Clinic clinic;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="medicalRoom")
 	private List<MedicalExamination> medicalExaminations = new ArrayList<MedicalExamination>();
 	

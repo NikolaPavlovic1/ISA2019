@@ -18,6 +18,7 @@ import { DoctorsComponent } from './components/doctors/doctors.component';
 import { FinalReservationComponent } from './components/final-reservation/final-reservation.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AccountConfirmationComponent } from './components/account-confirmation/account-confirmation.component';
+import { AdminExaminationComponent } from './components/admin-examination/admin-examination.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AccountConfirmationComponent } from './components/account-confirmation/
     DoctorsComponent,
     FinalReservationComponent,
     PageNotFoundComponent,
-    AccountConfirmationComponent
+    AccountConfirmationComponent,
+    AdminExaminationComponent
   ],
   imports: [
     BrowserModule,

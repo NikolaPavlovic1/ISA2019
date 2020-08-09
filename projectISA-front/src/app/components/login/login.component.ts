@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
 
       if(data.role === "PATIENT") {
       (<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
+      //(<HTMLElement>document.getElementById("reservationsAdminId")).hidden = true;
 
       (<HTMLElement>document.getElementById("clinicsUserId")).hidden = false;
       (<HTMLElement>document.getElementById("historyUserId")).hidden = false;
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
       } else {
         
       (<HTMLElement>document.getElementById("usersAdminId")).hidden = false;
+      //(<HTMLElement>document.getElementById("reservationsAdminId")).hidden = false;
 
       (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
       (<HTMLElement>document.getElementById("historyUserId")).hidden = true;

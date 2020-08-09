@@ -45,7 +45,8 @@ export class UserProfileComponent implements OnInit {
     headers = headers.set('Authorization', token);
 
     this.http.put<User>('http://localhost:8080/api/user', this.user,{headers:headers}).subscribe((data) => {
-      this.loadProfile();
+    alert("Profile updated!");  
+    this.loadProfile();
     });
   }
 

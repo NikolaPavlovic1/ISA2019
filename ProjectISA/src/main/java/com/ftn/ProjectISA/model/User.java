@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ftn.ProjectISA.dto.UserDTO;
 import com.ftn.ProjectISA.enums.Role;
 
@@ -38,30 +40,38 @@ public class User {
 	private String confirmationKey;
 	private Role role; 
 	
+	@JsonManagedReference
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
 	
+	@JsonManagedReference
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private MedicalRecord medicalRecord;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="user")
 	private List<ClinicRate> patientClinicRates = new ArrayList<ClinicRate>();
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="patient")
 	private List<DoctorRate> patientDoctorRates = new ArrayList<DoctorRate>();
 	
 	
 	
 	//doctors
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private Clinic clinic;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="doctor")
 	private List<MedicalExamination> doctorsScheduledExaminations = new ArrayList<MedicalExamination>();
 	
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "doctors")
 	private List<TypeDuration> typesOfExamination = new ArrayList<TypeDuration>();
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="doctor")
 	private List<DoctorRate> doctorRates = new ArrayList<DoctorRate>();
 	

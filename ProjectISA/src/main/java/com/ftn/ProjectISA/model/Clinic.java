@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ftn.ProjectISA.dto.ClinicDTO;
 
 @Entity
@@ -25,21 +26,26 @@ public class Clinic {
 	
 	private String description;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<User> doctors = new ArrayList<User>();
 	
 	@ElementCollection
 	private List<LocalDateTime> appointments = new ArrayList<LocalDateTime>();
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<MedicalRoom> medicalRooms = new ArrayList<MedicalRoom>();
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<ClinicRate> clinicRates = new ArrayList<ClinicRate>();
 	
+	@JsonManagedReference
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Address address;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="clinic")
 	private List<PricelistItem> pricelist = new ArrayList<PricelistItem>();
 	

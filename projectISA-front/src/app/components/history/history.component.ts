@@ -3,6 +3,7 @@ import { MedicalExamination } from 'src/app/model/MedicalExamination';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MedicalRecord } from 'src/app/model/MedicalRecord';
 import { User } from 'src/app/model/User';
+import { MedicalExaminationHistory } from 'src/app/model/MedicalExaminationHistory';
 
 @Component({
   selector: 'app-history',
@@ -11,7 +12,9 @@ import { User } from 'src/app/model/User';
 })
 export class HistoryComponent implements OnInit {
 
-  examinations : MedicalExamination[] = [];
+  examinations : MedicalExaminationHistory[] = [];
+  sortTypes = ["Type","Date"];
+  sortType: string;
 
   constructor(private http: HttpClient) { }
 
@@ -26,25 +29,21 @@ export class HistoryComponent implements OnInit {
     headers = headers.set('Authorization', token);
     
    
-    this.http.get<MedicalExamination[]>('http://localhost:8080/api/medical-examination/history/'+localStorage.getItem('id')).subscribe((data) => {
+    this.http.get<MedicalExaminationHistory[]>('http://localhost:8080/api/medical-examination/history/'+localStorage.getItem('id')).subscribe((data) => {
       this.examinations = data;
       console.log(data);
     });
   }
 
-  public getDoctor(doctorId: number) {
-    
-    let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += localStorage.getItem('token');
-    headers = headers.set('Authorization', token);
-    
-   
-    this.http.get<User>('http://localhost:8080/api/user/'+doctorId).subscribe((data) => {
-      let retVal = data;
-      return retVal.name + ' ' + retVal.lastName;
-    });
+  
 
+  public onChange() {
+    console.log(this.sortType);
+    if(this.sortType === "Type") {
+      this.examinations.sort((a,b)=>a.type.localeCompare(b.type));
+    } else {
+      this.examinations.sort((a,b)=>a.date.toString().localeCompare(b.date.toString()));
+    }
   }
 
 }

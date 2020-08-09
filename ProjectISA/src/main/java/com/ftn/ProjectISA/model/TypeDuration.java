@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class TypeDuration {
 
@@ -20,6 +22,7 @@ public class TypeDuration {
 	private String type;
 	private int duration;
 	
+	@JsonBackReference
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<User> doctors = new ArrayList<User>();

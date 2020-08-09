@@ -11,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class MedicalRecord {
@@ -22,14 +24,16 @@ public class MedicalRecord {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@JsonBackReference
 	@OneToOne
     @JoinColumn (name="user")
 	private User user;
 	
+	@JsonManagedReference
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="medicalRecord")
 	private List<MedicalExamination> medicalExaminations = new ArrayList<MedicalExamination>();
 	
-	
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "medicalRecords")
 	private List<Disease> diseaseHistory = new ArrayList<Disease>();
 	

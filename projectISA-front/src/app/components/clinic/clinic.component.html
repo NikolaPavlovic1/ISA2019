@@ -70,7 +70,7 @@
                                                     <label style="font-weight:bold;">{{item.typeOfExamination}}</label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    {{item.price}}
+                                                    {{item.price}} rsd
                                                 </div> 
                                                 
                                             </div>
@@ -87,9 +87,9 @@
                                                     <li>Doctor: {{pe.doctorUsername}}</li>
                                                     <li>Type: {{pe.type}}</li>
                                                     <li>Duration: {{pe.duration}}</li>
-                                                    <li>Price: {{pe.price}}</li>
+                                                    <li>Price: {{pe.price}} rsd</li>
                                                     <li>Medical room: {{pe.medicalRoom}}</li>
-                                                    <li><button class="btn btn-primary" (click)="reserve(pe.id)">Reserve</button></li>
+                                                    <li><button class="btn btn-primary" (click)="reserve(pe.id  )">Reserve</button></li>
                                                 </ul>
                                                 
                                                     

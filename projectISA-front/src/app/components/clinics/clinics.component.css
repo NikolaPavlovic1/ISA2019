@@ -6,7 +6,6 @@ body {
 
 }
 
-/* Category Ads */
 
 #ads {
     margin: 30px 0 30px 0;
@@ -17,10 +16,10 @@ body {
         position: absolute;
         left: -10px;
         top: -20px;
-        background: #f2d900;
+        background: rgb(0, 105, 255);
         text-align: center;
         border-radius: 30px 30px 30px 30px; 
-        color: #000;
+        color: white;
         padding: 5px 10px;
         font-size: 14px;
 
@@ -30,10 +29,10 @@ body {
         position: absolute;
         right: -10px;
         top: -20px;
-        background: #f2d900;
+        background: rgb(0, 105, 255);
         border-radius: 50%;
         text-align: center;
-        color: #000;      
+        color: white;      
         font-size: 11px;      
         width: 150px;
         height: 50px;    
@@ -42,22 +41,15 @@ body {
 
 
 #ads .card-detail-badge {      
-        background: #f2d900;
+        background: rgb(0, 105, 255);
         text-align: center;
         border-radius: 30px 30px 30px 30px;
-        color: #000;
+        color: white;
         padding: 5px 10px;
         font-size: 14px;        
     }
 
    
-
-#ads .card:hover {
-            background: #fff;
-            box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
 
 #ads .card-image-overlay {
         font-size: 20px;
@@ -70,22 +62,14 @@ body {
         }
 
 
-#ads .ad-btn:hover {
-            background-color: #e6de08;
-            color: #1e1717;
-            border: 2px solid #e6de08;
-            background: transparent;
-            transition: all 0.3s ease;
-            box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
-        }
-
 #ads .ad-title h5 {
         text-transform: uppercase;
         font-size: 18px;
 }
 
 .moreLink {
-    color: black;
+    color: white;
+    cursor: pointer;
 }
 
 .dropdown-item {

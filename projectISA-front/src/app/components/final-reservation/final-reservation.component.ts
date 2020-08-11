@@ -63,7 +63,7 @@ export class FinalReservationComponent implements OnInit {
       this.http.post<MedicalExamination>('http://localhost:8080/api/medical-examination', medicalExamination, { headers: headers }).subscribe((data) => {
         console.log(data);
         alert('Reservation successfull!');
-        this.router.navigate['/history'];
+        this.router.navigate["/medical-record"];
       });
     });
   }

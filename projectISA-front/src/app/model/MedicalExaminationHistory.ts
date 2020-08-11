@@ -7,4 +7,6 @@ export class MedicalExaminationHistory {
     clinic: string;
     medicalRoom: number;
     id: number;
+    userClinicRate: number;
+    userDoctorRate: number;
 }

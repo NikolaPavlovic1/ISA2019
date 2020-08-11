@@ -1,25 +1,19 @@
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li  class="nav-item" id="home">
+        <a class="nav-link" routerLink="/">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-primary">Home</span>
+          </i>
+        </a>
+      </li>
       <li  class="nav-item" id="usersAdminId">
         <a class="nav-link" routerLink="/users">
           <i class="fa fa-envelope-o">
-            <span class="badge badge-danger">M</span>
+            <span class="badge badge-primary">Users</span>
           </i>
-          UsersAdmin
         </a>
       </li>
       <!--<li  class="nav-item" id="reservationsAdminId">
@@ -33,33 +27,29 @@
       <li class="nav-item" id="clinicsUserId">
         <a class="nav-link" id="addressAdmin" routerLink="/clinics">
           <i class="fa fa-envelope-o">
-            <span class="badge badge-warning">A</span>
+            <span class="badge badge-primary">Clinics</span>
           </i>
-          Clinics
         </a>
       </li>
       <li class="nav-item" id="historyUserId">
         <a class="nav-link"  routerLink="/history">
           <i class="fa fa-envelope-o">
-            <span class="badge badge-warning">A</span>
+            <span class="badge badge-primary">Examination history</span>
           </i>
-          History of pregleda
         </a>
       </li>
       <li class="nav-item" id="medicalRecordUserId">
         <a class="nav-link"  routerLink="/medical-record">
           <i class="fa fa-envelope-o">
-            <span class="badge badge-warning">A</span>
+            <span class="badge badge-primary">Medical record</span>
           </i>
-          Medical record
         </a>
       </li>
       <li class="nav-item" id="profileUserId">
         <a class="nav-link"  routerLink="/profile">
           <i class="fa fa-envelope-o">
-            <span class="badge badge-warning">A</span>
+            <span class="badge badge-primary">Profile</span>
           </i>
-          Profile
         </a>
       </li>
           </ul>

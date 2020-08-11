@@ -18,7 +18,7 @@ export class ClinicsComponent implements OnInit {
   myDate: Date;
   type: string;
   sortType: string;
-  sortTypes = ["Name","City"];
+  sortTypes = ["Name","City","Street"];
 
   constructor(private http: HttpClient, private datePipe: DatePipe, private router : Router) { }
 
@@ -33,7 +33,7 @@ export class ClinicsComponent implements OnInit {
     headers = headers.set('Authorization', token);
     
     this.http.get<Clinic[]>('http://localhost:8080/api/clinic/all',{headers:headers}).subscribe((data) => {
-      this.clinics = data;
+      this.clinics = data;      
     });
   }
 
@@ -49,7 +49,7 @@ export class ClinicsComponent implements OnInit {
    
    }
 
-   if(this.myDate == undefined) {
+   if(this.type == undefined || this.type === "") {
      filterClinic.type = null;
    } else {
     filterClinic.type = this.type;
@@ -78,8 +78,10 @@ export class ClinicsComponent implements OnInit {
     console.log(this.sortType);
     if(this.sortType === "Name") {
       this.clinics.sort((a,b)=>a.name.localeCompare(b.name));
+    } else if(this.sortType === "Street"){
+      this.clinics.sort((a,b)=>a.address.street.toString().localeCompare(b.address.street.toString()));
     } else {
-      this.clinics.sort((a,b)=>a.description.localeCompare(b.description));
+      this.clinics.sort((a,b)=>a.address.city.toString().localeCompare(b.address.city.toString()));
     }
   }
 

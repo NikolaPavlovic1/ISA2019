@@ -38,6 +38,9 @@ public class MedicalExaminationService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	MyMailService mailService;
 
 	public List<MedicalExaminationDTO> findAllMedicalExaminations() {
 
@@ -120,7 +123,18 @@ public class MedicalExaminationService {
 			
 			if(free) {
 				e.setMedicalRoom(room);
-				this.medicalExaminationRepository.save(e);
+				User admin = this.userRepository.findByUsername("admin");
+				try {
+					this.mailService.sendMailToAdminAboutReservation(admin);
+					this.mailService.sendMailToPatientAboutReservation(this.medicalRecordRepository.getOne(examination.getMedicalRecordId()).getUser());
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				} finally {
+					this.medicalExaminationRepository.save(e);
+						
+				}
+				
 				return examination;
 			}
 		}
@@ -168,8 +182,17 @@ public class MedicalExaminationService {
 		MedicalExamination e = this.medicalExaminationRepository.getOne(examinationId);
 		User u = this.userRepository.getOne(patientId);
 		e.setMedicalRecord(u.getMedicalRecord());
+		
+		try {
+			this.mailService.sendPredefinedExaminationEmail(u);
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			this.medicalExaminationRepository.save(e);
+		}
 	
-		this.medicalExaminationRepository.save(e);
+		
 		
 		
 		

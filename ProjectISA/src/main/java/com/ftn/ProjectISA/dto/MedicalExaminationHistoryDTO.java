@@ -3,7 +3,10 @@ package com.ftn.ProjectISA.dto;
 import java.time.ZoneId;
 import java.util.Date;
 
+import com.ftn.ProjectISA.model.ClinicRate;
+import com.ftn.ProjectISA.model.DoctorRate;
 import com.ftn.ProjectISA.model.MedicalExamination;
+import com.ftn.ProjectISA.model.User;
 
 public class MedicalExaminationHistoryDTO {
 	
@@ -15,6 +18,8 @@ public class MedicalExaminationHistoryDTO {
 	private String clinic;
 	private Long medicalRoom;
 	private Long id;
+	private int userClinicRate = 0;
+	private int userDoctorRate = 0;
 	
 	public MedicalExaminationHistoryDTO() {}
 	
@@ -27,6 +32,21 @@ public class MedicalExaminationHistoryDTO {
 		this.clinic = me.getDoctor().getClinic().getName();
 		this.medicalRoom = me.getMedicalRoom().getId();
 		this.id = me.getId();
+		
+		if(me.getMedicalRecord()!= null) {
+			User patient = me.getMedicalRecord().getUser();
+			for(ClinicRate cr: patient.getPatientClinicRates()) {
+				if(cr.getClinic().getId() == me.getDoctor().getClinic().getId()) {
+					this.userClinicRate = cr.getRate();
+				}
+			}
+			for(DoctorRate dr: patient.getPatientDoctorRates()) {
+				if(dr.getDoctor().getId() == me.getDoctor().getId()) {
+					this.userDoctorRate = dr.getRate();
+				}
+			}	
+		}
+		
 	}
 
 	public Date getDate() {
@@ -91,6 +111,22 @@ public class MedicalExaminationHistoryDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getUserClinicRate() {
+		return userClinicRate;
+	}
+
+	public void setUserClinicRate(int userClinicRate) {
+		this.userClinicRate = userClinicRate;
+	}
+
+	public int getUserDoctorRate() {
+		return userDoctorRate;
+	}
+
+	public void setUserDoctorRate(int userDoctorRate) {
+		this.userDoctorRate = userDoctorRate;
 	}
 
 }

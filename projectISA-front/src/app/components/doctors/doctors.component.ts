@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Clinic } from 'src/app/model/Clinic';
-import { MedicalExamination } from 'src/app/model/MedicalExamination';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from 'src/app/model/User';
-import { FilterDoctors } from 'src/app/model/FilterDoctors';
+import { User} from '../../model/User';
+import { FilterDoctors} from '../../model/FilterDoctors';
 
 @Component({
   selector: 'app-doctors',
@@ -71,7 +69,7 @@ export class DoctorsComponent implements OnInit {
       filterC.date = null;
     }
 
-    if(this.type != undefined) {
+    if(this.type != undefined && this.type!= "") {
       filterC.type = this.type;
     } else {
       filterC.type = null;

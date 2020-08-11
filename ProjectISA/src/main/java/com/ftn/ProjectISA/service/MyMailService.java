@@ -46,5 +46,44 @@ public class MyMailService {
 		
 		javaMailSender.send(mail);
 	}
+	
+	public void sendPredefinedExaminationEmail(User recipient) throws Exception{
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(recipient.getEmail());
+		mail.setFrom("projectISA098@gmail.com");
+		mail.setSubject("You have just reserved medical examination!");
+
+		String text = "You have just reserved predefined medical examination!\n\n";
+		mail.setText(text);
+		
+		javaMailSender.send(mail);
+	}
+
+	public void sendMailToAdminAboutReservation(User recipient) throws Exception{
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(recipient.getEmail());
+		mail.setFrom("projectISA098@gmail.com");
+		mail.setSubject("Client has just reserved a medical examination!");
+
+		String text = "Client has just reserved a medical examination!\n\n";
+		mail.setText(text);
+		
+		javaMailSender.send(mail);
+	}
+	
+	public void sendMailToPatientAboutReservation(User recipient) throws Exception{
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(recipient.getEmail());
+		mail.setFrom("projectISA098@gmail.com");
+		mail.setSubject("You have just reserved a medical examination!");
+
+		String text = "You have just reserved a medical examination!\n\n";
+		mail.setText(text);
+		
+		javaMailSender.send(mail);
+	}
 
 }

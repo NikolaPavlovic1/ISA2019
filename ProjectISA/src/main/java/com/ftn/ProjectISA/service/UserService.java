@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ftn.ProjectISA.dto.RateDTO;
 import com.ftn.ProjectISA.dto.UserDTO;
 import com.ftn.ProjectISA.model.Clinic;
+import com.ftn.ProjectISA.model.ClinicRate;
+import com.ftn.ProjectISA.model.DoctorRate;
 import com.ftn.ProjectISA.model.TypeDuration;
 import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.ClinicRepository;
@@ -150,6 +153,50 @@ public class UserService {
 		u.setClinic(clinic);
 		
 		userRepository.save(u);
+		
+		return true;
+	}
+	
+	public boolean rate(RateDTO rate) {	
+		
+		User patient = this.userRepository.getOne(rate.getPatientId());
+		User doctor = this.userRepository.findByUsername(rate.getDoctorUsername());
+		Clinic clinic = doctor.getClinic();
+		
+		boolean match = false;
+		for(ClinicRate cr: patient.getPatientClinicRates()) {
+			if(cr.getClinic().getId() == clinic.getId()) {
+				if(cr.getRate() != rate.getClinicRate()) {
+					cr.setRate(rate.getClinicRate());		
+				}
+				match = true;
+			}
+		}
+		if(!match) {
+			ClinicRate cr = new ClinicRate(rate.getClinicRate());
+			cr.setClinic(clinic);
+			cr.setUser(patient);
+			patient.getPatientClinicRates().add(cr);
+		}
+		this.userRepository.save(patient);
+		
+		match = false;
+		for(DoctorRate dr: patient.getPatientDoctorRates()) {
+			if(dr.getDoctor().getId() == doctor.getId()) {
+				if(dr.getRate() != rate.getDoctorRate()) {
+					dr.setRate(rate.getDoctorRate());		
+				}
+				match = true;
+			}
+		}
+		if(!match) {
+			DoctorRate dr = new DoctorRate(rate.getDoctorRate());
+			dr.setDoctor(doctor);
+			dr.setPatient(patient);
+			patient.getPatientDoctorRates().add(dr);
+		}
+		this.userRepository.save(patient);
+		
 		
 		return true;
 	}

@@ -1,15 +1,9 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
+<h2 style="margin-left: 50px; margin-top: 20px;">Medical record</h2>
+<br>
+<hr>
 <div class="container">
 	<div class="row clearfix">
-		<h4>Medical record </h4>
-        
-
+		
         <div class="col-md-12 table-responsive">
 			<h4>Disease history: </h4>
 			<ul>
@@ -20,11 +14,12 @@
 		</div>
 	</div>
 
+	<hr>
 
 	<div class="row clearfix">
 		<div class="col-md-12 table-responsive">
 			<h4>Examination history: </h4>
-			<table class="table table-bordered table-hover table-sortable" id="tab_logic">
+			<table class="table table-bordered table-sortable" id="tab_logic">
 				<thead>
 					<tr>
 						<th class="text-center">
@@ -40,7 +35,7 @@
 							Duration(min)
 						</th>
 						<th class="text-center">
-							Price
+							Price(rsd)
 						</th>
 						<th class="text-center">
 							Clinic
@@ -53,25 +48,25 @@
 				<tbody>
 					<tr id='addr0' data-id="0" class="hidden" *ngFor="let examination of examinations">
 						<td data-name="name">
-							<input type="text" disabled name='name0' class="form-control" [value]="examination.date" />
+							{{examination.date | date}}
 						</td>
 						<td data-name="mail">
-							<input type="text" disabled name='mail0' class="form-control" [value]="examination.doctorUsername" />
+							{{examination.doctorUsername}}
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" [value]="examination.type" />
+							{{examination.type}}
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" [value]="examination.duration" />
+							{{examination.duration}}
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" [value]="examination.price" />
+							{{examination.price}}
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" [value]="examination.clinic" />
+							{{examination.clinic}}
 						</td>
 						<td data-name="desc">
-							<input name="desc0" disabled class="form-control" [value]="examination.medicalRoom" />
+							{{examination.medicalRoom}}
 						</td>
 					</tr>
 				</tbody>

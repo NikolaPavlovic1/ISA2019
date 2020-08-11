@@ -2,6 +2,7 @@ package com.ftn.ProjectISA.service;
 
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -78,9 +79,13 @@ public class ClinicService {
 				if(filterClinicsDTO.getDate() != null) {
 					for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
 						Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
-						System.out.println(d);
-						System.out.println(filterClinicsDTO.getDate());
-						if(d == filterClinicsDTO.getDate()) {
+						Calendar cal1 = Calendar.getInstance();
+						Calendar cal2 = Calendar.getInstance();
+						cal1.setTime(d);
+						cal2.setTime(filterClinicsDTO.getDate());
+						boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+						                  cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+						if(sameDay) {
 							date = false;
 							System.out.println("USAO");
 						}
@@ -127,9 +132,14 @@ public class ClinicService {
 				if(filterDoctorsDTO.getDate() != null) {
 					for(MedicalExamination me : doctor.getDoctorsScheduledExaminations()) {
 						Date d = Date.from(me.getStartDateTime().atZone(ZoneId.systemDefault()).toInstant());
-						if(d == filterDoctorsDTO.getDate()) {
+						Calendar cal1 = Calendar.getInstance();
+						Calendar cal2 = Calendar.getInstance();
+						cal1.setTime(d);
+						cal2.setTime(filterDoctorsDTO.getDate());
+						boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+						                  cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+						if(sameDay) {
 							date = false;
-							System.out.println("USAO");
 						}
 					}
 				}

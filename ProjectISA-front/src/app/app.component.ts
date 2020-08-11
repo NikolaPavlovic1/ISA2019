@@ -7,23 +7,56 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'projectISA-front';
 
   constructor(private http: HttpClient, private router: Router) {
   }
   ngOnInit(): void {
-    /*(<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
 
-    (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
-    (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
-    (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;
-    (<HTMLElement>document.getElementById("profileUserId")).hidden = true;
+    let role = localStorage.getItem('role');
 
-    (<HTMLElement>document.getElementById("login")).hidden = false;
-    (<HTMLElement>document.getElementById("register")).hidden = false;
-    (<HTMLElement>document.getElementById("logout")).hidden = true;
-*/
+    if (role === "PATIENT") {
+      (<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
+      //(<HTMLElement>document.getElementById("reservationsAdminId")).hidden = true;
+
+      (<HTMLElement>document.getElementById("clinicsUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("historyUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = false;
+      (<HTMLElement>document.getElementById("profileUserId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("login")).hidden = true;
+      (<HTMLElement>document.getElementById("register")).hidden = true;
+      (<HTMLElement>document.getElementById("logout")).hidden = false;
+
+    } else if (role === "ADMINISTRATOR") {
+
+      (<HTMLElement>document.getElementById("usersAdminId")).hidden = false;
+      //(<HTMLElement>document.getElementById("reservationsAdminId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("profileUserId")).hidden = false;
+
+      (<HTMLElement>document.getElementById("login")).hidden = true;
+      (<HTMLElement>document.getElementById("register")).hidden = true;
+      (<HTMLElement>document.getElementById("logout")).hidden = false;
+
+    } else {
+      (<HTMLElement>document.getElementById("usersAdminId")).hidden = true;
+
+      (<HTMLElement>document.getElementById("clinicsUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("historyUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("medicalRecordUserId")).hidden = true;
+      (<HTMLElement>document.getElementById("profileUserId")).hidden = true;
+
+      (<HTMLElement>document.getElementById("login")).hidden = false;
+      (<HTMLElement>document.getElementById("register")).hidden = false;
+      (<HTMLElement>document.getElementById("logout")).hidden = true;
+
+    }
+
   }
 
   logout() {
@@ -47,7 +80,7 @@ export class AppComponent implements OnInit{
       (<HTMLElement>document.getElementById("login")).hidden = false;
       (<HTMLElement>document.getElementById("register")).hidden = false;
       (<HTMLElement>document.getElementById("logout")).hidden = true;
-      
+
       this.router.navigate(["/"]);
     });
   }

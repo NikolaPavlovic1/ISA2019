@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.ProjectISA.dto.AuthenticationRequest;
 import com.ftn.ProjectISA.dto.AuthenticationResponse;
+import com.ftn.ProjectISA.dto.RateDTO;
 import com.ftn.ProjectISA.dto.UserDTO;
 import com.ftn.ProjectISA.security.JwtUtil;
 import com.ftn.ProjectISA.security.MyUserDetailsService;
@@ -68,6 +68,12 @@ public class UserController {
 	@PostMapping(value = "/decline/{id}") 
 	public ResponseEntity<Boolean> declineUser(@PathVariable Long id) { 
 		Boolean retVal = userService.declineUser(id);
+		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
+	}
+	
+	@PostMapping(consumes = "application/json", value = "/rate") 
+	public ResponseEntity<Boolean> rate(@RequestBody RateDTO rate) { 
+		Boolean retVal = userService.rate(rate);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
 	}
 	

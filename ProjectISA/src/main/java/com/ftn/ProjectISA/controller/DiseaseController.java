@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class DiseaseController {
 	@Autowired
 	DiseaseService diseaseService;
 
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping(value = "all")
 	public ResponseEntity<List<DiseaseDTO>> findAllDiseases() {
 		List<DiseaseDTO> retVal = diseaseService.findAllDiseases();
@@ -34,13 +36,13 @@ public class DiseaseController {
 		DiseaseDTO retVal = diseaseService.findDisease(id); 
 		return new ResponseEntity<DiseaseDTO>(retVal, HttpStatus.OK); }
 
-	//@PreAuthorize("ADMINISTRATOR")
 	@PostMapping(consumes = "application/json") 
 	public ResponseEntity<DiseaseDTO> addDisease(@RequestBody DiseaseDTO diseaseDTO){
 		DiseaseDTO retVal = diseaseService.addDisease(diseaseDTO);
 		return new ResponseEntity<DiseaseDTO>(retVal, HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@DeleteMapping(value = "/{id}") 
 	public ResponseEntity<?> deleteDisease(@PathVariable Long id){ 
 		diseaseService.deleteDisease(id);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/User';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,7 @@ export class RegisterComponent implements OnInit {
   password1 : String;
   password2 : String;
   
-
-  constructor(private http:HttpClient) { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -28,13 +28,7 @@ export class RegisterComponent implements OnInit {
     this.user.password = this.password1;
     this.user.role = "PATIENT";
     
-
-    this.http.post<User>('http://localhost:8080/api/user',this.user).subscribe((data)=>{
-      console.log(data);
-      alert("Registration request has been sent to admin!");
-
-    });
-    
+    this.authService.register(this.user);
   }
 
 }

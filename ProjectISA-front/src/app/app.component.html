@@ -2,18 +2,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li  class="nav-item" id="home">
+      <li class="nav-item" id="home">
         <a class="nav-link" routerLink="/">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Home</span>
-          </i>
+          <span class="badge badge-primary">Home</span>
         </a>
       </li>
-      <li  class="nav-item" id="usersAdminId">
+      <li class="nav-item" id="usersAdminId">
         <a class="nav-link" routerLink="/users">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Users</span>
-          </i>
+          <span class="badge badge-primary">Users</span>
         </a>
       </li>
       <!--<li  class="nav-item" id="reservationsAdminId">
@@ -26,46 +22,38 @@
       </li>-->
       <li class="nav-item" id="clinicsUserId">
         <a class="nav-link" id="addressAdmin" routerLink="/clinics">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Clinics</span>
-          </i>
+          <span class="badge badge-primary">Clinics</span>
         </a>
       </li>
       <li class="nav-item" id="historyUserId">
-        <a class="nav-link"  routerLink="/history">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Examination history</span>
-          </i>
+        <a class="nav-link" routerLink="/history">
+          <span class="badge badge-primary">Examination history</span>
         </a>
       </li>
       <li class="nav-item" id="medicalRecordUserId">
-        <a class="nav-link"  routerLink="/medical-record">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Medical record</span>
-          </i>
+        <a class="nav-link" routerLink="/medical-record">
+          <span class="badge badge-primary">Medical record</span>
         </a>
       </li>
       <li class="nav-item" id="profileUserId">
-        <a class="nav-link"  routerLink="/profile">
-          <i class="fa fa-envelope-o">
-            <span class="badge badge-primary">Profile</span>
-          </i>
+        <a class="nav-link" routerLink="/profile">
+          <span class="badge badge-primary">Profile</span>
         </a>
       </li>
-          </ul>
+    </ul>
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" id="login">
-        <a class="nav-link"  routerLink="/login" style="color: white;">Login</a>
+        <a class="nav-link" routerLink="/login" style="color: white;">Login</a>
       </li>
       <li class="nav-item" id="register">
-        <a class="nav-link"  routerLink="/register" style="color: white;">Register</a>
+        <a class="nav-link" routerLink="/register" style="color: white;">Register</a>
       </li>
       <li class="nav-item" id="logout">
-        <a class="nav-link"   (click)="logout()" style="color: white;">Log Out</a>
+        <a class="nav-link" (click)="logout()" style="color: white;">Log Out</a>
       </li>
     </ul>
-  
+
   </div>
 </nav>
 <router-outlet></router-outlet>

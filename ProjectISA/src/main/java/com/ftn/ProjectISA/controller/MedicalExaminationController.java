@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,18 +28,21 @@ public class MedicalExaminationController {
 	@Autowired
 	MedicalExaminationService medicalExaminationService;
 
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@GetMapping(value = "all")
 	public ResponseEntity<List<MedicalExaminationDTO>> findAllMedicalExaminations() {
 		List<MedicalExaminationDTO> retVal = medicalExaminationService.findAllMedicalExaminations();
 		return new ResponseEntity<List<MedicalExaminationDTO>>(retVal, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAuthority('PATIENT')")
 	@GetMapping(value = "history/{userId}")
 	public ResponseEntity<List<MedicalExaminationHistoryDTO>> medicalExaminationsUserHistory(@PathVariable Long userId) {
 		List<MedicalExaminationHistoryDTO> retVal = medicalExaminationService.medicalExaminationsUserHistory(userId);
 		return new ResponseEntity<List<MedicalExaminationHistoryDTO>>(retVal, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAuthority('PATIENT')")
 	@GetMapping(value = "future/{userId}")
 	public ResponseEntity<List<MedicalExaminationHistoryDTO>> medicalExaminationsUserReservations(@PathVariable Long userId) {
 		List<MedicalExaminationHistoryDTO> retVal = medicalExaminationService.medicalExaminationsUserReservations(userId);
@@ -51,7 +55,7 @@ public class MedicalExaminationController {
 		return new ResponseEntity<MedicalExaminationDTO>(retVal, HttpStatus.OK);
 	}
 
-	
+	@PreAuthorize("hasAuthority('PATIENT')")
 	@PostMapping(consumes = "application/json") 
 	public ResponseEntity<MedicalExaminationDTO> addMedicalExamination(
 			@RequestBody MedicalExaminationDTO medicalExaminationDTO){
@@ -59,6 +63,7 @@ public class MedicalExaminationController {
 		return new ResponseEntity<MedicalExaminationDTO>(retVal, HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PostMapping(consumes = "application/json", value = "/predefined") 
 	public ResponseEntity<MedicalExaminationHistoryDTO> addPredefinedMedicalExamination(
 			@RequestBody MedicalExaminationDTO medicalExaminationDTO){
@@ -72,19 +77,22 @@ public class MedicalExaminationController {
 		return new ResponseEntity<List<MedicalExaminationHistoryDTO>>(retVal, HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('PATIENT')")
 	@PostMapping(consumes = "application/json", value = "/predefined/{patientId}/{examinationId}") 
 	public ResponseEntity<Boolean> reservePredefinedMedicalExamination(
 			@PathVariable Long patientId, @PathVariable Long examinationId){
 		Boolean retVal = medicalExaminationService.reservePredefinedMedicalExamination(patientId,examinationId);
 		return new ResponseEntity<Boolean>(retVal, HttpStatus.OK); 
 	}
-	  	  
+	
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@DeleteMapping(value = "/{id}") 
 	public ResponseEntity<?> deleteMedicalExamination(@PathVariable Long id){ 
 		medicalExaminationService.deleteMedicalExamination(id);
 		return new ResponseEntity<>("Medical examination deleted successfully", HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PostMapping(value="addTypeDuration") 
 	public ResponseEntity<?> addTypeDuration(@RequestBody TypeDurationDTO tddto){
 		medicalExaminationService.addTypeDuration(tddto.getType(),tddto.getDuration());

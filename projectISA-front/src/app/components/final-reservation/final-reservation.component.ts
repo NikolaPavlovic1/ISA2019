@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TypeDuration } from 'src/app/model/TypeDuration';
 import { MedicalExamination } from 'src/app/model/MedicalExamination';
+import { UserService } from 'src/app/services/user.service';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-final-reservation',
@@ -17,7 +19,7 @@ export class FinalReservationComponent implements OnInit {
   price: number;
   doctor: User;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, private patientService:PatientService) { }
 
   ngOnInit(): void {
 
@@ -29,39 +31,26 @@ export class FinalReservationComponent implements OnInit {
       console.log(this.date);
 
       this.route.paramMap.subscribe(paramMap => {
-        let id = +paramMap.get('doctorId');
+        let id = paramMap.get('doctorId');
 
-        let headers = new HttpHeaders();
-        let token = "Bearer ";
-        token += localStorage.getItem('token');
-        headers = headers.set('Authorization', token);
-
-
-        this.http.get<User>('http://localhost:8080/api/user/' + id, { headers: headers }).subscribe((data) => {
+        this.userService.loadProfile(id).subscribe((data) => {
           this.doctor = data;
-          console.log(data);
         });
       });
     });
-
   }
 
   public reserveExamination() {
-    let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += localStorage.getItem('token');
-    headers = headers.set('Authorization', token);
-
     let medicalExamination = new MedicalExamination();
     medicalExamination.doctorId = this.doctor.id;
     medicalExamination.price = this.price;
     medicalExamination.startDateTime = this.date;
     medicalExamination.typeDurationId = this.type.id;
-    this.http.get<User>('http://localhost:8080/api/user/' + localStorage.getItem('id'), { headers: headers }).subscribe((data) => {
+    
+    this.userService.loadProfile(localStorage.getItem('id')).subscribe((data) => {
       let loggedInUser = data;
       medicalExamination.medicalRecordId = loggedInUser.medicalRecord.id;
-      this.http.post<MedicalExamination>('http://localhost:8080/api/medical-examination', medicalExamination, { headers: headers }).subscribe((data) => {
-        console.log(data);
+      this.patientService.reserveExamination(medicalExamination).subscribe((data) => {
         alert('Reservation successfull!');
         this.router.navigate["/medical-record"];
       });

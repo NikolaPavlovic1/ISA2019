@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User} from '../../model/User';
 import { FilterDoctors} from '../../model/FilterDoctors';
+import { DoctorService } from 'src/app/services/doctor.service';
 
 @Component({
   selector: 'app-doctors',
@@ -24,7 +25,7 @@ export class DoctorsComponent implements OnInit {
   showDate: boolean = false;
   showType: boolean = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
+  constructor(private route: ActivatedRoute, private doctorService: DoctorService, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -51,12 +52,6 @@ export class DoctorsComponent implements OnInit {
   }
 
   public loadAllDoctors() {
-
-    let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += localStorage.getItem('token');
-    headers = headers.set('Authorization', token);
-
     let filterC = new FilterDoctors();
 
     filterC.clinicId = this.id;
@@ -93,9 +88,8 @@ export class DoctorsComponent implements OnInit {
       filterC.rate = this.rate;
     }
 
-    this.http.post<User[]>('http://localhost:8080/api/clinic/filterDoctors',filterC, { headers: headers }).subscribe((data) => {
+    this.doctorService.loadAllDoctors(filterC).subscribe((data) => {
       this.filteredDoctors = data;
-      console.log(data);
     });
   }
 
@@ -118,7 +112,6 @@ export class DoctorsComponent implements OnInit {
 
     console.log(this.selectedDoctor);
     this.router.navigate( ['reservation', this.selectedDoctor.id],{queryParams: { date: this.date , type: this.type }});
-    
   }
 
 

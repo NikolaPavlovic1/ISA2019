@@ -1,3 +1,10 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
 <div class="container-fluid">
     <h1>Doctors filter</h1>
     <form #myForm="ngForm" novalidate (ngSubmit)="loadAllDoctors()">
@@ -26,7 +33,7 @@
             <input type="text" class="form-control" name="type" [(ngModel)]="type">
         </div>
 
-        <button class="btn btn-primary" type="submit" >Search</button>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
 </div>
 
@@ -34,15 +41,23 @@
     <hr />
     <h2>Select doctor: </h2>
     <hr />
-    <div [class.selectedDoc]="selectedDoctor.id==doctor.id"  class="card myCard" style="width:200px" *ngFor="let doctor of filteredDoctors">
+    <div [class.selectedDoc]="selectedDoctor.id==doctor.id" class="card myCard" style="width:300px"
+        *ngFor="let doctor of filteredDoctors">
         <img class="card-img-top" src="assets/img/clinic.png" alt="Card image">
         <div class="card-body">
-          <h4 class="card-title">{{doctor.name}} {{ doctor.lastName}}</h4>
-          <p class="card-text">Average rating: {{doctor.avgDoctorsRate}}</p>
-          <a class="btn btn-primary" (click)="selectDoctor(doctor.id)">Select</a>
+            <h4 class="card-title">{{doctor.name}} {{ doctor.lastName}}</h4>
+            <p class="card-text">Average rating: {{doctor.avgDoctorsRate}}
+
+                <span [class.checked]="doctor.avgDoctorsRate>0.49" class="fa fa-star"></span>
+                <span [class.checked]="doctor.avgDoctorsRate>1.49" class="fa fa-star "></span>
+                <span [class.checked]="doctor.avgDoctorsRate>2.49" class="fa fa-star "></span>
+                <span [class.checked]="doctor.avgDoctorsRate>3.49" class="fa fa-star"></span>
+                <span [class.checked]="doctor.avgDoctorsRate>4.49" class="fa fa-star"></span>
+            </p>
+
+            <a class="btn btn-primary" (click)="selectDoctor(doctor.id)">Select</a>
         </div>
-      </div>
+    </div>
 </div>
 
 <button class="btn btn-primary" (click)="proceed()">Proceed</button>
-

@@ -13,7 +13,6 @@ import {DoctorsComponent} from "./components/doctors/doctors.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import { FinalReservationComponent } from './components/final-reservation/final-reservation.component';
 import { AccountConfirmationComponent } from './components/account-confirmation/account-confirmation.component';
-import { AdminExaminationComponent } from './components/admin-examination/admin-examination.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
@@ -26,7 +25,6 @@ const routes: Routes = [
   { path: "doctors/:idClinic", component: DoctorsComponent },
   { path: "history", component: HistoryComponent },
   { path: "medical-record", component: MedicalRecordComponent },
-  { path: "reservations", component: AdminExaminationComponent },
   { path: "profile", component: UserProfileComponent },
   { path: "reservation/:doctorId", component: FinalReservationComponent },
   { path: "confirmation/:key", component: AccountConfirmationComponent },

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/model/User';
+import { UserService } from 'src/app/services/user.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-admin-user',
@@ -9,45 +11,28 @@ import { User } from 'src/app/model/User';
 })
 export class AdminUserComponent implements OnInit {
 
-  users : User[] = [];
+  users: User[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.loadUsers();
   }
 
-  public loadUsers(){
-    /*let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += this.storageService.getToken();
-    headers = headers.set('Authorization', token);
-    */
-   
-    this.http.get<User[]>('http://localhost:8080/api/user/all').subscribe((data) => {
+  public loadUsers() {
+    this.adminService.loadAllUsers().subscribe((data) => {
       this.users = data;
-      console.log(data);
     });
   }
 
-  public approve(id : number) {
-    let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += localStorage.getItem('token');
-    headers = headers.set('Authorization', token);
-    
-    this.http.post('http://localhost:8080/api/user/approve/'+id, {headers:headers}).subscribe((data) => {
+  public approve(id: number) {
+    this.adminService.approve(id).subscribe((data) => {
       this.loadUsers();
     });
   }
 
-  public decline(id : number) {
-    let headers = new HttpHeaders();
-    let token = "Bearer ";
-    token += localStorage.getItem('token');
-    headers = headers.set('Authorization', token);
-    
-    this.http.post('http://localhost:8080/api/user/decline/'+id, {headers:headers}).subscribe((data) => {
+  public decline(id: number) {
+    this.adminService.decline(id).subscribe((data) => {
       this.loadUsers();
     });
   }

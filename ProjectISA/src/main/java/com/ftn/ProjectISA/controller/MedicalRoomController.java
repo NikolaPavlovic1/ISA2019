@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,12 +38,14 @@ public class MedicalRoomController {
 		return new ResponseEntity<MedicalRoomDTO>(retVal, HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@PostMapping(consumes = "application/json") 
 	public ResponseEntity<MedicalRoomDTO> addMedicalRoom(@RequestBody MedicalRoomDTO medicalRoomDTO){
 		MedicalRoomDTO retVal = roomService.addMedicalRoom(medicalRoomDTO); 
 		return new ResponseEntity<MedicalRoomDTO>(retVal, HttpStatus.OK); 
 	}
 	  
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	@DeleteMapping(value = "/{id}") 
 	public ResponseEntity<?> deleteMedicalRoom(@PathVariable Long id){ 
 		roomService.deleteMedicalRoom(id);

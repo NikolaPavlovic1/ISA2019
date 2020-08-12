@@ -6,3 +6,7 @@
 .myCard {
     margin-left: 10px;
 }
+
+.checked {
+    color: orange;
+}

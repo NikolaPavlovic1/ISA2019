@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.DiseaseDTO;
 import com.ftn.ProjectISA.model.Disease;
@@ -13,6 +15,7 @@ import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.DiseaseRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class DiseaseService {
 
@@ -38,6 +41,7 @@ public class DiseaseService {
 		return new DiseaseDTO(retVal);
 	}
 	
+	@Transactional(readOnly = false)
 	public DiseaseDTO addDisease(DiseaseDTO d) {
 		User user = this.userRepository.getOne(d.getPatientId());
 		MedicalRecord medicalRecord = user.getMedicalRecord();
@@ -49,6 +53,7 @@ public class DiseaseService {
 		return d;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteDisease(Long id) {
 		diseaseRepository.deleteById(id);
 	}

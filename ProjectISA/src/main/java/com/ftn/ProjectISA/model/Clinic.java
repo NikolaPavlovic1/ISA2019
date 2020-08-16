@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ftn.ProjectISA.dto.ClinicDTO;
@@ -23,6 +24,9 @@ public class Clinic {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Version
+	private Long version;
 	
 	private String description;
 	
@@ -142,6 +146,14 @@ public class Clinic {
 		}
 		
 		return result/this.clinicRates.size();
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 }

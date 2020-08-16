@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,6 +24,9 @@ public class MedicalRoom {
 	private Long id;
 	
 	private String description;
+	
+	@Version
+	private Long version;
 	
 	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
@@ -68,6 +72,14 @@ public class MedicalRoom {
 
 	public void setMedicalExaminations(List<MedicalExamination> medicalExaminations) {
 		this.medicalExaminations = medicalExaminations;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	

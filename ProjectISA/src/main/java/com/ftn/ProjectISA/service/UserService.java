@@ -7,6 +7,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.RateDTO;
 import com.ftn.ProjectISA.dto.UserDTO;
@@ -19,6 +22,7 @@ import com.ftn.ProjectISA.repository.ClinicRepository;
 import com.ftn.ProjectISA.repository.TypeDurationRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class UserService {
 
@@ -37,6 +41,7 @@ public class UserService {
 	@Autowired
 	MyMailService mailService;
 
+	@Transactional(readOnly = false)
 	public UserDTO registerUser(UserDTO userDTO) {
 		User user = new User(userDTO);
 		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -70,6 +75,7 @@ public class UserService {
 		return retVal;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public UserDTO updateUser(UserDTO user) {
 		User u = userRepository.getOne(user.getId());
 		u.setName(user.getName());
@@ -80,10 +86,12 @@ public class UserService {
 		return new UserDTO(userRepository.save(u));
 	}
 
+	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public boolean approveUser(Long id) {	
 		User u = userRepository.getOne(id);
 		String confirmationKey = getRandomString();
@@ -100,6 +108,7 @@ public class UserService {
 		return true;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public boolean declineUser(Long id) {	
 		User u = userRepository.getOne(id);
 		
@@ -116,6 +125,7 @@ public class UserService {
 	
 	
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public boolean activateAccount(String confirmationKey) {	
 		User u = userRepository.findByConfirmationKey(confirmationKey);
 		u.setActive(true);
@@ -124,6 +134,7 @@ public class UserService {
 		return true;
 	}
 	
+	@Transactional(propagation = Propagation.SUPPORTS)
 	private String getRandomString() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder sb = new StringBuilder();
@@ -137,6 +148,7 @@ public class UserService {
 
     }
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public boolean addTypeToDoctor(Long id, Long typeDuration) {	
 		User u = userRepository.getOne(id);
 		TypeDuration td = typeDurationRepository.getOne(typeDuration);
@@ -147,6 +159,7 @@ public class UserService {
 		return true;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public boolean addDoctorToClinic(Long doctorId, Long clinicId) {	
 		User u = userRepository.getOne(doctorId);
 		Clinic clinic= this.clinicRepository.getOne(clinicId);
@@ -157,6 +170,7 @@ public class UserService {
 		return true;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public boolean rate(RateDTO rate) {	
 		
 		User patient = this.userRepository.getOne(rate.getPatientId());

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Address {
@@ -17,6 +18,9 @@ public class Address {
 	private int number;
 	private double latitude;
 	private double longitude;
+	
+	@Version
+	private Long version;
 	
 	public Address() {
 		
@@ -76,5 +80,13 @@ public class Address {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

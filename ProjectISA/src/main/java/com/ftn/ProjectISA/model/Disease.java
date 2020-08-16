@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -19,6 +20,9 @@ public class Disease {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Version
+	private Long version;
 
 	private String name;
 	
@@ -51,6 +55,14 @@ public class Disease {
 
 	public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
 		this.medicalRecords = medicalRecords;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	

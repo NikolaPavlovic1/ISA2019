@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.MedicalExaminationDTO;
 import com.ftn.ProjectISA.dto.MedicalExaminationHistoryDTO;
@@ -21,6 +24,7 @@ import com.ftn.ProjectISA.repository.MedicalRoomRepository;
 import com.ftn.ProjectISA.repository.TypeDurationRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class MedicalExaminationService {
 
@@ -54,6 +58,8 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
+	
+	@Transactional(isolation=Isolation.SERIALIZABLE)
 	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserHistory(Long userId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -68,6 +74,7 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserReservations(Long userId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -82,6 +89,7 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<MedicalExaminationHistoryDTO> getPredefinedMedicalExaminations(Long clinicId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -101,6 +109,7 @@ public class MedicalExaminationService {
 		return retVal;
 	}
 	
+	@Transactional(readOnly = false, noRollbackFor=Exception.class)
 	public MedicalExaminationDTO addMedicalExamination(MedicalExaminationDTO examination) {
 		MedicalExamination e = new MedicalExamination(examination);
 		
@@ -145,6 +154,7 @@ public class MedicalExaminationService {
 		return null;
 	}
 	
+	@Transactional(readOnly = false)
 	public MedicalExaminationHistoryDTO addPredefinedMedicalExamination(MedicalExaminationDTO examination) {
 		MedicalExamination e = new MedicalExamination(examination);
 		
@@ -178,6 +188,7 @@ public class MedicalExaminationService {
 		return null;
 	}
 	
+	@Transactional(readOnly = false, noRollbackFor=Exception.class)
 	public Boolean reservePredefinedMedicalExamination(Long patientId,Long examinationId){
 		MedicalExamination e = this.medicalExaminationRepository.getOne(examinationId);
 		User u = this.userRepository.getOne(patientId);
@@ -200,10 +211,12 @@ public class MedicalExaminationService {
 		return true;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteMedicalExamination(Long id) {
 		medicalExaminationRepository.deleteById(id);
 	}
 	
+	@Transactional(readOnly = false)
 	public void addTypeDuration(String type, int duration) {
 		TypeDuration typeDuration = new TypeDuration();
 		typeDuration.setType(type);

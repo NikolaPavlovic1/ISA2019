@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,6 +26,9 @@ public class MedicalExamination {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Version
+	private Long version;
 	
 	private LocalDateTime startDateTime;
 	private int price;
@@ -119,6 +123,14 @@ public class MedicalExamination {
 
 	public void setTypeAndDuration(TypeDuration typeAndDuration) {
 		this.typeAndDuration = typeAndDuration;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	

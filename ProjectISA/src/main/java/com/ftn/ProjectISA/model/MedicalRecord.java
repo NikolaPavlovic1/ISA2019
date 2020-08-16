@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,6 +24,9 @@ public class MedicalRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Version
+	private Long version;
 	
 	@JsonBackReference
 	@OneToOne
@@ -69,6 +73,14 @@ public class MedicalRecord {
 
 	public void setDiseaseHistory(List<Disease> diseaseHistory) {
 		this.diseaseHistory = diseaseHistory;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	

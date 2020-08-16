@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,6 +19,9 @@ public class ClinicRate {
 	private Long id;
 	
 	private int rate;
+	
+	@Version
+	private Long version;
 	
 	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
@@ -63,6 +67,14 @@ public class ClinicRate {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	

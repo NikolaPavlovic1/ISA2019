@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.ClinicDTO;
 import com.ftn.ProjectISA.dto.FilterClinicsDTO;
@@ -22,6 +25,7 @@ import com.ftn.ProjectISA.model.User;
 import com.ftn.ProjectISA.repository.ClinicRepository;
 import com.ftn.ProjectISA.repository.PricelistItemRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class ClinicService {
 	
@@ -31,6 +35,7 @@ public class ClinicService {
 	@Autowired
 	PricelistItemRepository pricelistItemRepository;
 	
+	@Transactional(readOnly = false)
 	public ClinicDTO addClinic(ClinicDTO c) {
 		Clinic clinic = new Clinic(c);
 		
@@ -50,6 +55,7 @@ public class ClinicService {
 		return clinicsDtos;
 	}
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<ClinicDTO> filterClinics(FilterClinicsDTO filterClinicsDTO) {
 		
 		//LocalDateTime ldt = LocalDateTime.
@@ -109,6 +115,7 @@ public class ClinicService {
 		return filteredClinics;
 	}
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<UserDTO> filteredDoctorsInClinic(FilterDoctorsDTO filterDoctorsDTO) {
 		
 		Clinic clinic = this.clinicRepository.getOne(filterDoctorsDTO.getClinicId());
@@ -176,10 +183,12 @@ public class ClinicService {
 		return retVal;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteClinic(Long id) {
 		clinicRepository.deleteById(id);
 	}
 	
+	@Transactional(readOnly = false)
 	public PricelistItemDTO addPricelistItem(PricelistItemDTO pricelistItemDTO) {
 		Clinic clinic = this.clinicRepository.getOne(pricelistItemDTO.getClinicId());
 		PricelistItem item = new PricelistItem(pricelistItemDTO.getTypeOfExamination(),pricelistItemDTO.getPrice());

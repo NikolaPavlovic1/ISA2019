@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -20,6 +21,9 @@ public class PricelistItem {
 	private String typeOfExamination;
 	
 	private int price;
+	
+	@Version
+	private Long version;
 	
 	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
@@ -62,6 +66,14 @@ public class PricelistItem {
 
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	

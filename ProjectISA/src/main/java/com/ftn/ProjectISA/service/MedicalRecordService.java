@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.MedicalRecordDTO;
 import com.ftn.ProjectISA.model.MedicalRecord;
@@ -12,6 +13,7 @@ import com.ftn.ProjectISA.repository.MedicalExaminationRepository;
 import com.ftn.ProjectISA.repository.MedicalRecordRepository;
 import com.ftn.ProjectISA.repository.UserRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class MedicalRecordService {
 

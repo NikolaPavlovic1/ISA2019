@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -21,6 +22,9 @@ public class TypeDuration {
 	private Long id;
 	private String type;
 	private int duration;
+	
+	@Version
+	private Long version;
 	
 	@JsonBackReference
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -59,5 +63,13 @@ public class TypeDuration {
 
 	public void setDoctors(List<User> doctors) {
 		this.doctors = doctors;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}	
 }

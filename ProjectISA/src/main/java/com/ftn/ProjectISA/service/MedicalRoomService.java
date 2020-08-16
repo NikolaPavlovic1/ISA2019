@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.ProjectISA.dto.MedicalRoomDTO;
 import com.ftn.ProjectISA.model.MedicalRoom;
 import com.ftn.ProjectISA.repository.ClinicRepository;
 import com.ftn.ProjectISA.repository.MedicalRoomRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class MedicalRoomService {
 	
@@ -20,6 +23,7 @@ public class MedicalRoomService {
 	@Autowired
 	ClinicRepository clinicRepository;
 	
+	@Transactional(readOnly = false)
 	public MedicalRoomDTO addMedicalRoom(MedicalRoomDTO mr) {
 		MedicalRoom room = new MedicalRoom(mr.getDescription());
 		room.setClinic(clinicRepository.getOne(mr.getClinicId()));
@@ -46,6 +50,7 @@ public class MedicalRoomService {
 		return retVal;
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteMedicalRoom(Long id) {
 		medicalRoomRepository.deleteById(id);
 	}

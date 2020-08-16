@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -39,6 +40,9 @@ public class User {
 	private boolean declined;
 	private String confirmationKey;
 	private Role role; 
+	
+	@Version
+	private Long version;
 	
 	@JsonManagedReference
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -276,6 +280,14 @@ public class User {
 
 	public void setDeclined(boolean declined) {
 		this.declined = declined;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 }

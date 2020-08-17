@@ -19,8 +19,21 @@ public class MyUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = this.userRepository.findByUsername(username);
 		
+		if(user == null) {
+			System.out.println("NNNNNNNNNNNNNNNNNNNNNNNNNNN");
+		}
+		
+		
+		
 		if(user == null)
 			throw new UsernameNotFoundException("User with username " + username + " does not exists");
+		
+		
+		System.out.println(user.getUsername());
+		System.out.println(user.getRole());
+		System.out.println(user.getPassword());
+		System.out.println(user.isActive());
+		
 		
 		return new MyUserDetails(user.getUsername(),user.getPassword(),user.getRole(),user.isActive());
 	}

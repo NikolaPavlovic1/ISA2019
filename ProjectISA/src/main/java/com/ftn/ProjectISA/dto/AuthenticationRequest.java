@@ -11,6 +11,8 @@ public class AuthenticationRequest {
 		this.username = username;
 		this.password = password;
 	}
+	
+	
 
 	public String getUsername() {
 		return username;

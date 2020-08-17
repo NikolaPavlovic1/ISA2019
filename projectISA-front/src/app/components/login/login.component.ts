@@ -12,7 +12,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  email : String;
+  username : String;
   password : String;
 
   constructor(private authService: AuthenticationService) { }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     let request = new AuthenticationRequest();
-    request.username = this.email;
+    request.username = this.username;
     request.password = this.password;
     console.log(request);
     

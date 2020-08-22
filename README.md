@@ -16,5 +16,5 @@ Front-end:
     
     Prerequisites: NodeJS, Angular CLI, Visual Studio Code
     
-    Description: In order to successfullyrun a project, first you need to import it in Visual Studio Code. After that, in terminal, type ng serve. After project running is completed, type localhost:4200 in your browser. 
+    Description: In order to successfully run a project, first you need to import it in Visual Studio Code. After that, in terminal, type ng serve. After project running is completed, type localhost:4200 in your browser. 
 

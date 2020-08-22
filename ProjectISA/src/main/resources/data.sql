@@ -1,14 +1,14 @@
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
-VALUES (101, "Zrenjanin", "Serbia", 40, 40, 60, "Vladimira Cvetkova", 0);
+VALUES (101, "Novi Sad", "Serbia", 40, 40, 60, "Papa Pavla", 0);
 
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
-VALUES (102, "Zrenjanin", "Serbia", 30, 30, 1, "Bolnicka", 0);
+VALUES (102, "Novi Sad", "Serbia", 30, 30, 1, "Bolnicka", 0);
 
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
-VALUES (103, "Zrenjanin", "Serbia", 30, 31, 133, "Prvomajska", 0);
+VALUES (103, "Novi Sad", "Serbia", 30, 31, 133, "Prvomajska", 0);
 
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
-VALUES (104, "Zrenjanin", "Serbia", 32, 31, 34, "Neznanih junaka", 0);
+VALUES (104, "Novi Sad", "Serbia", 32, 31, 34, "Neznanih junaka", 0);
 
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
 VALUES (105, "Novi Sad", "Serbia", 70, 31, 1, "Cara Dusana", 0);
@@ -21,7 +21,7 @@ VALUES (107, "Novi Sad", "Serbia", 22, 10, 5, "Bul. Mihajla Pupina", 0);
 
 
 INSERT INTO clinic (id, description, name, address_id, version)
-VALUES (101, "Gradska bolnica Zrenjanin", "Opsta bolnica Djordje Joanovic", 102, 0);
+VALUES (101, "Gradska bolnica Novi Sad", "Nova gradska bolnica", 102, 0);
 
 INSERT INTO clinic (id, description, name, address_id, version)
 VALUES (102, "Klinicki centar u Novom Sadu", "Klinicki centar Vojvodine", 105, 0);
@@ -29,8 +29,8 @@ VALUES (102, "Klinicki centar u Novom Sadu", "Klinicki centar Vojvodine", 105, 0
 
 INSERT INTO user (id, active, approved, confirmation_key, email,insurance_number,last_name,
 	name, password, phone_number, role, username, address_id, clinic_id, declined, version)
-VALUES (101, 1, 1, 'OE8VWPORPSVON8QS9D',"duka023zr@gmail.com", "15sa2", "Radjenovic",
-"Dusan", '$2a$10$BjNIEnkw0fXiOBA6vlATb.ksRGwr1PYOsmdxGjkBK6IQfYiP0OPGa', "0637557096", 1, "admin",101,null,0,0);
+VALUES (101, 1, 1, 'OE8VWPORPSVON8QS9D',"duka023zr@gmail.com", "15sa2", "Pavlovic",
+"Nikola", '$2a$10$BjNIEnkw0fXiOBA6vlATb.ksRGwr1PYOsmdxGjkBK6IQfYiP0OPGa', "0637557096", 1, "admin",101,null,0,0);
 
 INSERT INTO user (id, active, approved, confirmation_key, email,insurance_number,last_name,
 	name, password, phone_number, role, username, address_id, clinic_id, declined, version)

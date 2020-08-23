@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +19,7 @@ public class MyMailService {
 		this.javaMailSender = javaMailSender;
 	}
 	
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class)
 	public void sendApprovedEmail(User recipient) throws Exception{
 	
 		SimpleMailMessage mail = new SimpleMailMessage();
@@ -37,7 +36,7 @@ public class MyMailService {
 		javaMailSender.send(mail);
 	}
 	
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class)
 	public void sendDeclinedEmail(User recipient) throws Exception{
 		
 		SimpleMailMessage mail = new SimpleMailMessage();
@@ -51,7 +50,7 @@ public class MyMailService {
 		javaMailSender.send(mail);
 	}
 	
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class)
 	public void sendPredefinedExaminationEmail(User recipient) throws Exception{
 		
 		SimpleMailMessage mail = new SimpleMailMessage();
@@ -65,7 +64,7 @@ public class MyMailService {
 		javaMailSender.send(mail);
 	}
 	
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class)
 	public void sendMailToAdminAboutReservation(User recipient) throws Exception{
 		
 		SimpleMailMessage mail = new SimpleMailMessage();
@@ -79,7 +78,7 @@ public class MyMailService {
 		javaMailSender.send(mail);
 	}
 	
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS, noRollbackFor=Exception.class)
 	public void sendMailToPatientAboutReservation(User recipient) throws Exception{
 		
 		SimpleMailMessage mail = new SimpleMailMessage();

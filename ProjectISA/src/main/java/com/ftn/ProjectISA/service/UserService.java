@@ -86,7 +86,7 @@ public class UserService {
 		return new UserDTO(userRepository.save(u));
 	}
 
-	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 	}

@@ -58,12 +58,8 @@ public class ClinicService {
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<ClinicDTO> filterClinics(FilterClinicsDTO filterClinicsDTO) {
 		
-		//LocalDateTime ldt = LocalDateTime.
 		List<ClinicDTO> filteredClinics = new ArrayList<ClinicDTO>();
 		List<Clinic> clinics = clinicRepository.findAll();
-		
-		System.out.println("T: " + filterClinicsDTO.getType());
-		System.out.println("D: " + filterClinicsDTO.getDate());
 		
 		for(Clinic clinic : clinics) {
 			boolean match = false;
@@ -75,7 +71,6 @@ public class ClinicService {
 					for(TypeDuration td: doctor.getTypesOfExamination()) {
 						if(td.getType().equals(filterClinicsDTO.getType())) {
 							type = true;
-							System.out.println("usao");
 						}
 					}	
 				} else {
@@ -93,7 +88,6 @@ public class ClinicService {
 						                  cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
 						if(sameDay) {
 							date = false;
-							System.out.println("USAO");
 						}
 					}
 				}
@@ -103,7 +97,6 @@ public class ClinicService {
 					match = true;
 				}
 				
-				System.out.println("---------------");
 			}
 			
 			if(match) {

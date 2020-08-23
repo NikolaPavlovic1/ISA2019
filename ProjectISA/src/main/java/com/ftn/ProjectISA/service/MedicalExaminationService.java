@@ -59,7 +59,6 @@ public class MedicalExaminationService {
 	}
 	
 	
-	@Transactional(isolation=Isolation.SERIALIZABLE)
 	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserHistory(Long userId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -89,7 +88,7 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
-	@Transactional(isolation = Isolation.SERIALIZABLE)
+	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public List<MedicalExaminationHistoryDTO> getPredefinedMedicalExaminations(Long clinicId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -188,7 +187,7 @@ public class MedicalExaminationService {
 		return null;
 	}
 	
-	@Transactional(readOnly = false, noRollbackFor=Exception.class)
+	@Transactional(readOnly = false, noRollbackFor=Exception.class, isolation = Isolation.READ_COMMITTED)
 	public Boolean reservePredefinedMedicalExamination(Long patientId,Long examinationId){
 		MedicalExamination e = this.medicalExaminationRepository.getOne(examinationId);
 		User u = this.userRepository.getOne(patientId);
@@ -211,7 +210,7 @@ public class MedicalExaminationService {
 		return true;
 	}
 	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
 	public void deleteMedicalExamination(Long id) {
 		medicalExaminationRepository.deleteById(id);
 	}

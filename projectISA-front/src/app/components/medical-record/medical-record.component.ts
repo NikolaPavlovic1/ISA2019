@@ -26,6 +26,7 @@ export class MedicalRecordComponent implements OnInit {
       this.medicalRecord = data;
       this.patientService.loadMedicalExaminationReservations().subscribe((data) => {
         this.examinations = data;
+        console.log(this.examinations);
       });
     });
   }

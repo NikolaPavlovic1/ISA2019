@@ -44,6 +44,7 @@ public class UserService {
 	@Transactional(readOnly = false)
 	public UserDTO registerUser(UserDTO userDTO) {
 		User user = new User(userDTO);
+		
 		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		if(userDTO.getClinicId() != null) {
 			user.setClinic(clinicRepository.getOne(userDTO.getClinicId()));
@@ -86,7 +87,7 @@ public class UserService {
 		return new UserDTO(userRepository.save(u));
 	}
 
-	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 	}

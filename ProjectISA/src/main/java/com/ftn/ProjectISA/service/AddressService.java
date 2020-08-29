@@ -43,7 +43,7 @@ public class AddressService {
 		return addressRepository.save(address);
 	}
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED)
 	public void deleteAddress(long id) {
 		addressRepository.deleteById(id);
 	}

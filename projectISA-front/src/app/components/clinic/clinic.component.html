@@ -36,7 +36,7 @@
                                                 <label style="font-weight:bold;">Address</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Ovde preko pipe
+                                                {{clinic.address.street}} {{clinic.address.number}}, {{clinic.address.city}} ({{clinic.address.country}})
                                             </div>
                                         </div>
                                         <hr />
@@ -89,7 +89,7 @@
                                                     <li>Duration: {{pe.duration}}</li>
                                                     <li>Price: {{pe.price}} rsd</li>
                                                     <li>Medical room: {{pe.medicalRoom}}</li>
-                                                    <li><button class="btn btn-primary" (click)="reserve(pe.id  )">Reserve</button></li>
+                                                    <li><button class="btn btn-primary" (click)="reserve(pe.id )">Reserve</button></li>
                                                 </ul>
                                                 
                                                     

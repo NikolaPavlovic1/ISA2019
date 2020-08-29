@@ -36,6 +36,7 @@ public class ClinicController {
 		return new ResponseEntity<List<ClinicDTO>>(retVal, HttpStatus.OK);
 	}
 	
+	//ova
 	@PostMapping(consumes = "application/json", value = "/filterClinics")
 	public ResponseEntity<List<ClinicDTO>> filterClinics(@RequestBody FilterClinicsDTO filterClinicsDTO) {
 		List<ClinicDTO> retVal = clinicService.filterClinics(filterClinicsDTO);

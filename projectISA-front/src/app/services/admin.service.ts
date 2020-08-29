@@ -18,11 +18,12 @@ export class AdminService {
 
   public approve(id : number) {
     let headers = this.authService.getHeaders();
-    return this.http.post('http://localhost:8080/api/user/approve/'+id, {headers:headers});
+    console.log(headers);
+    return this.http.get('http://localhost:8080/api/user/approve/'+id, {headers:headers});
   }
 
   public decline(id : number) {
     let headers = this.authService.getHeaders();
-    return this.http.post('http://localhost:8080/api/user/decline/'+id, {headers:headers});
+    return this.http.get('http://localhost:8080/api/user/decline/'+id, {headers:headers});
   }
 }

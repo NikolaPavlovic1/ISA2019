@@ -35,6 +35,7 @@ export class ClinicService {
 
   public reservePredefinedExaminations(id: string, userId: string): Observable<Boolean>{
     let headers = this.authService.getHeaders();
-    return this.http.post<Boolean>('http://localhost:8080/api/medical-examination/predefined/' + userId+"/"+id, { headers: headers });
+    console.log(userId + " " + id);
+    return this.http.get<Boolean>('http://localhost:8080/api/medical-examination/predefined/' + userId+'/'+id, { headers: headers });
   }
 }

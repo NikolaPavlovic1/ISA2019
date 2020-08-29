@@ -66,6 +66,9 @@ export class AuthenticationService {
     let token = "Bearer ";
     token += localStorage.getItem('token');
     headers = headers.set('Authorization', token);
+    //headers.set("Access-Control-Allow-Origin", "*")
+//headers.set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+//headers.set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
     return headers;
   }
 

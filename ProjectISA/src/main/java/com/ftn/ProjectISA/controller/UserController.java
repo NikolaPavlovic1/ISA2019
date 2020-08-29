@@ -60,14 +60,14 @@ public class UserController {
 	}
 	
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	@PostMapping(value = "/approve/{id}") 
+	@GetMapping(value = "/approve/{id}") 
 	public ResponseEntity<Boolean> approveUser(@PathVariable Long id) { 
 		Boolean retVal = userService.approveUser(id);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
 	}
 	
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	@PostMapping(value = "/decline/{id}") 
+	@GetMapping(value = "/decline/{id}") 
 	public ResponseEntity<Boolean> declineUser(@PathVariable Long id) { 
 		Boolean retVal = userService.declineUser(id);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
@@ -80,7 +80,7 @@ public class UserController {
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK); 
 	}
 	
-	@PostMapping(value = "/activate/{confirmationKey}") 
+	@GetMapping(value = "/activate/{confirmationKey}") 
 	public ResponseEntity<Boolean> activateUser(@PathVariable String confirmationKey) { 
 		Boolean retVal = userService.activateAccount(confirmationKey);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);
@@ -124,14 +124,14 @@ public class UserController {
 	}
 	
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	@PostMapping(value = "/{doctorId}/{typeId}") 
+	@GetMapping(value = "/{doctorId}/{typeId}") 
 	public ResponseEntity<Boolean> addTypeToDoctor(@PathVariable Long doctorId, @PathVariable Long typeId) { 
 		Boolean retVal = userService.addTypeToDoctor(doctorId, typeId);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);
 	}
 	
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	@PostMapping(value = "addDoctorToClinic/{doctorId}/{clinicId}") 
+	@GetMapping(value = "addDoctorToClinic/{doctorId}/{clinicId}") 
 	public ResponseEntity<Boolean> addDoctorToClinic(@PathVariable Long doctorId, @PathVariable Long clinicId) { 
 		Boolean retVal = userService.addDoctorToClinic(doctorId, clinicId);
 		return new ResponseEntity<Boolean>(retVal,HttpStatus.OK);

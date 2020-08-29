@@ -35,9 +35,11 @@ public class MedicalExaminationController {
 		return new ResponseEntity<List<MedicalExaminationDTO>>(retVal, HttpStatus.OK);
 	}
 	
+	//ova
 	@PreAuthorize("hasAuthority('PATIENT')")
 	@GetMapping(value = "history/{userId}")
 	public ResponseEntity<List<MedicalExaminationHistoryDTO>> medicalExaminationsUserHistory(@PathVariable Long userId) {
+		System.out.println("USao");
 		List<MedicalExaminationHistoryDTO> retVal = medicalExaminationService.medicalExaminationsUserHistory(userId);
 		return new ResponseEntity<List<MedicalExaminationHistoryDTO>>(retVal, HttpStatus.OK);
 	}
@@ -71,6 +73,7 @@ public class MedicalExaminationController {
 		return new ResponseEntity<MedicalExaminationHistoryDTO>(retVal, HttpStatus.OK); 
 	}
 	
+	@PreAuthorize("hasAuthority('PATIENT')")
 	@GetMapping(value = "/predefined/{clinicId}") 
 	public ResponseEntity<List<MedicalExaminationHistoryDTO>> getPredefinedMedicalExaminations(@PathVariable Long clinicId){
 		List<MedicalExaminationHistoryDTO> retVal = medicalExaminationService.getPredefinedMedicalExaminations(clinicId);
@@ -78,7 +81,7 @@ public class MedicalExaminationController {
 	}
 	
 	@PreAuthorize("hasAuthority('PATIENT')")
-	@PostMapping(consumes = "application/json", value = "/predefined/{patientId}/{examinationId}") 
+	@GetMapping(value = "/predefined/{patientId}/{examinationId}") 
 	public ResponseEntity<Boolean> reservePredefinedMedicalExamination(
 			@PathVariable Long patientId, @PathVariable Long examinationId){
 		Boolean retVal = medicalExaminationService.reservePredefinedMedicalExamination(patientId,examinationId);

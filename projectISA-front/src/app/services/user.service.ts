@@ -21,7 +21,7 @@ export class UserService {
     return this.http.put<User>('http://localhost:8080/api/user', user,{headers:headers});
   }
 
-  public activateUser(key: string): Observable<Boolean> {
-    return this.http.post<Boolean>('http://localhost:8080/api/user/activate/' + key,null);
+  public activateUser(key: string): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/api/user/activate/' + key);
   }
 }

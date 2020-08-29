@@ -58,22 +58,27 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
-	
+	//ova 
 	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserHistory(Long userId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
 		
 		List<MedicalExamination> medicalExaminations = userRepository.getOne(userId).getMedicalRecord().getMedicalExaminations();
-		
-		for(MedicalExamination me : medicalExaminations)
+		System.out.println(medicalExaminations.size());
+		for(MedicalExamination me : medicalExaminations) {
+			System.out.println("bbb");
 			if(me.getStartDateTime().isBefore(LocalDateTime.now())) {
+				System.out.println("AAA");
 				medicalExaminationDTOs.add(new MedicalExaminationHistoryDTO(me));	
 			}
+		}
+			
 			
 		return medicalExaminationDTOs;
 	}
 	
-	@Transactional(isolation = Isolation.SERIALIZABLE)
+	//ova
+	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public List<MedicalExaminationHistoryDTO> medicalExaminationsUserReservations(Long userId) {
 
 		List<MedicalExaminationHistoryDTO> medicalExaminationDTOs = new ArrayList<MedicalExaminationHistoryDTO>();
@@ -88,6 +93,7 @@ public class MedicalExaminationService {
 		return medicalExaminationDTOs;
 	}
 	
+	//ova
 	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public List<MedicalExaminationHistoryDTO> getPredefinedMedicalExaminations(Long clinicId) {
 
@@ -194,18 +200,11 @@ public class MedicalExaminationService {
 		e.setMedicalRecord(u.getMedicalRecord());
 		
 		try {
+			this.medicalExaminationRepository.save(e);
 			this.mailService.sendPredefinedExaminationEmail(u);
-			
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		} finally {
-			this.medicalExaminationRepository.save(e);
 		}
-	
-		
-		
-		
-		
 		
 		return true;
 	}

@@ -55,6 +55,7 @@ public class ClinicService {
 		return clinicsDtos;
 	}
 	
+	//ova
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<ClinicDTO> filterClinics(FilterClinicsDTO filterClinicsDTO) {
 		
@@ -108,6 +109,7 @@ public class ClinicService {
 		return filteredClinics;
 	}
 	
+	//ova
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<UserDTO> filteredDoctorsInClinic(FilterDoctorsDTO filterDoctorsDTO) {
 		
@@ -156,13 +158,13 @@ public class ClinicService {
 					}
 				}
 				
-				if(filterDoctorsDTO.getRate() > 0) {
-					/*if(doctor.getRate() != filterDoctorsDTO.getRate()) {
+
+				
+				if(filterDoctorsDTO.getRate() != 0) {
+					if(doctor.getAvgDoctorRate()< filterDoctorsDTO.getRate()) {
 						other = false;
-					}*/
+					}
 				}
-				
-				
 				if(type && date && other) {
 					filteredDoctors.add(new UserDTO(doctor));
 				}
@@ -176,7 +178,7 @@ public class ClinicService {
 		return retVal;
 	}
 	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
 	public void deleteClinic(Long id) {
 		clinicRepository.deleteById(id);
 	}

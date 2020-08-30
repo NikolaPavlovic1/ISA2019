@@ -31,6 +31,8 @@ public class UserServiceTest {
 		User user = new User();
 		user.setId(1L);
 		Mockito.when(userRepositoryMocked.getOne(1L)).thenReturn(user);
+		Mockito.when(userRepositoryMocked.getOne(2L)).thenThrow(NullPointerException.class);
+		
 	}
 	
 	

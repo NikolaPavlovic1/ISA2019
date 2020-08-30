@@ -19,6 +19,9 @@ VALUES (106, "Novi Sad", "Serbia", 72, 32, 11, "Cara Lazara", 0);
 INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
 VALUES (107, "Novi Sad", "Serbia", 22, 10, 5, "Bul. Mihajla Pupina", 0);
 
+INSERT INTO address (id, city, country, latitude, longitude,number,street, version)
+VALUES (108, "Novi Sad", "Serbia", 22, 10, 5, "Bul. Oslobodenja Test", 0);
+
 
 INSERT INTO clinic (id, description, name, address_id, version)
 VALUES (101, "Gradska bolnica Novi Sad", "Nova gradska bolnica", 102, 0);

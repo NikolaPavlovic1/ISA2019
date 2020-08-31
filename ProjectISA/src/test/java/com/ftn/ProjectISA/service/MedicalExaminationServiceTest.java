@@ -53,12 +53,7 @@ public class MedicalExaminationServiceTest {
 		assertEquals(id, examination.getId());
 	}
 	
-	@Test(expected=NullPointerException.class)
-	public void testUserReservations() {
-		
 
-//		assertEquals(id, examination.getId());
-	}
 	
 	
 	

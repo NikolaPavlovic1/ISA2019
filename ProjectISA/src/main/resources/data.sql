@@ -122,4 +122,9 @@ type_and_duration_id,  version)
 VALUES (102, 500, "2020-12-12 19:00:00", 102, null, 101, 102, 0);
 
 
+INSERT INTO medical_examination(id, price, start_date_time,doctor_id, medical_record_id, medical_room_id,
+type_and_duration_id,  version) 
+VALUES (105, 9500, "2020-12-12 19:00:00", 102, null, 101, 102, 0);
+
+
 

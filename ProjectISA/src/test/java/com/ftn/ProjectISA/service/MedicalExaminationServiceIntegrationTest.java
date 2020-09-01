@@ -28,7 +28,7 @@ public class MedicalExaminationServiceIntegrationTest {
 	 @Test
 	 public void testFind_All() {
 	     List<MedicalExaminationDTO> examinations = medicalExaminationService.findAllMedicalExaminations();
-	     assertEquals(4, examinations.size());
+	     assertEquals(5, examinations.size());
 	 }
 	 
 	 @SuppressWarnings("deprecation")
